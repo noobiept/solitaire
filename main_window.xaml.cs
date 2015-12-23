@@ -20,18 +20,49 @@ namespace GoldMine
         {
         bool isDragging = false;
         Point clickPosition;
-        List<Foundation> foundations = new List<Foundation>();
+        List<Panel> droppableElements = new List<Panel>();
 
 
         public MainWindow()
             {
             InitializeComponent();
 
-            var foundation = new Foundation( 400, 50 );
+                // add 4 foundations at the top right corner (the foundation is to where the cards need to be stacked (starting on an ace until the king)
+            int margin = 10;
+            double left = this.Width - margin;
+            double top = margin;
 
-            MainCanvas.Children.Add( foundation );
-            this.foundations.Add( foundation );
-            
+            for (int a = 0 ; a < 4 ; a++)
+                {
+                var foundation = new Foundation();
+
+                left -= foundation.Width + margin;
+
+                Canvas.SetLeft( foundation, left );
+                Canvas.SetTop( foundation, top );
+
+                MainCanvas.Children.Add( foundation );
+                this.droppableElements.Add( foundation );
+                }
+
+                // add 7 tableau piles (where you can move any card to)
+            left = margin;
+            top = 300;  //HERE
+
+            for (int a = 0 ; a < 7 ; a++)
+                {
+                var tableau = new Tableau();
+
+                Canvas.SetLeft( tableau, left );
+                Canvas.SetTop( tableau, top );
+
+                left += tableau.Width + margin;
+
+                MainCanvas.Children.Add( tableau );
+                this.droppableElements.Add( tableau );
+                }
+
+
             var card = new Card( 50, 50 );
 
             card.MouseDown += this.onMouseDown;
@@ -50,15 +81,15 @@ namespace GoldMine
             }
 
 
-        private Foundation collisionDetection( Image image )
+        private Panel collisionDetection( Image image )
             {
-            for (var a = 0 ; a < this.foundations.Count ; a++)
+            for (var a = 0 ; a < this.droppableElements.Count ; a++)
                 {
-                var foundation = this.foundations[ a ];
+                var element = this.droppableElements[ a ];
 
-                if ( this.boxBoxCollision( image, foundation ) )
+                if ( this.boxBoxCollision( image, element ) )
                     {
-                    return foundation;
+                    return element;
                     }
                 }
 
@@ -72,7 +103,7 @@ namespace GoldMine
             var oneTop = Canvas.GetTop( one );
             var twoLeft = Canvas.GetLeft( two );
             var twoTop = Canvas.GetTop( two );
-
+            
             return !(
                     oneLeft > twoLeft + two.ActualWidth ||
                     oneLeft + one.ActualWidth < twoLeft ||

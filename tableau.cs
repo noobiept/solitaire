@@ -10,13 +10,13 @@ using System.Windows.Media;
 
 namespace GoldMine
     {
-    public class Foundation : Panel
+    public class Tableau : Panel
         {
-        public Foundation() : base()
+        public Tableau() : base()
             {
             this.Width = 150;
             this.Height = 200;
-            this.Background = Brushes.AntiqueWhite;
+            this.Background = Brushes.BlueViolet;
             }
 
 
@@ -24,7 +24,7 @@ namespace GoldMine
             {
             Size panelDesiredSize = new Size();
 
-            foreach( UIElement child in this.InternalChildren )
+            foreach (UIElement child in this.InternalChildren)
                 {
                 child.Measure( availableSize );
                 panelDesiredSize = child.DesiredSize;
@@ -36,9 +36,14 @@ namespace GoldMine
 
         protected override Size ArrangeOverride( Size finalSize )
             {
-            foreach( UIElement child in this.InternalChildren )
+            int y = 0;
+            int step = 20;
+
+            foreach (UIElement child in this.InternalChildren)
                 {
-                child.Arrange( new Rect( new Point( 0, 0 ), child.DesiredSize ) );
+                child.Arrange( new Rect( new Point( 0, y ), child.DesiredSize ) );
+
+                y += step;
                 }
 
             return finalSize;
