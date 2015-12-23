@@ -31,7 +31,7 @@ namespace GoldMine
 
             MainCanvas.Children.Add( foundation );
             this.foundations.Add( foundation );
-
+            
             var card = new Card( 50, 50 );
 
             card.MouseDown += this.onMouseDown;
@@ -39,10 +39,18 @@ namespace GoldMine
             card.MouseUp += this.onMouseUp;
 
             MainCanvas.Children.Add( card );
+
+            var card2 = new Card( 50, 300 );
+
+            card2.MouseDown += this.onMouseDown;
+            card2.MouseMove += this.onMouseMove;
+            card2.MouseUp += this.onMouseUp;
+
+            MainCanvas.Children.Add( card2 );
             }
 
 
-        private void collisionDetection( Image image )
+        private Foundation collisionDetection( Image image )
             {
             for (var a = 0 ; a < this.foundations.Count ; a++)
                 {
@@ -50,9 +58,11 @@ namespace GoldMine
 
                 if ( this.boxBoxCollision( image, foundation ) )
                     {
-                    Console.WriteLine( "Collision!" );
+                    return foundation;
                     }
                 }
+
+            return null;
             }
 
 
@@ -74,9 +84,20 @@ namespace GoldMine
 
         private void onMouseDown( object sender, MouseButtonEventArgs e )
             {
-            var image = (Image) sender;
+            var card = (Card) sender;
             this.isDragging = true;
-            this.clickPosition = Mouse.GetPosition( image );
+            this.clickPosition = Mouse.GetPosition( card );
+
+            var parent = card.Parent as Panel;
+
+            if ( parent != null )
+                {
+                parent.Children.Remove( card );
+                }
+
+            this.MainCanvas.Children.Add( card );
+
+            this.positionCard( card, e );
             }
 
 
@@ -90,20 +111,45 @@ namespace GoldMine
                     return;
                     }
 
-                var image = (Image) sender;
-                var position = e.GetPosition( MainCanvas );
-
-                Canvas.SetLeft( image, position.X - this.clickPosition.X );
-                Canvas.SetTop( image, position.Y - this.clickPosition.Y );
-
-                this.collisionDetection( image );
+                var card = (Card) sender;
+                this.positionCard( card, e );
                 }
             }
 
 
         private void onMouseUp( object sender, MouseButtonEventArgs e )
             {
+            var card = (Card) sender;
             this.isDragging = false;
+            var foundation = this.collisionDetection( card );
+
+            if ( foundation != null )
+                {
+                card.removeEffect();
+                MainCanvas.Children.Remove( card );
+                foundation.Children.Add( card );
+                }
+            }
+
+
+        private void positionCard( Card card, MouseEventArgs e )
+            {
+            var position = e.GetPosition( MainCanvas );
+
+            Canvas.SetLeft( card, position.X - this.clickPosition.X );
+            Canvas.SetTop( card, position.Y - this.clickPosition.Y );
+
+            var foundation = this.collisionDetection( card );
+
+            if (foundation != null)
+                {
+                card.applyEffect();
+                }
+
+            else
+                {
+                card.removeEffect();
+                }
             }
         }
     }
