@@ -10,9 +10,9 @@ using System.Windows.Media;
 
 namespace GoldMine
     {
-    public class Tableau : Panel
+    public class Tableau : Container
         {
-        public Tableau() : base()
+        public Tableau()
             {
             this.Width = 150;
             this.Height = 200;

@@ -20,7 +20,8 @@ namespace GoldMine
         {
         bool isDragging = false;
         Point clickPosition;
-        List<Panel> droppableElements = new List<Panel>();
+        Container highlightedContainer;     // when dragging a card on top of a container, highlight that container, and keep a reference to it (to know when to remove the highlight)
+        List<Container> droppableElements = new List<Container>();
 
 
         public MainWindow()
@@ -81,7 +82,7 @@ namespace GoldMine
             }
 
 
-        private Panel collisionDetection( Image image )
+        private Container collisionDetection( Image image )
             {
             for (var a = 0 ; a < this.droppableElements.Count ; a++)
                 {
@@ -152,13 +153,16 @@ namespace GoldMine
             {
             var card = (Card) sender;
             this.isDragging = false;
-            var foundation = this.collisionDetection( card );
+            var container = this.collisionDetection( card );
 
-            if ( foundation != null )
+            if ( container != null )
                 {
-                card.removeEffect();
+                card.removeDropEffect();
+                container.removeDropEffect();
+                this.highlightedContainer = null;
+
                 MainCanvas.Children.Remove( card );
-                foundation.Children.Add( card );
+                container.Children.Add( card );
                 }
             }
 
@@ -170,16 +174,25 @@ namespace GoldMine
             Canvas.SetLeft( card, position.X - this.clickPosition.X );
             Canvas.SetTop( card, position.Y - this.clickPosition.Y );
 
-            var foundation = this.collisionDetection( card );
+            var container = this.collisionDetection( card );
 
-            if (foundation != null)
+            if ( this.highlightedContainer != null )
                 {
-                card.applyEffect();
+                this.highlightedContainer.removeDropEffect();
+                this.highlightedContainer = null;
+                }
+
+            if ( container != null )
+                {
+                container.applyDropEffect();
+                card.applyDropEffect();
+
+                this.highlightedContainer = container;
                 }
 
             else
                 {
-                card.removeEffect();
+                card.removeDropEffect();
                 }
             }
         }

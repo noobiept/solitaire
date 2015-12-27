@@ -25,13 +25,13 @@ namespace GoldMine
             }
 
 
-        public void applyEffect()
+        public void applyDropEffect()
             {
             this.Opacity = 0.5;
             }
 
 
-        public void removeEffect()
+        public void removeDropEffect()
             {
             this.Opacity = 1;
             }

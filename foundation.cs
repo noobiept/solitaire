@@ -10,9 +10,9 @@ using System.Windows.Media;
 
 namespace GoldMine
     {
-    public class Foundation : Panel
+    public class Foundation : Container
         {
-        public Foundation() : base()
+        public Foundation()
             {
             this.Width = 150;
             this.Height = 200;
