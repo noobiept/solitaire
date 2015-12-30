@@ -18,9 +18,18 @@ namespace GoldMine
     {
     public partial class MainWindow : Window
         {
-        bool isDragging = false;
-        Point clickPosition;
-        Container highlightedContainer;     // when dragging a card on top of a container, highlight that container, and keep a reference to it (to know when to remove the highlight)
+            // data use for the drag and drop operation of cards
+        public struct Drag
+            {
+            public bool isDragging;
+            public Card cardDragging;
+            public Point clickPosition;
+            public Container originalContainer;    // original container before the drag occurred. if the drag isn't valid, we need to return the cards to the original place
+            public Container highlightedContainer; // when dragging a card on top of a container, highlight that container, and keep a reference to it (to know when to remove the highlight)
+            }
+
+        Drag drag;
+
         List<Container> droppableElements = new List<Container>();
         List<Card> cards = new List<Card>();
         Stock stock;
@@ -166,16 +175,20 @@ namespace GoldMine
         private void onMouseDown( object sender, MouseButtonEventArgs e )
             {
             var card = (Card) sender;
-            this.isDragging = true;
-            this.clickPosition = Mouse.GetPosition( card );
+            var parent = card.Parent as Container;
 
-            var parent = card.Parent as Panel;
-
-            if ( parent != null )
+            if ( this.drag.isDragging == true )
                 {
-                parent.Children.Remove( card );
+                this.moveCard( this.drag.cardDragging, this.drag.originalContainer );
+                return;
                 }
 
+            this.drag.isDragging = true;
+            this.drag.cardDragging = card;
+            this.drag.clickPosition = Mouse.GetPosition( card );
+            this.drag.originalContainer = parent;
+
+            parent.Children.Remove( card );
             this.MainCanvas.Children.Add( card );
 
             this.positionCard( card, e );
@@ -184,16 +197,19 @@ namespace GoldMine
 
         private void onMouseMove( object sender, MouseEventArgs e )
             {
-            if ( this.isDragging )
+            if ( this.drag.isDragging )
                 {
+                var card = (Card) sender;
+
                 if ( e.LeftButton == MouseButtonState.Released )
                     {
-                    this.isDragging = false;
-                    return;
+                    this.moveCard( this.drag.cardDragging, this.drag.originalContainer );
                     }
 
-                var card = (Card) sender;
-                this.positionCard( card, e );
+                else
+                    {
+                    this.positionCard( card, e );
+                    }
                 }
             }
 
@@ -201,18 +217,39 @@ namespace GoldMine
         private void onMouseUp( object sender, MouseButtonEventArgs e )
             {
             var card = (Card) sender;
-            this.isDragging = false;
             var container = this.collisionDetection( card );
 
             if ( container != null )
                 {
-                card.removeDropEffect();
-                container.removeDropEffect();
-                this.highlightedContainer = null;
-
-                this.MainCanvas.Children.Remove( card );
-                container.Children.Add( card );
+                this.moveCard( card, container );
                 }
+
+                // wasn't dropped on any container, so its not a valid drag operation. return to the original container
+            else
+                {
+                this.moveCard( card, this.drag.originalContainer );
+                }
+            }
+
+
+        /**
+         * Finishes the drag operation, moving the card to a container.
+         */
+        private void moveCard( Card card, Container container )
+            {
+            card.removeDropEffect();
+
+            if ( this.drag.highlightedContainer != null )
+                {
+                this.drag.highlightedContainer.removeDropEffect();
+                this.drag.highlightedContainer = null;
+                }
+
+            this.MainCanvas.Children.Remove( card );
+            container.Children.Add( card );
+            this.drag.originalContainer = null;
+            this.drag.cardDragging = null;
+            this.drag.isDragging = false;
             }
 
 
@@ -220,15 +257,15 @@ namespace GoldMine
             {
             var position = e.GetPosition( this.MainCanvas );
 
-            Canvas.SetLeft( card, position.X - this.clickPosition.X );
-            Canvas.SetTop( card, position.Y - this.clickPosition.Y );
+            Canvas.SetLeft( card, position.X - this.drag.clickPosition.X );
+            Canvas.SetTop( card, position.Y - this.drag.clickPosition.Y );
 
             var container = this.collisionDetection( card );
 
-            if ( this.highlightedContainer != null )
+            if ( this.drag.highlightedContainer != null )
                 {
-                this.highlightedContainer.removeDropEffect();
-                this.highlightedContainer = null;
+                this.drag.highlightedContainer.removeDropEffect();
+                this.drag.highlightedContainer = null;
                 }
 
             if ( container != null )
@@ -236,7 +273,7 @@ namespace GoldMine
                 container.applyDropEffect();
                 card.applyDropEffect();
 
-                this.highlightedContainer = container;
+                this.drag.highlightedContainer = container;
                 }
 
             else
