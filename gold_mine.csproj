@@ -56,7 +56,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="container.cs" />
+    <Compile Include="stock.cs" />
     <Compile Include="tableau.cs" />
+    <Compile Include="waste.cs" />
     <Page Include="main_window.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

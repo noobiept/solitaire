@@ -13,15 +13,12 @@ namespace GoldMine
     {
     public class Card : Image
         {
-        public Card( double left, double top )
+        public Card()
             {
             var uri = new Uri( @"images/card_back_orange.png", UriKind.Relative );
             var backSource = new BitmapImage( uri );
             this.Source = backSource;
             this.Width = 150;
-
-            Canvas.SetLeft( this, left );
-            Canvas.SetTop( this, top );
             }
 
 

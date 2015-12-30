@@ -14,23 +14,7 @@ namespace GoldMine
         {
         public Tableau()
             {
-            this.Width = 150;
-            this.Height = 200;
             this.Background = Brushes.BlueViolet;
-            }
-
-
-        protected override Size MeasureOverride( Size availableSize )
-            {
-            Size panelDesiredSize = new Size();
-
-            foreach (UIElement child in this.InternalChildren)
-                {
-                child.Measure( availableSize );
-                panelDesiredSize = child.DesiredSize;
-                }
-
-            return panelDesiredSize;
             }
 
 
@@ -39,7 +23,7 @@ namespace GoldMine
             int y = 0;
             int step = 20;
 
-            foreach (UIElement child in this.InternalChildren)
+            foreach( UIElement child in this.InternalChildren )
                 {
                 child.Arrange( new Rect( new Point( 0, y ), child.DesiredSize ) );
 

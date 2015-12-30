@@ -4,25 +4,29 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media;
 
 
 namespace GoldMine
     {
-    public class Foundation : Container
+    class Waste : Container
         {
-        public Foundation()
+        public Waste()
             {
-            this.Background = Brushes.AntiqueWhite;
+            this.Background = Brushes.GreenYellow;
             }
 
 
         protected override Size ArrangeOverride( Size finalSize )
             {
+            int x = 0;
+            int step = 20;
+
             foreach( UIElement child in this.InternalChildren )
                 {
-                child.Arrange( new Rect( new Point( 0, 0 ), child.DesiredSize ) );
+                child.Arrange( new Rect( new Point( x, 0 ), child.DesiredSize ) );
+
+                x += step;
                 }
 
             return finalSize;

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GoldMine"
         mc:Ignorable="d"
-        Title="Gold Mine" Height="600" Width="1000">
+        Title="Gold Mine" Height="650" Width="1200">
     <Canvas Name="MainCanvas">
         
     </Canvas>

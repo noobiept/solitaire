@@ -22,16 +22,41 @@ namespace GoldMine
         Point clickPosition;
         Container highlightedContainer;     // when dragging a card on top of a container, highlight that container, and keep a reference to it (to know when to remove the highlight)
         List<Container> droppableElements = new List<Container>();
+        List<Card> cards = new List<Card>();
+        Stock stock;
+        Waste waste;
 
 
         public MainWindow()
             {
             InitializeComponent();
 
-                // add 4 foundations at the top right corner (the foundation is to where the cards need to be stacked (starting on an ace until the king)
+                // add the stock element in the top left
             int margin = 10;
-            double left = this.Width - margin;
+            double left = margin;
             double top = margin;
+
+            this.stock = new Stock();
+            this.stock.MouseUp += this.onStockMouseUp;
+
+            Canvas.SetLeft( this.stock, left );
+            Canvas.SetTop( this.stock, top );
+
+            this.MainCanvas.Children.Add( this.stock );
+
+                // add the waste element next to the stock
+            this.waste = new Waste();
+
+            left += this.stock.Width + margin;
+
+            Canvas.SetLeft( this.waste, left );
+            Canvas.SetTop( this.waste, top );
+
+            this.MainCanvas.Children.Add( this.waste );
+
+                // add 4 foundations at the top right corner (the foundation is to where the cards need to be stacked (starting on an ace until the king)
+            left = this.Width - margin;
+            top = margin;
 
             for (int a = 0 ; a < 4 ; a++)
                 {
@@ -42,7 +67,7 @@ namespace GoldMine
                 Canvas.SetLeft( foundation, left );
                 Canvas.SetTop( foundation, top );
 
-                MainCanvas.Children.Add( foundation );
+                this.MainCanvas.Children.Add( foundation );
                 this.droppableElements.Add( foundation );
                 }
 
@@ -59,26 +84,50 @@ namespace GoldMine
 
                 left += tableau.Width + margin;
 
-                MainCanvas.Children.Add( tableau );
+                this.MainCanvas.Children.Add( tableau );
                 this.droppableElements.Add( tableau );
                 }
 
+            startGame();
+            }
 
-            var card = new Card( 50, 50 );
 
-            card.MouseDown += this.onMouseDown;
-            card.MouseMove += this.onMouseMove;
-            card.MouseUp += this.onMouseUp;
+        private void startGame()
+            {
+            for (int a = 0 ; a < 7 ; a++)
+                {
+                var card = new Card();
 
-            MainCanvas.Children.Add( card );
+                this.stock.Children.Add( card );
+                this.cards.Add( card );
+                }
+            }
 
-            var card2 = new Card( 50, 300 );
 
-            card2.MouseDown += this.onMouseDown;
-            card2.MouseMove += this.onMouseMove;
-            card2.MouseUp += this.onMouseUp;
+        /**
+         * When we click on the stock, we move 3 cards to the waste.
+         */
+        private void onStockMouseUp( object sender, MouseButtonEventArgs e )
+            {
+            var count = this.stock.Children.Count;
 
-            MainCanvas.Children.Add( card2 );
+            for (int a = 0 ; a < 3 && count > 0 ; a++)
+                {
+                int lastPosition = count - 1;
+
+                var card = this.stock.Children[ lastPosition ];
+                this.stock.Children.RemoveAt( lastPosition );
+                this.waste.Children.Add( card );
+
+                count = this.stock.Children.Count;
+                }
+
+                // add the mouse events to the last card
+            var lastCard = this.waste.Children[ this.waste.Children.Count - 1 ];
+
+            lastCard.MouseDown += this.onMouseDown;
+            lastCard.MouseMove += this.onMouseMove;
+            lastCard.MouseUp += this.onMouseUp;
             }
 
 
@@ -161,7 +210,7 @@ namespace GoldMine
                 container.removeDropEffect();
                 this.highlightedContainer = null;
 
-                MainCanvas.Children.Remove( card );
+                this.MainCanvas.Children.Remove( card );
                 container.Children.Add( card );
                 }
             }
@@ -169,7 +218,7 @@ namespace GoldMine
 
         private void positionCard( Card card, MouseEventArgs e )
             {
-            var position = e.GetPosition( MainCanvas );
+            var position = e.GetPosition( this.MainCanvas );
 
             Canvas.SetLeft( card, position.X - this.clickPosition.X );
             Canvas.SetTop( card, position.Y - this.clickPosition.Y );

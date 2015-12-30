@@ -4,17 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Input;
 
 
 namespace GoldMine
     {
-    public class Foundation : Container
+    class Stock : Container
         {
-        public Foundation()
+        public Stock()
             {
-            this.Background = Brushes.AntiqueWhite;
+            this.Background = Brushes.DarkGray;
             }
 
 

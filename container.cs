@@ -11,6 +11,13 @@ namespace GoldMine
     {
     public class Container : Panel
         {
+        public Container()
+            {
+            this.Width = 150;
+            this.Height = 200;
+            }
+
+
         public void applyDropEffect()
             {
             this.Opacity = 0.5;
@@ -20,6 +27,20 @@ namespace GoldMine
         public void removeDropEffect()
             {
             this.Opacity = 1;
+            }
+
+
+        protected override Size MeasureOverride( Size availableSize )
+            {
+            Size panelDesiredSize = new Size();
+
+            foreach( UIElement child in this.InternalChildren )
+                {
+                child.Measure( availableSize );
+                panelDesiredSize = child.DesiredSize;
+                }
+
+            return panelDesiredSize;
             }
         }
     }
