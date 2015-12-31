@@ -107,6 +107,10 @@ namespace GoldMine
                 {
                 var card = new Card();
 
+                card.MouseDown += this.onMouseDown;
+                card.MouseMove += this.onMouseMove;
+                card.MouseUp += this.onMouseUp;
+
                 this.stock.Children.Add( card );
                 this.cards.Add( card );
                 }
@@ -130,13 +134,6 @@ namespace GoldMine
 
                 count = this.stock.Children.Count;
                 }
-
-                // add the mouse events to the last card
-            var lastCard = this.waste.Children[ this.waste.Children.Count - 1 ];
-
-            lastCard.MouseDown += this.onMouseDown;
-            lastCard.MouseMove += this.onMouseMove;
-            lastCard.MouseUp += this.onMouseUp;
             }
 
 
@@ -177,6 +174,11 @@ namespace GoldMine
             var card = (Card) sender;
             var parent = card.Parent as Container;
 
+            if ( !this.isCardDraggable( card ) )
+                {
+                return;
+                }
+
             if ( this.drag.isDragging == true )
                 {
                 this.moveCard( this.drag.cardDragging, this.drag.originalContainer );
@@ -216,18 +218,23 @@ namespace GoldMine
 
         private void onMouseUp( object sender, MouseButtonEventArgs e )
             {
+            if ( !this.drag.isDragging )
+                {
+                return;
+                }
+
             var card = (Card) sender;
             var container = this.collisionDetection( card );
 
             if ( container != null )
                 {
-                this.moveCard( card, container );
+                this.moveCard( this.drag.cardDragging, container );
                 }
 
                 // wasn't dropped on any container, so its not a valid drag operation. return to the original container
             else
                 {
-                this.moveCard( card, this.drag.originalContainer );
+                this.moveCard( this.drag.cardDragging, this.drag.originalContainer );
                 }
             }
 
@@ -280,6 +287,36 @@ namespace GoldMine
                 {
                 card.removeDropEffect();
                 }
+            }
+
+
+        /**
+         * Depending on where the card is located, it may be draggable or not.
+         */
+        private bool isCardDraggable( Card card )
+            {
+            var parent = card.Parent;
+
+            if ( parent is Stock )
+                {
+                return false;
+                }
+
+                // the last card is draggable, the others aren't
+            if ( parent is Waste )
+                {
+                if ( this.waste.Children.Count != 0 )
+                    {
+                    var last = this.waste.Children[ this.waste.Children.Count - 1 ];
+
+                    if ( last != card )
+                        {
+                        return false;
+                        }
+                    }
+                }
+
+            return true;
             }
         }
     }
