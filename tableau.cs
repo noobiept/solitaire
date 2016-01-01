@@ -18,6 +18,28 @@ namespace GoldMine
             }
 
 
+        /**
+         * Drag all cards starting from the reference card.
+         */
+        public override void dragCards( Card refCard, List<Card> cardsDragging )
+            {
+            var reached = false;
+
+            foreach( Card card in this.Children )
+                {
+                if ( card == refCard )
+                    {
+                    reached = true;
+                    }
+
+                if ( reached )
+                    {
+                    cardsDragging.Add( card );
+                    }
+                }
+            }
+
+
         protected override Size ArrangeOverride( Size finalSize )
             {
             int y = 0;

@@ -30,6 +30,15 @@ namespace GoldMine
             }
 
 
+        /**
+         * Populate the list with the cards to be dragged. The reference card is one where the drag started.
+         */
+        public virtual void dragCards( Card refCard, List<Card> cardsDragging )
+            {
+            cardsDragging.Add( refCard );
+            }
+
+
         protected override Size MeasureOverride( Size availableSize )
             {
             Size panelDesiredSize = new Size();

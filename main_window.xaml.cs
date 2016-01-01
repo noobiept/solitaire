@@ -16,13 +16,23 @@ using System.Windows.Shapes;
 
 namespace GoldMine
     {
+    public struct Box
+        {
+        public double x;
+        public double y;
+        public double width;
+        public double height;
+        }
+
+
     public partial class MainWindow : Window
         {
             // data use for the drag and drop operation of cards
         public struct Drag
             {
             public bool isDragging;
-            public Card cardDragging;
+            public const int diff = 20;            // space between each card during the drag
+            public List<Card> cardsDragging;
             public Point clickPosition;
             public Container originalContainer;    // original container before the drag occurred. if the drag isn't valid, we need to return the cards to the original place
             public Container highlightedContainer; // when dragging a card on top of a container, highlight that container, and keep a reference to it (to know when to remove the highlight)
@@ -39,6 +49,8 @@ namespace GoldMine
         public MainWindow()
             {
             InitializeComponent();
+
+            this.drag.cardsDragging = new List<Card>();
 
                 // add the stock element in the top left
             int margin = 10;
@@ -137,13 +149,20 @@ namespace GoldMine
             }
 
 
-        private Container collisionDetection( Image image )
+        private Container collisionDetection( Box one )
             {
             for (var a = 0 ; a < this.droppableElements.Count ; a++)
                 {
                 var element = this.droppableElements[ a ];
 
-                if ( this.boxBoxCollision( image, element ) )
+                var box = new Box {
+                    x = Canvas.GetLeft( element ),
+                    y = Canvas.GetTop( element ),
+                    width = element.ActualWidth,
+                    height = element.ActualHeight
+                };
+
+                if ( this.boxBoxCollision( one, box ) )
                     {
                     return element;
                     }
@@ -153,18 +172,13 @@ namespace GoldMine
             }
 
 
-        private bool boxBoxCollision( FrameworkElement one, FrameworkElement two )
-            {
-            var oneLeft = Canvas.GetLeft( one );
-            var oneTop = Canvas.GetTop( one );
-            var twoLeft = Canvas.GetLeft( two );
-            var twoTop = Canvas.GetTop( two );
-            
+        private bool boxBoxCollision( Box one, Box two )
+            {           
             return !(
-                    oneLeft > twoLeft + two.ActualWidth ||
-                    oneLeft + one.ActualWidth < twoLeft ||
-                    oneTop > twoTop + two.ActualHeight ||
-                    oneTop + one.ActualHeight < twoTop
+                    one.x > two.x + two.width ||
+                    one.x + one.width < two.x ||
+                    one.y > two.y + two.height ||
+                    one.y + one.height < two.y
                 );
             }
 
@@ -181,19 +195,22 @@ namespace GoldMine
 
             if ( this.drag.isDragging == true )
                 {
-                this.moveCard( this.drag.cardDragging, this.drag.originalContainer );
+                this.moveCards( this.drag.cardsDragging, this.drag.originalContainer );
                 return;
                 }
 
             this.drag.isDragging = true;
-            this.drag.cardDragging = card;
             this.drag.clickPosition = Mouse.GetPosition( card );
             this.drag.originalContainer = parent;
+            parent.dragCards( card, this.drag.cardsDragging );
 
-            parent.Children.Remove( card );
-            this.MainCanvas.Children.Add( card );
+            foreach( Card dragCard in this.drag.cardsDragging )
+                {
+                parent.Children.Remove( dragCard );
+                this.MainCanvas.Children.Add( dragCard );
+                }
 
-            this.positionCard( card, e );
+            this.positionCards( this.drag.cardsDragging, e );
             }
 
 
@@ -201,16 +218,14 @@ namespace GoldMine
             {
             if ( this.drag.isDragging )
                 {
-                var card = (Card) sender;
-
                 if ( e.LeftButton == MouseButtonState.Released )
                     {
-                    this.moveCard( this.drag.cardDragging, this.drag.originalContainer );
+                    this.moveCards( this.drag.cardsDragging, this.drag.originalContainer );
                     }
 
                 else
                     {
-                    this.positionCard( card, e );
+                    this.positionCards( this.drag.cardsDragging, e );
                     }
                 }
             }
@@ -223,51 +238,58 @@ namespace GoldMine
                 return;
                 }
 
-            var card = (Card) sender;
-            var container = this.collisionDetection( card );
+            var box = this.cardsDimension( this.drag.cardsDragging );
+            var container = this.collisionDetection( box );
 
             if ( container != null )
                 {
-                this.moveCard( this.drag.cardDragging, container );
+                this.moveCards( this.drag.cardsDragging, container );
                 }
 
                 // wasn't dropped on any container, so its not a valid drag operation. return to the original container
             else
                 {
-                this.moveCard( this.drag.cardDragging, this.drag.originalContainer );
+                this.moveCards( this.drag.cardsDragging, this.drag.originalContainer );
                 }
             }
 
 
         /**
-         * Finishes the drag operation, moving the card to a container.
+         * Finishes the drag operation, moving a list of cards to a container.
          */
-        private void moveCard( Card card, Container container )
+        private void moveCards( List<Card> cards, Container container )
             {
-            card.removeDropEffect();
-
             if ( this.drag.highlightedContainer != null )
                 {
                 this.drag.highlightedContainer.removeDropEffect();
                 this.drag.highlightedContainer = null;
                 }
 
-            this.MainCanvas.Children.Remove( card );
-            container.Children.Add( card );
+            foreach( Card card in cards )
+                {
+                card.removeDropEffect();
+                this.MainCanvas.Children.Remove( card );
+                container.Children.Add( card );
+                }
+
             this.drag.originalContainer = null;
-            this.drag.cardDragging = null;
+            this.drag.cardsDragging.Clear();
             this.drag.isDragging = false;
             }
 
 
-        private void positionCard( Card card, MouseEventArgs e )
+        private void positionCards( List<Card> cards, MouseEventArgs e )
             {
             var position = e.GetPosition( this.MainCanvas );
 
-            Canvas.SetLeft( card, position.X - this.drag.clickPosition.X );
-            Canvas.SetTop( card, position.Y - this.drag.clickPosition.Y );
+            for (int a = 0 ; a < cards.Count ; a++)
+                {
+                Canvas.SetLeft( cards[ a ], position.X - this.drag.clickPosition.X );
+                Canvas.SetTop( cards[ a ], position.Y - this.drag.clickPosition.Y + Drag.diff * a );
+                }
 
-            var container = this.collisionDetection( card );
+            var box = this.cardsDimension( cards );
+            var container = this.collisionDetection( box );
 
             if ( this.drag.highlightedContainer != null )
                 {
@@ -278,15 +300,40 @@ namespace GoldMine
             if ( container != null )
                 {
                 container.applyDropEffect();
-                card.applyDropEffect();
+
+                foreach( Card card in cards )
+                    {
+                    card.applyDropEffect();
+                    }
 
                 this.drag.highlightedContainer = container;
                 }
 
             else
                 {
-                card.removeDropEffect();
+                foreach( Card card in cards )
+                    {
+                    card.removeDropEffect();
+                    }
                 }
+            }
+
+
+        /**
+         * Determine the dimensions of the cards stack.
+         * Use the first card to determine the x/y/width.
+         * The height is calculated from the number of cards.
+         * The 'diff' is the space between each card.
+         */
+        private Box cardsDimension( List<Card> cards )
+            {
+            var firstCard = cards[ 0 ];
+            return new Box {
+                x = Canvas.GetLeft( firstCard ),
+                y = Canvas.GetTop( firstCard ),
+                width = firstCard.ActualWidth,
+                height = firstCard.ActualHeight + Drag.diff * (cards.Count - 1)
+                };
             }
 
 
