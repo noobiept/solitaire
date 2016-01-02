@@ -11,13 +11,6 @@ namespace GoldMine
     {
     public class Container : Panel
         {
-        public Container()
-            {
-            this.Width = 150;
-            this.Height = 200;
-            }
-
-
         public void applyDropEffect()
             {
             this.Opacity = 0.5;

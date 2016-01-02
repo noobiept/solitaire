@@ -44,6 +44,8 @@ namespace GoldMine
         List<Card> cards = new List<Card>();
         Stock stock;
         Waste waste;
+        List<Foundation> foundations = new List<Foundation>();
+        List<Tableau> tableaus = new List<Tableau>();
 
 
         public MainWindow()
@@ -52,64 +54,34 @@ namespace GoldMine
 
             this.drag.cardsDragging = new List<Card>();
 
-                // add the stock element in the top left
-            int margin = 10;
-            double left = margin;
-            double top = margin;
-
+                // initialize all the game elements
             this.stock = new Stock();
             this.stock.MouseUp += this.onStockMouseUp;
-
-            Canvas.SetLeft( this.stock, left );
-            Canvas.SetTop( this.stock, top );
-
             this.MainCanvas.Children.Add( this.stock );
 
-                // add the waste element next to the stock
             this.waste = new Waste();
-
-            left += this.stock.Width + margin;
-
-            Canvas.SetLeft( this.waste, left );
-            Canvas.SetTop( this.waste, top );
-
             this.MainCanvas.Children.Add( this.waste );
-
-                // add 4 foundations at the top right corner (the foundation is to where the cards need to be stacked (starting on an ace until the king)
-            left = this.Width - margin;
-            top = margin;
 
             for (int a = 0 ; a < 4 ; a++)
                 {
                 var foundation = new Foundation();
 
-                left -= foundation.Width + margin;
-
-                Canvas.SetLeft( foundation, left );
-                Canvas.SetTop( foundation, top );
-
                 this.MainCanvas.Children.Add( foundation );
                 this.droppableElements.Add( foundation );
+                this.foundations.Add( foundation );
                 }
-
-                // add 7 tableau piles (where you can move any card to)
-            left = margin;
-            top = 300;  //HERE
 
             for (int a = 0 ; a < 7 ; a++)
                 {
                 var tableau = new Tableau();
 
-                Canvas.SetLeft( tableau, left );
-                Canvas.SetTop( tableau, top );
-
-                left += tableau.Width + margin;
-
                 this.MainCanvas.Children.Add( tableau );
                 this.droppableElements.Add( tableau );
+                this.tableaus.Add( tableau );
                 }
 
-            startGame();
+            this.positionResizeElements();
+            this.startGame();
             }
 
 
@@ -250,6 +222,102 @@ namespace GoldMine
             else
                 {
                 this.moveCards( this.drag.cardsDragging, this.drag.originalContainer );
+                }
+            }
+
+        
+        /**
+         * When the window is resized, we need to reposition the game elements.
+         */
+        private void onSizeChange( object sender, SizeChangedEventArgs e )
+            {
+            this.positionResizeElements();
+            }
+
+
+        private void onStateChange( object sender, EventArgs e )
+            {
+            this.positionResizeElements();
+            }
+
+
+        /**
+         * Position/resize all the elements in the right place (given the current width/height of the canvas).
+         */
+        private void positionResizeElements()
+            {
+                // the layout is a grid with 7 columns and 3 lines
+                // each position has space for a card + margin
+                // we calculate these values from the available window dimensions
+            var canvasWidth = this.MainCanvas.ActualWidth;
+            var canvasHeight = this.MainCanvas.ActualHeight;
+            var positionWidth = canvasWidth / 7;
+            var positionHeight = canvasHeight / 3;
+            var cardWidth = positionWidth * 0.9;
+            var cardHeight = positionHeight * 0.9;
+
+            var horizontalMargin = (positionWidth - cardWidth) / 2;   // divide by 2 since there's margin in both sides
+            var verticalMargin = (positionHeight - cardHeight) / 2;
+
+                // resize all the elements
+            foreach( Card card in this.cards )
+                {
+                card.Height = cardHeight;   // the image will maintain the aspect ratio, so only need to set one
+                }
+
+            foreach( Tableau tableau in this.tableaus )
+                {
+                tableau.Width = cardWidth;
+                tableau.Height = cardHeight;
+                }
+
+            foreach( Foundation foundation in this.foundations )
+                {
+                foundation.Width = cardWidth;
+                foundation.Height = cardHeight;
+                }
+
+            this.waste.Width = cardWidth;
+            this.waste.Height = cardHeight;
+
+            this.stock.Width = cardWidth;
+            this.stock.Height = cardHeight;
+
+                // position all the elements
+                // add the stock element in the top left
+            double left = horizontalMargin;
+            double top = verticalMargin;
+            
+            Canvas.SetLeft( this.stock, left );
+            Canvas.SetTop( this.stock, top );
+
+                // add the waste element next to the stock
+            left += cardWidth + horizontalMargin * 2;
+
+            Canvas.SetLeft( this.waste, left );
+            Canvas.SetTop( this.waste, top );
+
+                // add the foundations in the top right corner (the foundation is to where the cards need to be stacked (starting on an ace until the king)
+            left = canvasWidth - cardWidth - horizontalMargin;
+
+            foreach( var foundation in this.foundations )
+                {
+                Canvas.SetLeft( foundation, left );
+                Canvas.SetTop( foundation, top );
+
+                left -= cardWidth + 2 * horizontalMargin;
+                }
+
+                // add the tableau piles (where you can move any card to)
+            left = horizontalMargin;
+            top += cardHeight + verticalMargin;
+
+            foreach( var tableau in this.tableaus )
+                {
+                Canvas.SetLeft( tableau, left );
+                Canvas.SetTop( tableau, top );
+
+                left += cardWidth + 2 * horizontalMargin;
                 }
             }
 

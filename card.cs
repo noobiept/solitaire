@@ -18,7 +18,6 @@ namespace GoldMine
             var uri = new Uri( @"images/card_back_orange.png", UriKind.Relative );
             var backSource = new BitmapImage( uri );
             this.Source = backSource;
-            this.Width = 150;
             }
 
 
