@@ -121,8 +121,14 @@ namespace GoldMine
             }
 
 
+        /**
+         * Calculates the intersection area between the reference element and the droppable elements, and returns the one where the area was higher.
+         */
         private Container collisionDetection( Box one )
             {
+            Container colliding = null;
+            double collidingArea = 0;
+
             for (var a = 0 ; a < this.droppableElements.Count ; a++)
                 {
                 var element = this.droppableElements[ a ];
@@ -134,13 +140,33 @@ namespace GoldMine
                     height = element.ActualHeight
                 };
 
-                if ( this.boxBoxCollision( one, box ) )
+                var area = this.calculateIntersectionArea( one, box );
+
+                if ( area > collidingArea )
                     {
-                    return element;
+                    collidingArea = area;
+                    colliding = element;
                     }
                 }
+                
+            return colliding;
+            }
 
-            return null;
+
+        private double calculateIntersectionArea( Box one, Box two )
+            {
+            var left = Math.Max( one.x, two.x );
+            var right = Math.Min( one.x + one.width, two.x + two.width );
+            var bottom = Math.Min( one.y + one.height, two.y + two.height );
+            var top = Math.Max( one.y, two.y );
+
+                // if there's an intersection
+            if ( left < right && bottom > top )
+                {
+                return (right - left) * (bottom - top);
+                }
+            
+            return 0;
             }
 
 
