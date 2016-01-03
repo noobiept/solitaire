@@ -4,6 +4,7 @@
              xmlns:local="clr-namespace:GoldMine"
              StartupUri="main_window.xaml">
     <Application.Resources>
-         
+        <BitmapImage x:Key="card_back" UriSource="images/card_back_orange.png" />
+        <BitmapImage x:Key="two_of_clubs" UriSource="images/two_of_clubs.png" />
     </Application.Resources>
 </Application>

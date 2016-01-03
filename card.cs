@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Input;
 
@@ -13,11 +14,37 @@ namespace GoldMine
     {
     public class Card : Image
         {
-        public Card()
+        public enum Suit { clubs, diamonds, hearts, spades };
+        public enum Value { ace, two, three, four, five, six, seven, eight, nine, ten, jack, queen, king };
+
+
+        private Suit suit;
+        private Value value;
+
+
+        public Card( Suit suit, Value value )
             {
-            var uri = new Uri( @"images/card_back_orange.png", UriKind.Relative );
-            var backSource = new BitmapImage( uri );
-            this.Source = backSource;
+            this.suit = suit;
+            this.value = value;
+
+            this.showBack();
+            }
+
+
+        public void showBack()
+            {
+            var mainResources = Application.Current.Resources;
+
+            this.Source = (ImageSource) mainResources[ "card_back" ];
+            }
+
+
+        public void showFront()
+            {
+            var mainResources = Application.Current.Resources;
+
+            var imageName = this.value.ToString() + "_of_" + this.suit.ToString();
+            this.Source = (ImageSource) mainResources[ imageName ];
             }
 
 

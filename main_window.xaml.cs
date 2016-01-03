@@ -89,7 +89,7 @@ namespace GoldMine
             {
             for (int a = 0 ; a < 7 ; a++)
                 {
-                var card = new Card();
+                var card = new Card( Card.Suit.clubs, Card.Value.two );
 
                 card.MouseDown += this.onMouseDown;
                 card.MouseMove += this.onMouseMove;
@@ -112,9 +112,11 @@ namespace GoldMine
                 {
                 int lastPosition = count - 1;
 
-                var card = this.stock.Children[ lastPosition ];
+                var card = (Card) this.stock.Children[ lastPosition ];
                 this.stock.Children.RemoveAt( lastPosition );
                 this.waste.Children.Add( card );
+
+                card.showFront();
 
                 count = this.stock.Children.Count;
                 }
