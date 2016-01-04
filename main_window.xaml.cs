@@ -402,7 +402,7 @@ namespace GoldMine
                 this.drag.highlightedContainer = null;
                 }
 
-            if ( container != null )
+            if ( container != null && container.canDrop( cards ) )
                 {
                 container.applyDropEffect();
 
