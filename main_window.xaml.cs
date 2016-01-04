@@ -97,9 +97,15 @@ namespace GoldMine
                     card.MouseMove += this.onMouseMove;
                     card.MouseUp += this.onMouseUp;
 
-                    this.stock.Children.Add( card );
                     this.cards.Add( card );
                     }
+                }
+
+            Utilities.shuffle( this.cards );
+
+            foreach( Card card in this.cards )
+                {
+                this.stock.Children.Add( card );
                 }
             }
 
@@ -244,7 +250,7 @@ namespace GoldMine
             var box = this.cardsDimension( this.drag.cardsDragging );
             var container = this.collisionDetection( box );
 
-            if ( container != null )
+            if ( container != null && container.canDrop( this.drag.cardsDragging ) )
                 {
                 this.moveCards( this.drag.cardsDragging, container );
                 }

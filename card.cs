@@ -16,16 +16,28 @@ namespace GoldMine
         {
         public enum Suit { clubs, diamonds, hearts, spades };
         public enum Value { ace, two, three, four, five, six, seven, eight, nine, ten, jack, queen, king };
+        public enum Color { black, red };
 
 
-        private Suit suit;
-        private Value value;
+        public Suit suit;
+        public Value value;
+        public Color color;
 
 
         public Card( Suit suit, Value value )
             {
             this.suit = suit;
             this.value = value;
+
+            if ( suit == Suit.clubs || suit == Suit.spades )
+                {
+                this.color = Color.black;
+                }
+
+            else
+                {
+                this.color = Color.red;
+                }
 
             this.showBack();
             }

@@ -40,6 +40,36 @@ namespace GoldMine
             }
 
 
+        /**
+         * A card is droppable if either the tableau is empty, or if the last card in the tableau is one value above the first card being dropped, and they have alternating colors.
+         */
+        public override bool canDrop( List<Card> cards )
+            {
+            if ( this.Children.Count > 0 )
+                {
+                Card lastTableau = (Card) this.Children[ this.Children.Count - 1 ];
+                Card firstDrag = cards[ 0 ];
+
+                if ( lastTableau.value - 1 == firstDrag.value &&
+                     lastTableau.color != firstDrag.color )
+                    {
+                    return true;
+                    }
+
+                else
+                    {
+                    return false;
+                    }
+                }
+
+                // its empty, so any card is valid
+            else
+                {
+                return true;
+                }
+            }
+
+
         protected override Size ArrangeOverride( Size finalSize )
             {
             int y = 0;

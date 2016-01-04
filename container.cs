@@ -24,6 +24,15 @@ namespace GoldMine
 
 
         /**
+         * Says if the given cards can be dropped unto this container or not.
+         */
+        public virtual bool canDrop( List<Card> cards )
+            {
+            return false;
+            }
+
+
+        /**
          * Populate the list with the cards to be dragged. The reference card is one where the drag started.
          */
         public virtual void dragCards( Card refCard, List<Card> cardsDragging )
