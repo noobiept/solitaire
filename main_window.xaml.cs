@@ -87,16 +87,19 @@ namespace GoldMine
 
         private void startGame()
             {
-            for (int a = 0 ; a < 7 ; a++)
+            foreach( Card.Suit suit in Enum.GetValues( typeof( Card.Suit ) ) )
                 {
-                var card = new Card( Card.Suit.clubs, Card.Value.two );
+                foreach( Card.Value value in Enum.GetValues( typeof( Card.Value ) ) )
+                    {
+                    var card = new Card( suit, value );
 
-                card.MouseDown += this.onMouseDown;
-                card.MouseMove += this.onMouseMove;
-                card.MouseUp += this.onMouseUp;
+                    card.MouseDown += this.onMouseDown;
+                    card.MouseMove += this.onMouseMove;
+                    card.MouseUp += this.onMouseUp;
 
-                this.stock.Children.Add( card );
-                this.cards.Add( card );
+                    this.stock.Children.Add( card );
+                    this.cards.Add( card );
+                    }
                 }
             }
 

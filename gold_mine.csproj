@@ -24,6 +24,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -33,6 +34,9 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>GoldMine.App</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -105,12 +109,81 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\card_back_orange.png" />
-  </ItemGroup>
-  <ItemGroup>
+    <Resource Include="images\two_of_clubs.png" />
     <Resource Include="info.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\two_of_clubs.png" />
+    <Resource Include="images\ace_of_clubs.png" />
+    <Resource Include="images\ace_of_diamonds.png" />
+    <Resource Include="images\ace_of_hearts.png" />
+    <Resource Include="images\ace_of_spades.png" />
+    <Resource Include="images\ace_of_spades2.png" />
+    <Resource Include="images\black_joker.png" />
+    <Resource Include="images\card_back_black.png" />
+    <Resource Include="images\card_back_blue.png" />
+    <Resource Include="images\card_back_green.png" />
+    <Resource Include="images\card_back_purple.png" />
+    <Resource Include="images\card_black_red.png" />
+    <Resource Include="images\eight_of_clubs.png" />
+    <Resource Include="images\eight_of_diamonds.png" />
+    <Resource Include="images\eight_of_hearts.png" />
+    <Resource Include="images\eight_of_spades.png" />
+    <Resource Include="images\five_of_clubs.png" />
+    <Resource Include="images\five_of_diamonds.png" />
+    <Resource Include="images\five_of_hearts.png" />
+    <Resource Include="images\five_of_spades.png" />
+    <Resource Include="images\four_of_clubs.png" />
+    <Resource Include="images\four_of_diamonds.png" />
+    <Resource Include="images\four_of_hearts.png" />
+    <Resource Include="images\four_of_spades.png" />
+    <Resource Include="images\jack_of_clubs.png" />
+    <Resource Include="images\jack_of_clubs2.png" />
+    <Resource Include="images\jack_of_diamonds.png" />
+    <Resource Include="images\jack_of_diamonds2.png" />
+    <Resource Include="images\jack_of_hearts.png" />
+    <Resource Include="images\jack_of_hearts2.png" />
+    <Resource Include="images\jack_of_spades.png" />
+    <Resource Include="images\jack_of_spades2.png" />
+    <Resource Include="images\king_of_clubs.png" />
+    <Resource Include="images\king_of_clubs2.png" />
+    <Resource Include="images\king_of_diamonds.png" />
+    <Resource Include="images\king_of_diamonds2.png" />
+    <Resource Include="images\king_of_hearts.png" />
+    <Resource Include="images\king_of_hearts2.png" />
+    <Resource Include="images\king_of_spades.png" />
+    <Resource Include="images\king_of_spades2.png" />
+    <Resource Include="images\nine_of_clubs.png" />
+    <Resource Include="images\nine_of_diamonds.png" />
+    <Resource Include="images\nine_of_hearts.png" />
+    <Resource Include="images\nine_of_spades.png" />
+    <Resource Include="images\queen_of_clubs.png" />
+    <Resource Include="images\queen_of_clubs2.png" />
+    <Resource Include="images\queen_of_diamonds.png" />
+    <Resource Include="images\queen_of_diamonds2.png" />
+    <Resource Include="images\queen_of_hearts.png" />
+    <Resource Include="images\queen_of_hearts2.png" />
+    <Resource Include="images\queen_of_spades.png" />
+    <Resource Include="images\queen_of_spades2.png" />
+    <Resource Include="images\red_joker.png" />
+    <Resource Include="images\seven_of_clubs.png" />
+    <Resource Include="images\seven_of_diamonds.png" />
+    <Resource Include="images\seven_of_hearts.png" />
+    <Resource Include="images\seven_of_spades.png" />
+    <Resource Include="images\six_of_clubs.png" />
+    <Resource Include="images\six_of_diamonds.png" />
+    <Resource Include="images\six_of_hearts.png" />
+    <Resource Include="images\six_of_spades.png" />
+    <Resource Include="images\ten_of_clubs.png" />
+    <Resource Include="images\ten_of_diamonds.png" />
+    <Resource Include="images\ten_of_hearts.png" />
+    <Resource Include="images\ten_of_spades.png" />
+    <Resource Include="images\three_of_clubs.png" />
+    <Resource Include="images\three_of_diamonds.png" />
+    <Resource Include="images\three_of_hearts.png" />
+    <Resource Include="images\three_of_spades.png" />
+    <Resource Include="images\two_of_diamonds.png" />
+    <Resource Include="images\two_of_hearts.png" />
+    <Resource Include="images\two_of_spades.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

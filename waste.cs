@@ -21,12 +21,19 @@ namespace GoldMine
             {
             int x = 0;
             int step = 20;
+            int count = this.InternalChildren.Count;
 
-            foreach( UIElement child in this.InternalChildren )
+            for (int a = 0 ; a < count ; a++)
                 {
+                var child = this.InternalChildren[ a ];
+
                 child.Arrange( new Rect( new Point( x, 0 ), child.DesiredSize ) );
 
-                x += step;
+                    // the last 3 cards are place with a x-offset, the others are stacked in each other
+                if ( a >= count - 3 )
+                    {
+                    x += step;
+                    }
                 }
 
             return finalSize;

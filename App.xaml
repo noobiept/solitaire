@@ -5,6 +5,70 @@
              StartupUri="main_window.xaml">
     <Application.Resources>
         <BitmapImage x:Key="card_back" UriSource="images/card_back_orange.png" />
+
+        <BitmapImage x:Key="ace_of_clubs" UriSource="images/ace_of_clubs.png" />
+        <BitmapImage x:Key="ace_of_diamonds" UriSource="images/ace_of_diamonds.png" />
+        <BitmapImage x:Key="ace_of_hearts" UriSource="images/ace_of_hearts.png" />
+        <BitmapImage x:Key="ace_of_spades" UriSource="images/ace_of_spades.png" />
+
         <BitmapImage x:Key="two_of_clubs" UriSource="images/two_of_clubs.png" />
+        <BitmapImage x:Key="two_of_diamonds" UriSource="images/two_of_diamonds.png" />
+        <BitmapImage x:Key="two_of_hearts" UriSource="images/two_of_hearts.png" />
+        <BitmapImage x:Key="two_of_spades" UriSource="images/two_of_spades.png" />
+        
+        <BitmapImage x:Key="three_of_clubs" UriSource="images/three_of_clubs.png" />
+        <BitmapImage x:Key="three_of_diamonds" UriSource="images/three_of_diamonds.png" />
+        <BitmapImage x:Key="three_of_hearts" UriSource="images/three_of_hearts.png" />
+        <BitmapImage x:Key="three_of_spades" UriSource="images/three_of_spades.png" />
+        
+        <BitmapImage x:Key="four_of_clubs" UriSource="images/four_of_clubs.png" />
+        <BitmapImage x:Key="four_of_diamonds" UriSource="images/four_of_diamonds.png" />
+        <BitmapImage x:Key="four_of_hearts" UriSource="images/four_of_hearts.png" />
+        <BitmapImage x:Key="four_of_spades" UriSource="images/four_of_spades.png" />
+        
+        <BitmapImage x:Key="five_of_clubs" UriSource="images/five_of_clubs.png" />
+        <BitmapImage x:Key="five_of_diamonds" UriSource="images/five_of_diamonds.png" />
+        <BitmapImage x:Key="five_of_hearts" UriSource="images/five_of_hearts.png" />
+        <BitmapImage x:Key="five_of_spades" UriSource="images/five_of_spades.png" />
+        
+        <BitmapImage x:Key="six_of_clubs" UriSource="images/six_of_clubs.png" />
+        <BitmapImage x:Key="six_of_diamonds" UriSource="images/six_of_diamonds.png" />
+        <BitmapImage x:Key="six_of_hearts" UriSource="images/six_of_hearts.png" />
+        <BitmapImage x:Key="six_of_spades" UriSource="images/six_of_spades.png" />
+        
+        <BitmapImage x:Key="seven_of_clubs" UriSource="images/seven_of_clubs.png" />
+        <BitmapImage x:Key="seven_of_diamonds" UriSource="images/seven_of_diamonds.png" />
+        <BitmapImage x:Key="seven_of_hearts" UriSource="images/seven_of_hearts.png" />
+        <BitmapImage x:Key="seven_of_spades" UriSource="images/seven_of_spades.png" />
+        
+        <BitmapImage x:Key="eight_of_clubs" UriSource="images/eight_of_clubs.png" />
+        <BitmapImage x:Key="eight_of_diamonds" UriSource="images/eight_of_diamonds.png" />
+        <BitmapImage x:Key="eight_of_hearts" UriSource="images/eight_of_hearts.png" />
+        <BitmapImage x:Key="eight_of_spades" UriSource="images/eight_of_spades.png" />
+        
+        <BitmapImage x:Key="nine_of_clubs" UriSource="images/nine_of_clubs.png" />
+        <BitmapImage x:Key="nine_of_diamonds" UriSource="images/nine_of_diamonds.png" />
+        <BitmapImage x:Key="nine_of_hearts" UriSource="images/nine_of_hearts.png" />
+        <BitmapImage x:Key="nine_of_spades" UriSource="images/nine_of_spades.png" />
+        
+        <BitmapImage x:Key="ten_of_clubs" UriSource="images/ten_of_clubs.png" />
+        <BitmapImage x:Key="ten_of_diamonds" UriSource="images/ten_of_diamonds.png" />
+        <BitmapImage x:Key="ten_of_hearts" UriSource="images/ten_of_hearts.png" />
+        <BitmapImage x:Key="ten_of_spades" UriSource="images/ten_of_spades.png" />
+        
+        <BitmapImage x:Key="jack_of_clubs" UriSource="images/jack_of_clubs2.png" />
+        <BitmapImage x:Key="jack_of_diamonds" UriSource="images/jack_of_diamonds2.png" />
+        <BitmapImage x:Key="jack_of_hearts" UriSource="images/jack_of_hearts2.png" />
+        <BitmapImage x:Key="jack_of_spades" UriSource="images/jack_of_spades2.png" />
+        
+        <BitmapImage x:Key="queen_of_clubs" UriSource="images/queen_of_clubs2.png" />
+        <BitmapImage x:Key="queen_of_diamonds" UriSource="images/queen_of_diamonds2.png" />
+        <BitmapImage x:Key="queen_of_hearts" UriSource="images/queen_of_hearts2.png" />
+        <BitmapImage x:Key="queen_of_spades" UriSource="images/queen_of_spades2.png" />
+        
+        <BitmapImage x:Key="king_of_clubs" UriSource="images/king_of_clubs2.png" />
+        <BitmapImage x:Key="king_of_diamonds" UriSource="images/king_of_diamonds2.png" />
+        <BitmapImage x:Key="king_of_hearts" UriSource="images/king_of_hearts2.png" />
+        <BitmapImage x:Key="king_of_spades" UriSource="images/king_of_spades2.png" />
     </Application.Resources>
 </Application>
