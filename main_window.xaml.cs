@@ -335,7 +335,6 @@ namespace GoldMine
 
             foreach( Card card in cards )
                 {
-                card.removeDropEffect();
                 this.MainCanvas.Children.Remove( card );
                 container.Children.Add( card );
                 }
@@ -369,20 +368,7 @@ namespace GoldMine
                 {
                 container.applyDropEffect();
 
-                foreach( Card card in cards )
-                    {
-                    card.applyDropEffect();
-                    }
-
                 this.drag.highlightedContainer = container;
-                }
-
-            else
-                {
-                foreach( Card card in cards )
-                    {
-                    card.removeDropEffect();
-                    }
                 }
             }
 

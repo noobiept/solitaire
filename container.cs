@@ -5,21 +5,34 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
+using Microsoft.Expression.Media.Effects;
 
 
 namespace GoldMine
     {
     public class Container : Panel
         {
+        private ColorToneEffect dropEffect;
+
+
+        public Container()
+            {
+            this.dropEffect = new ColorToneEffect();
+            this.dropEffect.DarkColor = Colors.Black;
+            this.dropEffect.LightColor = Colors.CornflowerBlue;
+            }
+
+
         public void applyDropEffect()
             {
-            this.Opacity = 0.5;
+            this.Effect = this.dropEffect;
             }
 
 
         public void removeDropEffect()
             {
-            this.Opacity = 1;
+            this.Effect = null;
             }
 
 

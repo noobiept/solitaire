@@ -3,10 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ee="http://schemas.microsoft.com/expression/2010/effects"
         xmlns:local="clr-namespace:GoldMine"
         mc:Ignorable="d"
         Title="Gold Mine" Height="650" Width="1000" SizeChanged="onSizeChange" StateChanged="onStateChange">
     <Canvas Name="MainCanvas">
-        
+
     </Canvas>
 </Window>

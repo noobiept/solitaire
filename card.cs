@@ -58,17 +58,5 @@ namespace GoldMine
             var imageName = this.value.ToString() + "_of_" + this.suit.ToString();
             this.Source = (ImageSource) mainResources[ imageName ];
             }
-
-
-        public void applyDropEffect()
-            {
-            this.Opacity = 0.5;
-            }
-
-
-        public void removeDropEffect()
-            {
-            this.Opacity = 1;
-            }
         }
     }
