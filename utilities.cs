@@ -4,8 +4,17 @@ using System.Collections.Generic;
 
 namespace GoldMine
     {
-    class Utilities
+    public static class Utilities
         {
+        public struct Box
+            {
+            public double x;
+            public double y;
+            public double width;
+            public double height;
+            }
+
+
         public static void shuffle<Type>( List<Type> list )
             {
             var currentIndex = list.Count;
@@ -25,6 +34,34 @@ namespace GoldMine
                 list[ currentIndex ] = list[ randomIndex ];
                 list[ randomIndex ] = temporaryValue;
                 }
+            }
+
+
+        public static double calculateIntersectionArea( Box one, Box two )
+            {
+            var left = Math.Max( one.x, two.x );
+            var right = Math.Min( one.x + one.width, two.x + two.width );
+            var bottom = Math.Min( one.y + one.height, two.y + two.height );
+            var top = Math.Max( one.y, two.y );
+
+                // if there's an intersection
+            if (left < right && bottom > top)
+                {
+                return (right - left) * (bottom - top);
+                }
+
+            return 0;
+            }
+
+
+        public static bool boxBoxCollision( Box one, Box two )
+            {
+            return !(
+                    one.x > two.x + two.width ||
+                    one.x + one.width < two.x ||
+                    one.y > two.y + two.height ||
+                    one.y + one.height < two.y
+                );
             }
         }
     }

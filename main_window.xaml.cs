@@ -16,15 +16,6 @@ using System.Windows.Shapes;
 
 namespace GoldMine
     {
-    public struct Box
-        {
-        public double x;
-        public double y;
-        public double width;
-        public double height;
-        }
-
-
     public partial class MainWindow : Window
         {
             // data use for the drag and drop operation of cards
@@ -135,7 +126,7 @@ namespace GoldMine
         /**
          * Calculates the intersection area between the reference element and the droppable elements, and returns the one where the area was higher.
          */
-        private Container collisionDetection( Box one )
+        private Container collisionDetection( Utilities.Box one )
             {
             Container colliding = null;
             double collidingArea = 0;
@@ -144,14 +135,14 @@ namespace GoldMine
                 {
                 var element = this.droppableElements[ a ];
 
-                var box = new Box {
+                var box = new Utilities.Box {
                     x = Canvas.GetLeft( element ),
                     y = Canvas.GetTop( element ),
                     width = element.ActualWidth,
                     height = element.ActualHeight
                 };
 
-                var area = this.calculateIntersectionArea( one, box );
+                var area = Utilities.calculateIntersectionArea( one, box );
 
                 if ( area > collidingArea )
                     {
@@ -161,34 +152,6 @@ namespace GoldMine
                 }
                 
             return colliding;
-            }
-
-
-        private double calculateIntersectionArea( Box one, Box two )
-            {
-            var left = Math.Max( one.x, two.x );
-            var right = Math.Min( one.x + one.width, two.x + two.width );
-            var bottom = Math.Min( one.y + one.height, two.y + two.height );
-            var top = Math.Max( one.y, two.y );
-
-                // if there's an intersection
-            if ( left < right && bottom > top )
-                {
-                return (right - left) * (bottom - top);
-                }
-            
-            return 0;
-            }
-
-
-        private bool boxBoxCollision( Box one, Box two )
-            {           
-            return !(
-                    one.x > two.x + two.width ||
-                    one.x + one.width < two.x ||
-                    one.y > two.y + two.height ||
-                    one.y + one.height < two.y
-                );
             }
 
 
@@ -430,10 +393,10 @@ namespace GoldMine
          * The height is calculated from the number of cards.
          * The 'diff' is the space between each card.
          */
-        private Box cardsDimension( List<Card> cards )
+        private Utilities.Box cardsDimension( List<Card> cards )
             {
             var firstCard = cards[ 0 ];
-            return new Box {
+            return new Utilities.Box {
                 x = Canvas.GetLeft( firstCard ),
                 y = Canvas.GetTop( firstCard ),
                 width = firstCard.ActualWidth,
