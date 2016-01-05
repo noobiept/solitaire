@@ -6,8 +6,16 @@
         xmlns:ee="http://schemas.microsoft.com/expression/2010/effects"
         xmlns:local="clr-namespace:GoldMine"
         mc:Ignorable="d"
-        Title="Gold Mine" Height="650" Width="1000" SizeChanged="onSizeChange" StateChanged="onStateChange">
-    <Canvas Name="MainCanvas">
-
-    </Canvas>
+        Title="Gold Mine" Height="650" Width="1000" SizeChanged="onSizeChange" StateChanged="onStateChange"
+        Closing="onWindowClosing">
+    <DockPanel>
+        <DockPanel Name="Menu" DockPanel.Dock="Top" LastChildFill="False" Background="LightGray">
+            <Button Margin="2,2,2,6" Click="newGameClick">New Game</Button>
+            <Button Margin="2,2,2,6">Statistics</Button>
+            <Button Margin="2,2,2,6">About</Button>
+            <TextBlock Name="TimePassed" Margin="2,2,2,6" DockPanel.Dock="Right">Time: 0s</TextBlock>
+            <TextBlock Name="StockLeft" Margin="2,2,2,6" DockPanel.Dock="Right">In stock: x</TextBlock>
+        </DockPanel>
+        <Canvas Name="MainCanvas" DockPanel.Dock="Bottom"></Canvas>
+    </DockPanel>
 </Window>

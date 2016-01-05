@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -30,6 +31,8 @@ namespace GoldMine
             }
 
         Drag drag;
+        Timer timer;
+        int secondsPassed;
 
         List<Container> droppableElements = new List<Container>();
         List<Card> cards = new List<Card>();
@@ -44,6 +47,8 @@ namespace GoldMine
             InitializeComponent();
 
             this.drag.cardsDragging = new List<Card>();
+            this.timer = new Timer( 1000 );
+            this.timer.Elapsed += this.onTimeElapsed;
 
                 // initialize all the game elements
             this.stock = new Stock();
@@ -71,13 +76,6 @@ namespace GoldMine
                 this.tableaus.Add( tableau );
                 }
 
-            this.positionResizeElements();
-            this.startGame();
-            }
-
-
-        private void startGame()
-            {
             foreach( Card.Suit suit in Enum.GetValues( typeof( Card.Suit ) ) )
                 {
                 foreach( Card.Value value in Enum.GetValues( typeof( Card.Value ) ) )
@@ -92,12 +90,38 @@ namespace GoldMine
                     }
                 }
 
-            Utilities.shuffle( this.cards );
+            this.positionResizeElements();
+            this.startGame();
+            }
 
+
+        private void startGame()
+            {
+                // disconnect the cards from their previous container
             foreach( Card card in this.cards )
                 {
+                var parent = card.Parent as Panel;
+
+                if ( parent != null )
+                    {
+                    parent.Children.Remove( card );
+                    }
+                }
+
+            Utilities.shuffle( this.cards );
+
+                // add all the shuffled cards to the stock
+            foreach( Card card in this.cards )
+                {
+                card.showBack();
                 this.stock.Children.Add( card );
                 }
+
+            this.updateStockLeft();
+            this.timer.Stop();
+            this.secondsPassed = 0;
+            this.updateTimePassed();
+            this.timer.Start();
             }
 
 
@@ -120,6 +144,8 @@ namespace GoldMine
 
                 count = this.stock.Children.Count;
                 }
+
+            this.updateStockLeft();
             }
 
 
@@ -418,6 +444,40 @@ namespace GoldMine
                 }
 
             return true;
+            }
+
+
+        private void newGameClick( object sender, RoutedEventArgs e )
+            {
+            this.startGame();
+            }
+
+
+        private void updateStockLeft()
+            {
+            this.StockLeft.Text = "In stock: " + this.stock.Children.Count;
+            }
+
+
+        private void updateTimePassed()
+            {
+            this.TimePassed.Text = "Time: " + this.secondsPassed + "s";
+            }
+
+
+        private void onTimeElapsed( Object source, ElapsedEventArgs e )
+            {
+            this.Dispatcher.Invoke( (Action) (() =>
+                {
+                this.secondsPassed++;
+                this.updateTimePassed();
+                }));
+            }
+
+
+        private void onWindowClosing( object sender, System.ComponentModel.CancelEventArgs e )
+            {
+            this.timer.Stop();
             }
         }
     }
