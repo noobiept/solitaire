@@ -14,6 +14,10 @@ namespace GoldMine
     {
     public class Card : Image
         {
+        public const double OriginalWidth = 672;
+        public const double OriginalHeight = 976;
+        public const double Ratio = OriginalWidth / OriginalHeight;
+
         public enum Suit { clubs, diamonds, hearts, spades };
         public enum Value { ace, two, three, four, five, six, seven, eight, nine, ten, jack, queen, king };
         public enum Color { black, red };

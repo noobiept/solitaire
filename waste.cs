@@ -11,16 +11,10 @@ namespace GoldMine
     {
     class Waste : Container
         {
-        public Waste()
-            {
-            this.Background = Brushes.GreenYellow;
-            }
-
-
         protected override Size ArrangeOverride( Size finalSize )
             {
             int x = 0;
-            int step = 20;
+            int step = 25;
             int count = this.InternalChildren.Count;
 
             for (int a = 0 ; a < count ; a++)

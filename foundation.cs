@@ -12,12 +12,6 @@ namespace GoldMine
     {
     public class Foundation : Container
         {
-        public Foundation()
-            {
-            this.Background = Brushes.AntiqueWhite;
-            }
-
-
         /**
          * A card is droppable if:
          *     - Its an ace and the foundation is empty.

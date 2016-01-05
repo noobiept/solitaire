@@ -90,7 +90,6 @@ namespace GoldMine
                     }
                 }
 
-            this.positionResizeElements();
             this.startGame();
             }
 
@@ -279,8 +278,16 @@ namespace GoldMine
             var canvasHeight = this.MainCanvas.ActualHeight;
             var positionWidth = canvasWidth / 7;
             var positionHeight = canvasHeight / 3;
-            var cardWidth = positionWidth * 0.9;
+            var availableCardWidth = positionWidth * 0.9;
+
             var cardHeight = positionHeight * 0.9;
+            var cardWidth = cardHeight * Card.Ratio;
+
+            if ( cardWidth > availableCardWidth )
+                {
+                cardWidth = availableCardWidth;
+                cardHeight = cardWidth / Card.Ratio;
+                }
 
             var horizontalMargin = (positionWidth - cardWidth) / 2;   // divide by 2 since there's margin in both sides
             var verticalMargin = (positionHeight - cardHeight) / 2;

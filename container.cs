@@ -18,6 +18,8 @@ namespace GoldMine
 
         public Container()
             {
+            this.Background = new SolidColorBrush( Color.FromRgb( 87, 129, 50 ) );
+
             this.dropEffect = new ColorToneEffect();
             this.dropEffect.DarkColor = Colors.Black;
             this.dropEffect.LightColor = Colors.CornflowerBlue;

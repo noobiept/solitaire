@@ -12,12 +12,6 @@ namespace GoldMine
     {
     class Stock : Container
         {
-        public Stock()
-            {
-            this.Background = Brushes.DarkGray;
-            }
-
-
         protected override Size ArrangeOverride( Size finalSize )
             {
             foreach( UIElement child in this.InternalChildren )

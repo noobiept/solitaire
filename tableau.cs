@@ -12,12 +12,6 @@ namespace GoldMine
     {
     public class Tableau : Container
         {
-        public Tableau()
-            {
-            this.Background = Brushes.BlueViolet;
-            }
-
-
         /**
          * Drag all cards starting from the reference card.
          */
@@ -73,7 +67,7 @@ namespace GoldMine
         protected override Size ArrangeOverride( Size finalSize )
             {
             int y = 0;
-            int step = 20;
+            int step = 25;
 
             foreach( UIElement child in this.InternalChildren )
                 {
