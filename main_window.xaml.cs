@@ -125,6 +125,29 @@ namespace GoldMine
 
 
         /**
+         * Checks if the game has ended, and if so then show a message.
+         * The game is over when all the cards are in the foundations.
+         */
+        private void checkGameEnd()
+            {
+            int cardCount = this.cards.Count;
+            int foundationCount = 0;
+
+            foreach( var foundation in this.foundations )
+                {
+                foundationCount += foundation.Children.Count;
+                }
+
+                // game has ended
+            if ( cardCount == foundationCount )
+                {
+                MessageBox.Show( "Game Over!", "Game Over!", MessageBoxButton.OK );
+                this.startGame();
+                }
+            }
+
+
+        /**
          * When we click on the stock, we move 3 cards to the waste.
          */
         private void onStockMouseUp( object sender, MouseButtonEventArgs e )
@@ -241,6 +264,7 @@ namespace GoldMine
             if ( container != null && container.canDrop( this.drag.cardsDragging ) )
                 {
                 this.moveCards( this.drag.cardsDragging, container );
+                this.checkGameEnd();
                 }
 
                 // wasn't dropped on any container, so its not a valid drag operation. return to the original container
