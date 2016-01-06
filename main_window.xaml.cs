@@ -172,6 +172,36 @@ namespace GoldMine
 
 
         /**
+         * When double-clicking on a card, see if we can send that card to a foundation.
+         */
+        private void sendToFoundation( Card card )
+            {
+                // can only send it if its the last card of its parent container
+            var parent = card.Parent as Container;
+            var last = parent.Children[ parent.Children.Count - 1 ];
+
+            if ( last != card )
+                {
+                return;
+                }
+
+                // need to have a list to work with the 'canDrop' function
+            var cards = new List<Card>();
+            cards.Add( card );
+
+            foreach( var foundation in this.foundations )
+                {
+                if ( foundation.canDrop( cards ) )
+                    {
+                    this.moveCards( cards, foundation );
+                    this.checkGameEnd();
+                    return;
+                    }
+                }
+            }
+
+
+        /**
          * Calculates the intersection area between the reference element and the droppable elements, and returns the one where the area was higher.
          */
         private Container collisionDetection( Utilities.Box one )
@@ -210,6 +240,12 @@ namespace GoldMine
 
             if ( !this.isCardDraggable( card ) )
                 {
+                return;
+                }
+
+            if ( e.ClickCount == 2 )
+                {
+                this.sendToFoundation( card );
                 return;
                 }
 
@@ -392,7 +428,8 @@ namespace GoldMine
 
             foreach( Card card in cards )
                 {
-                this.MainCanvas.Children.Remove( card );
+                var parent = card.Parent as Panel;
+                parent.Children.Remove( card );
                 container.Children.Add( card );
                 }
 
