@@ -26,6 +26,33 @@ namespace GoldMine
             }
 
 
+        /**
+         * Get the dimension box of the container.
+         */
+        public virtual Utilities.Box getDimensionBox()
+            {
+            var box = new Utilities.Box();
+
+            box.x = Canvas.GetLeft( this );
+            box.y = Canvas.GetTop( this );
+            box.width = this.ActualWidth;
+            box.height = this.ActualHeight;
+
+            return box;
+            }
+
+
+        public Card getLast()
+            {
+            if ( this.Children.Count > 0 )
+                {
+                return (Card) this.Children[ this.Children.Count - 1 ];
+                }
+
+            return null;
+            }
+
+
         public void applyDropEffect()
             {
             this.Effect = this.dropEffect;

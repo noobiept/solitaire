@@ -204,28 +204,27 @@ namespace GoldMine
         /**
          * Calculates the intersection area between the reference element and the droppable elements, and returns the one where the area was higher.
          */
-        private Container collisionDetection( Utilities.Box one )
+        private Container collisionDetection( List<Card> cards )
             {
+            var cardsBox = this.cardsDimension( cards );
             Container colliding = null;
             double collidingArea = 0;
 
             for (var a = 0 ; a < this.droppableElements.Count ; a++)
                 {
-                var element = this.droppableElements[ a ];
+                var container = this.droppableElements[ a ];
 
-                var box = new Utilities.Box {
-                    x = Canvas.GetLeft( element ),
-                    y = Canvas.GetTop( element ),
-                    width = element.ActualWidth,
-                    height = element.ActualHeight
-                };
-
-                var area = Utilities.calculateIntersectionArea( one, box );
-
-                if ( area > collidingArea )
+                if ( container.canDrop( cards ) )
                     {
-                    collidingArea = area;
-                    colliding = element;
+                    var containerBox = container.getDimensionBox();
+
+                    var area = Utilities.calculateIntersectionArea( cardsBox, containerBox );
+
+                    if ( area > collidingArea )
+                        {
+                        collidingArea = area;
+                        colliding = container;
+                        }
                     }
                 }
                 
@@ -294,10 +293,9 @@ namespace GoldMine
                 return;
                 }
 
-            var box = this.cardsDimension( this.drag.cardsDragging );
-            var container = this.collisionDetection( box );
+            var container = this.collisionDetection( this.drag.cardsDragging );
 
-            if ( container != null && container.canDrop( this.drag.cardsDragging ) )
+            if ( container != null )
                 {
                 this.moveCards( this.drag.cardsDragging, container );
                 this.checkGameEnd();
@@ -449,8 +447,7 @@ namespace GoldMine
                 Canvas.SetTop( cards[ a ], position.Y - this.drag.clickPosition.Y + Drag.diff * a );
                 }
 
-            var box = this.cardsDimension( cards );
-            var container = this.collisionDetection( box );
+            var container = this.collisionDetection( cards );
 
             if ( this.drag.highlightedContainer != null )
                 {
@@ -458,7 +455,7 @@ namespace GoldMine
                 this.drag.highlightedContainer = null;
                 }
 
-            if ( container != null && container.canDrop( cards ) )
+            if ( container != null )
                 {
                 container.applyDropEffect();
 

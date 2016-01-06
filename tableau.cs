@@ -35,6 +35,36 @@ namespace GoldMine
 
 
         /**
+         * Get the dimension box of the container (also considers its children).
+         */
+        public override Utilities.Box getDimensionBox()
+            {
+            var box = new Utilities.Box();
+
+            box.x = Canvas.GetLeft( this );
+            box.y = Canvas.GetTop( this );
+            box.width = this.ActualWidth;
+            box.height = this.ActualHeight;
+
+            var lastCard = this.getLast();
+
+                // the last card may be outside the container dimensions, so need to consider that
+            if ( lastCard != null )
+                {
+                var point = lastCard.TranslatePoint( new Point( 0, 0 ), this );
+                var combinedHeight = point.Y + lastCard.ActualHeight;
+
+                if ( combinedHeight > box.height )
+                    {
+                    box.height = combinedHeight;
+                    }
+                }
+
+            return box;
+            }
+
+
+        /**
          * A card is droppable if either the tableau is empty, or if the last card in the tableau is one value above the first card being dropped, and they have alternating colors.
          */
         public override bool canDrop( List<Card> cards )
