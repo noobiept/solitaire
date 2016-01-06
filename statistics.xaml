@@ -1,0 +1,38 @@
+﻿<Window x:Class="GoldMine.Statistics"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GoldMine"
+        mc:Ignorable="d"
+        Title="Statistics" 
+        Height="150" Width="250"
+        WindowStartupLocation="CenterScreen"
+        Background="LightGray">
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        
+        <TextBlock Grid.Column="0" Grid.Row="0">Total:</TextBlock>
+        <TextBlock Name="TotalGames" Grid.Column="1" Grid.Row="0">x games</TextBlock>
+        
+        <TextBlock Grid.Column="0" Grid.Row="1">Win Percentage:</TextBlock>
+        <TextBlock Name="WinPercentage" Grid.Column="1" Grid.Row="1">x %</TextBlock>
+
+        <TextBlock Grid.Column="0" Grid.Row="2">Best time:</TextBlock>
+        <TextBlock Name="BestTime" Grid.Column="1" Grid.Row="2">x</TextBlock>
+
+        <StackPanel Grid.Row="3" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+            <Button Margin="2" Click="resetStatistics">Reset</Button>
+            <Button Margin="2" Click="closeWindow">Close</Button>
+        </StackPanel>
+    </Grid>
+</Window>

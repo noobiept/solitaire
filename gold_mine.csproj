@@ -61,6 +61,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="container.cs" />
+    <Compile Include="statistics.xaml.cs">
+      <DependentUpon>statistics.xaml</DependentUpon>
+    </Compile>
     <Compile Include="stock.cs" />
     <Compile Include="tableau.cs" />
     <Compile Include="utilities.cs" />
@@ -79,6 +82,10 @@
       <DependentUpon>main_window.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="statistics.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

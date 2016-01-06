@@ -544,5 +544,12 @@ namespace GoldMine
             {
             this.timer.Stop();
             }
+
+
+        private void openStatisticsWindow( object sender, RoutedEventArgs e )
+            {
+            var statistics = new Statistics();
+            statistics.ShowDialog();
+            }
         }
     }
