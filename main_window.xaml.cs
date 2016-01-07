@@ -32,7 +32,7 @@ namespace GoldMine
 
         Drag drag;
         Timer timer;
-        int secondsPassed;
+        uint secondsPassed;
 
         List<Container> droppableElements = new List<Container>();
         List<Card> cards = new List<Card>();
@@ -49,6 +49,8 @@ namespace GoldMine
             this.drag.cardsDragging = new List<Card>();
             this.timer = new Timer( 1000 );
             this.timer.Elapsed += this.onTimeElapsed;
+
+            Data.load();
 
                 // initialize all the game elements
             this.stock = new Stock();
@@ -141,6 +143,7 @@ namespace GoldMine
                 // game has ended
             if ( cardCount == foundationCount )
                 {
+                Data.oneMoreWin( this.secondsPassed );
                 MessageBox.Show( "Game Over!", "Game Over!", MessageBoxButton.OK );
                 this.startGame();
                 }

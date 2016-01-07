@@ -20,12 +20,34 @@ namespace GoldMine
         public Statistics()
             {
             InitializeComponent();
+
+            this.updateUi();
+            }
+
+
+        private void updateUi()
+            {
+            uint totalWins = Data.DATA.totalWins;
+            uint bestTime = Data.DATA.bestTime;
+
+            this.TotalWins.Text = Data.DATA.totalWins.ToString();
+
+            if ( bestTime == 0 )
+                {
+                this.BestTime.Text = "---";
+                }
+
+            else
+                {
+                this.BestTime.Text = bestTime + "s";
+                }
             }
 
 
         private void resetStatistics( object sender, RoutedEventArgs e )
             {
-
+            Data.resetStatistics();
+            this.updateUi();
             }
 
 
