@@ -175,22 +175,15 @@ namespace GoldMine
 
 
         /**
-         * When double-clicking on a card, see if we can send that card to a foundation.
+         * Try to send the last card of a container to a foundation.
          */
-        private void sendToFoundation( Card card )
+        private bool sendToFoundation( Container container )
             {
-                // can only send it if its the last card of its parent container
-            var parent = card.Parent as Container;
-            var last = parent.Children[ parent.Children.Count - 1 ];
-
-            if ( last != card )
-                {
-                return;
-                }
+            var last = container.getLast();
 
                 // need to have a list to work with the 'canDrop' function
             var cards = new List<Card>();
-            cards.Add( card );
+            cards.Add( last );
 
             foreach( var foundation in this.foundations )
                 {
@@ -198,9 +191,11 @@ namespace GoldMine
                     {
                     this.moveCards( cards, foundation );
                     this.checkGameEnd();
-                    return;
+                    return true;
                     }
                 }
+
+            return false;
             }
 
 
@@ -247,7 +242,7 @@ namespace GoldMine
 
             if ( e.ClickCount == 2 )
                 {
-                this.sendToFoundation( card );
+                this.sendToFoundation( parent );
                 return;
                 }
 
@@ -559,6 +554,38 @@ namespace GoldMine
         private void openAboutPage( object sender, RoutedEventArgs e )
             {
             System.Diagnostics.Process.Start( "https://bitbucket.org/drk4/gold_mine" );
+            }
+
+
+        /**
+         * Tries to move all the possible cards from the waste/tableau to the foundation.
+         * Useful for the ending of a game, so that you don't have to manually move all the last cards.
+         */
+        private void toFoundationClick( object sender, RoutedEventArgs e )
+            {
+                // if a card was moved to the foundation
+                // we keep checking until there's no more possible moves
+            bool moved = false;
+
+            do
+                {
+                moved = false;
+
+                if ( this.sendToFoundation( this.waste ) )
+                    {
+                    moved = true;
+                    }
+
+                foreach ( var tableau in this.tableaus )
+                    {
+                    if ( this.sendToFoundation( tableau ) )
+                        {
+                        moved = true;
+                        }
+                    }
+                }
+
+            while ( moved == true );
             }
         }
     }

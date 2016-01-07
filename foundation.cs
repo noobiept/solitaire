@@ -18,6 +18,11 @@ namespace GoldMine
                 {
                 var card = cards[ 0 ];
 
+                if ( card == null )
+                    {
+                    return false;
+                    }
+
                 if ( this.Children.Count > 0 )
                     {
                     var last = (Card) this.Children[ this.Children.Count - 1 ];
