@@ -226,7 +226,7 @@ namespace GoldMine
                 {
                 var container = this.droppableElements[ a ];
 
-                if ( container.canDrop( cards ) )
+                if ( container != this.drag.originalContainer && container.canDrop( cards ) )
                     {
                     var containerBox = container.getDimensionBox();
 
@@ -562,6 +562,12 @@ namespace GoldMine
             {
             var statistics = new Statistics();
             statistics.ShowDialog();
+            }
+
+
+        private void openAboutPage( object sender, RoutedEventArgs e )
+            {
+            System.Diagnostics.Process.Start( "https://bitbucket.org/drk4/gold_mine" );
             }
         }
     }

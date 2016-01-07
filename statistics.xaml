@@ -14,6 +14,7 @@
             <RowDefinition />
             <RowDefinition />
             <RowDefinition />
+            <RowDefinition />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -25,8 +26,10 @@
       
         <TextBlock Grid.Column="0" Grid.Row="1">Best time:</TextBlock>
         <TextBlock Name="BestTime" Grid.Column="1" Grid.Row="1">x</TextBlock>
-
-        <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+        
+        <Separator Grid.Row="2" Grid.ColumnSpan="2" />
+        
+        <StackPanel Grid.Row="3" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
             <Button Margin="2" Click="resetStatistics">Reset</Button>
             <Button Margin="2" Click="closeWindow">Close</Button>
         </StackPanel>
