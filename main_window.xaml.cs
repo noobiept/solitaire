@@ -41,6 +41,7 @@ namespace GoldMine
             this.timer = new Timer( 1000 );
             this.timer.Elapsed += this.onTimeElapsed;
 
+            this.setupKeyboardShortcuts();
             Data.load();
 
                 // initialize all the game elements
@@ -84,6 +85,30 @@ namespace GoldMine
                 }
 
             this.startGame();
+            }
+
+
+        private void setupKeyboardShortcuts()
+            {
+                // ctrl + n -- start a new game
+            var newGame = new RoutedCommand();
+            newGame.InputGestures.Add( new KeyGesture( Key.N, ModifierKeys.Control ) );
+            CommandBindings.Add( new CommandBinding( newGame, this.newGameClick ) );
+
+                // ctrl + s -- open the statistics window
+            var openStatistics = new RoutedCommand();
+            openStatistics.InputGestures.Add( new KeyGesture( Key.S, ModifierKeys.Control ) );
+            CommandBindings.Add( new CommandBinding( openStatistics, this.openStatisticsWindow ) );
+
+                // ctrl + f -- try to move all the possible cards to the foundation
+            var moveToFoundation = new RoutedCommand();
+            moveToFoundation.InputGestures.Add( new KeyGesture( Key.F, ModifierKeys.Control ) );
+            CommandBindings.Add( new CommandBinding( moveToFoundation, this.toFoundationClick ) );
+
+                // ctrl + a -- open the about webpage
+            var openAbout = new RoutedCommand();
+            openAbout.InputGestures.Add( new KeyGesture( Key.A, ModifierKeys.Control ) );
+            CommandBindings.Add( new CommandBinding( openAbout, this.openAboutPage ) );
             }
 
 
