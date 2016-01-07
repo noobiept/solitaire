@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using System.Collections.Generic;
 
 
@@ -62,6 +63,33 @@ namespace GoldMine
                     one.y > two.y + two.height ||
                     one.y + one.height < two.y
                 );
+            }
+
+
+        /**
+         * Returns the string representation of the seconds value.
+         * For example: "1m 2s" or "30s"
+         */
+        public static string timeToString( int seconds )
+            {
+            int minute = 60;
+            int minutesCount = 0;
+
+            while( seconds >= minute )
+                {
+                minutesCount++;
+                seconds -= minute;
+                }
+
+            if ( minutesCount != 0 )
+                {
+                return String.Format( "{0}m {1}s", minutesCount, seconds );
+                }
+
+            else
+                {
+                return String.Format( "{0}s", seconds );
+                }
             }
         }
     }

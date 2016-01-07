@@ -143,8 +143,17 @@ namespace GoldMine
                 // game has ended
             if ( cardCount == foundationCount )
                 {
-                Data.oneMoreWin( this.secondsPassed );
-                MessageBox.Show( "Game Over!", "Game Over!", MessageBoxButton.OK );
+                this.timer.Stop();
+
+                var best = Data.oneMoreWin( this.secondsPassed );
+                var message = String.Format( "You Win!\nTime: {0}", Utilities.timeToString( (int) this.secondsPassed ) );
+                  
+                if ( this.secondsPassed == best )
+                    {
+                    message += "\nYou beat your best time!";
+                    }
+
+                MessageBox.Show( message, "Game Over!", MessageBoxButton.OK );
                 this.startGame();
                 }
             }
@@ -529,7 +538,7 @@ namespace GoldMine
 
         private void updateTimePassed()
             {
-            this.TimePassed.Text = "Time: " + this.secondsPassed + "s";
+            this.TimePassed.Text = "Time: " + Utilities.timeToString( (int) this.secondsPassed );
             }
 
 

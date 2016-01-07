@@ -69,7 +69,7 @@ namespace GoldMine
             {
                 // no updates yet
             }
-
+        
 
         static private void save()
             {
@@ -84,7 +84,7 @@ namespace GoldMine
             }
 
 
-        static public void oneMoreWin( uint time )
+        static public uint oneMoreWin( uint time )
             {
             Data.DATA.totalWins++;
             
@@ -100,6 +100,8 @@ namespace GoldMine
                 }
 
             Data.save();
+
+            return Data.DATA.bestTime;
             }
 
 

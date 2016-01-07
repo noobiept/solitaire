@@ -39,7 +39,7 @@ namespace GoldMine
 
             else
                 {
-                this.BestTime.Text = bestTime + "s";
+                this.BestTime.Text = Utilities.timeToString( (int) bestTime );
                 }
             }
 
