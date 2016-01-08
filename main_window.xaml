@@ -12,10 +12,10 @@
         Closing="onWindowClosing">
     <DockPanel>
         <DockPanel Name="Menu" DockPanel.Dock="Top" LastChildFill="False" Background="LightGray">
-            <Button Margin="2,2,2,6" Click="newGameClick">New Game</Button>
-            <Button Margin="2,2,2,6" Click="openStatisticsWindow">Statistics</Button>
-            <Button Margin="2,2,2,6" Click="toFoundationClick">To Foundation</Button>
-            <Button Margin="2,2,2,6" Click="openAboutPage">About</Button>
+            <Button Margin="2,2,2,6" Click="newGameClick" ToolTip="ctrl + n">New Game</Button>
+            <Button Margin="2,2,2,6" Click="openStatisticsWindow" ToolTip="ctrl + s">Statistics</Button>
+            <Button Margin="2,2,2,6" Click="toFoundationClick" ToolTip="ctrl + f">To Foundation</Button>
+            <Button Margin="2,2,2,6" Click="openAboutPage" ToolTip="ctrl + a">About</Button>
             <TextBlock Name="TimePassed" Margin="2,2,2,6" DockPanel.Dock="Right">Time: 0s</TextBlock>
             <TextBlock Name="StockLeft" Margin="2,2,2,6" DockPanel.Dock="Right">In stock: x</TextBlock>
         </DockPanel>

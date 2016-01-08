@@ -14,7 +14,7 @@ namespace GoldMine
         public struct Drag
             {
             public bool isDragging;
-            public const int diff = 20;            // space between each card during the drag
+            public const int diff = 25;            // space between each card during the drag
             public List<Card> cardsDragging;
             public Point clickPosition;
             public Container originalContainer;    // original container before the drag occurred. if the drag isn't valid, we need to return the cards to the original place

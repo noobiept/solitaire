@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -91,8 +92,17 @@ namespace GoldMine
 
         protected override Size ArrangeOverride( Size finalSize )
             {
-            int y = 0;
-            int step = 25;
+            double availableHeight = 1.4 * finalSize.Height;
+            double y = 0;
+            double step = Math.Round( availableHeight * 0.15 );
+            int count = this.InternalChildren.Count;
+            double neededHeight = count * step;
+
+                // if there's no space available for the default step, then calculate the possible step
+            if ( neededHeight > availableHeight )
+                {
+                step = Math.Floor( availableHeight / count );
+                }
 
             foreach( UIElement child in this.InternalChildren )
                 {

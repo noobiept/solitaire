@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 
 
 namespace GoldMine
@@ -7,8 +8,8 @@ namespace GoldMine
         {
         protected override Size ArrangeOverride( Size finalSize )
             {
-            int x = 0;
-            int step = 25;
+            double x = 0;
+            double step = Math.Round( finalSize.Width * 0.3 );
             int count = this.InternalChildren.Count;
 
             for (int a = 0 ; a < count ; a++)
