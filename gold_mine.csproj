@@ -38,6 +38,9 @@
   <PropertyGroup>
     <StartupObject>GoldMine.App</StartupObject>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>images\icon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Expression.Effects, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -199,6 +202,10 @@
     <Resource Include="images\two_of_diamonds.png" />
     <Resource Include="images\two_of_hearts.png" />
     <Resource Include="images\two_of_spades.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="images\icon.ico" />
+    <Resource Include="images\icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
