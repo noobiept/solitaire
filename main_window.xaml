@@ -13,11 +13,12 @@
     <DockPanel>
         <DockPanel Name="Menu" DockPanel.Dock="Top" LastChildFill="False" Background="LightGray">
             <Button Margin="2,2,2,6" Click="newGameClick" ToolTip="ctrl + n">New Game</Button>
+            <Button Margin="2,2,2,6" Click="restartGame" ToolTip="ctrl + r">Restart</Button>
             <Button Margin="2,2,2,6" Click="openStatisticsWindow" ToolTip="ctrl + s">Statistics</Button>
             <Button Margin="2,2,2,6" Click="toFoundationClick" ToolTip="ctrl + f">To Foundation</Button>
             <Button Margin="2,2,2,6" Click="openAboutPage" ToolTip="ctrl + a">About</Button>
-            <TextBlock Name="TimePassed" Margin="2,2,2,6" DockPanel.Dock="Right">Time: 0s</TextBlock>
-            <TextBlock Name="StockLeft" Margin="2,2,2,6" DockPanel.Dock="Right">In stock: x</TextBlock>
+            <TextBlock Name="TimePassed" Margin="6,2,6,6" DockPanel.Dock="Right">Time: 0s</TextBlock>
+            <TextBlock Name="StockLeft" Margin="6,2,6,6" DockPanel.Dock="Right">In stock: x</TextBlock>
         </DockPanel>
         <Canvas Name="MainCanvas" DockPanel.Dock="Bottom" Background="#004F0F" />
     </DockPanel>

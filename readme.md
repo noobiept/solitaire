@@ -1,4 +1,7 @@
-﻿Description
+﻿![example](images/game_example.png)
+
+
+Description
 ===========
 
 You can read about the game here [http://politaire.com/help/goldmine](http://politaire.com/help/goldmine).
@@ -18,6 +21,7 @@ Shortcuts
 =========
 
 - `ctrl + n` -- Start a `n`ew game.
+- `ctrl + r` -- `R`estart the game.
 - `ctrl + s` -- Open the `s`tatistics window.
 - `ctrl + f` -- Try to move all the possible cards from the waste/tableau to the `f`oundation.
 - `ctrl + a` -- Open the `a`bout webpage.

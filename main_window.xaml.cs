@@ -95,6 +95,11 @@ namespace GoldMine
             newGame.InputGestures.Add( new KeyGesture( Key.N, ModifierKeys.Control ) );
             CommandBindings.Add( new CommandBinding( newGame, this.newGameClick ) );
 
+                // ctrl + r -- restart the game
+            var restart = new RoutedCommand();
+            restart.InputGestures.Add( new KeyGesture( Key.R, ModifierKeys.Control ) );
+            CommandBindings.Add( new CommandBinding( restart, this.restartGame ) );
+
                 // ctrl + s -- open the statistics window
             var openStatistics = new RoutedCommand();
             openStatistics.InputGestures.Add( new KeyGesture( Key.S, ModifierKeys.Control ) );
@@ -112,7 +117,7 @@ namespace GoldMine
             }
 
 
-        private void startGame()
+        private void startGame( bool shuffle = true )
             {
                 // disconnect the cards from their previous container
             foreach( Card card in this.cards )
@@ -125,7 +130,10 @@ namespace GoldMine
                     }
                 }
 
-            Utilities.shuffle( this.cards );
+            if ( shuffle == true )
+                {
+                Utilities.shuffle( this.cards );
+                }
 
                 // add all the shuffled cards to the stock
             foreach( Card card in this.cards )
@@ -611,6 +619,12 @@ namespace GoldMine
                 }
 
             while ( moved == true );
+            }
+
+
+        private void restartGame( object sender, RoutedEventArgs e )
+            {
+            this.startGame( false );
             }
         }
     }
