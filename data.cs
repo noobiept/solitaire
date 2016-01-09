@@ -96,7 +96,7 @@ namespace GoldMine
 
             else if ( time < Data.DATA.bestTime )
                 {
-                time = Data.DATA.bestTime;
+                Data.DATA.bestTime = time;
                 }
 
             Data.save();
