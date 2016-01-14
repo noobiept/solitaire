@@ -21,16 +21,16 @@ namespace GoldMine
             public Container highlightedContainer; // when dragging a card on top of a container, highlight that container, and keep a reference to it (to know when to remove the highlight)
             }
 
-        Drag drag;
-        Timer timer;
-        uint secondsPassed;
+        private Drag drag;
+        private Timer timer;
+        private uint secondsPassed;
 
-        List<Container> droppableElements = new List<Container>();
-        List<Card> cards = new List<Card>();
-        Stock stock;
-        Waste waste;
-        List<Foundation> foundations = new List<Foundation>();
-        List<Tableau> tableaus = new List<Tableau>();
+        private readonly List<Container> droppableElements = new List<Container>();
+        private readonly List<Card> cards = new List<Card>();
+        private readonly Stock stock;
+        private readonly Waste waste;
+        private readonly List<Foundation> foundations = new List<Foundation>();
+        private readonly List<Tableau> tableaus = new List<Tableau>();
 
 
         public MainWindow()
@@ -528,14 +528,11 @@ namespace GoldMine
                 // the last card is draggable, the others aren't
             if ( parent is Waste )
                 {
-                if ( this.waste.Children.Count != 0 )
-                    {
-                    var last = this.waste.Children[ this.waste.Children.Count - 1 ];
+                var last = this.waste.getLast();
 
-                    if ( last != card )
-                        {
-                        return false;
-                        }
+                if ( last != null && last != card )
+                    {
+                    return false;
                     }
                 }
 

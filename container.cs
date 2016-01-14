@@ -9,7 +9,7 @@ namespace GoldMine
     {
     public class Container : Panel
         {
-        private ColorToneEffect dropEffect;
+        private readonly ColorToneEffect dropEffect;
 
 
         public Container()

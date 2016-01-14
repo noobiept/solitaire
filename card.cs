@@ -16,9 +16,9 @@ namespace GoldMine
         public enum Color { black, red };
 
 
-        public Suit suit;
-        public Value value;
-        public Color color;
+        public readonly Suit suit;
+        public readonly Value value;
+        public readonly Color color;
 
 
         public Card( Suit suit, Value value )
