@@ -23,10 +23,10 @@ namespace GoldMine
                     return false;
                     }
 
-                if ( this.Children.Count > 0 )
-                    {
-                    var last = (Card) this.Children[ this.Children.Count - 1 ];
+                var last = this.getLast();
 
+                if ( last != null )
+                    {
                     if ( card.value == last.value + 1 && 
                          card.suit == last.suit )
                         {

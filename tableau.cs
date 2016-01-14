@@ -35,12 +35,12 @@ namespace GoldMine
          */
         public override Utilities.Box getDimensionBox()
             {
-            var box = new Utilities.Box();
-
-            box.x = Canvas.GetLeft( this );
-            box.y = Canvas.GetTop( this );
-            box.width = this.ActualWidth;
-            box.height = this.ActualHeight;
+            var box = new Utilities.Box {
+                    x = Canvas.GetLeft( this ),
+                    y = Canvas.GetTop( this ),
+                    width = this.ActualWidth,
+                    height = this.ActualHeight
+                };
 
             var lastCard = this.getLast();
 
@@ -65,9 +65,10 @@ namespace GoldMine
          */
         public override bool canDrop( List<Card> cards )
             {
-            if ( this.Children.Count > 0 )
+            var lastTableau = this.getLast();
+
+            if ( lastTableau != null )
                 {
-                Card lastTableau = (Card) this.Children[ this.Children.Count - 1 ];
                 Card firstDrag = cards[ 0 ];
 
                 if ( lastTableau.value - 1 == firstDrag.value &&

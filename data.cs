@@ -54,11 +54,11 @@ namespace GoldMine
 
         static private void loadDefaults()
             {
-            Data.DATA = new AppData();
-
-            Data.DATA.totalWins = 0;
-            Data.DATA.bestTime = 0;
-            Data.DATA.version = Data.DATA_VERSION;
+            Data.DATA = new AppData {
+                    totalWins = 0,
+                    bestTime = 0,
+                    version = Data.DATA_VERSION
+                };
             }
 
 

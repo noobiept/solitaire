@@ -16,9 +16,10 @@ namespace GoldMine
             {
             this.Background = new SolidColorBrush( Color.FromRgb( 87, 129, 50 ) );
 
-            this.dropEffect = new ColorToneEffect();
-            this.dropEffect.DarkColor = Colors.Black;
-            this.dropEffect.LightColor = Colors.CornflowerBlue;
+            this.dropEffect = new ColorToneEffect {
+                    DarkColor = Colors.Black,
+                    LightColor = Colors.CornflowerBlue
+                };
             }
 
 
@@ -27,14 +28,12 @@ namespace GoldMine
          */
         public virtual Utilities.Box getDimensionBox()
             {
-            var box = new Utilities.Box();
-
-            box.x = Canvas.GetLeft( this );
-            box.y = Canvas.GetTop( this );
-            box.width = this.ActualWidth;
-            box.height = this.ActualHeight;
-
-            return box;
+            return new Utilities.Box {
+                    x = Canvas.GetLeft( this ),
+                    y = Canvas.GetTop( this ),
+                    width = this.ActualWidth,
+                    height = this.ActualHeight
+                };
             }
 
 

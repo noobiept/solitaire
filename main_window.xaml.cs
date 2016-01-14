@@ -505,10 +505,10 @@ namespace GoldMine
             {
             var firstCard = cards[ 0 ];
             return new Utilities.Box {
-                x = Canvas.GetLeft( firstCard ),
-                y = Canvas.GetTop( firstCard ),
-                width = firstCard.ActualWidth,
-                height = firstCard.ActualHeight + Drag.diff * (cards.Count - 1)
+                    x = Canvas.GetLeft( firstCard ),
+                    y = Canvas.GetTop( firstCard ),
+                    width = firstCard.ActualWidth,
+                    height = firstCard.ActualHeight + Drag.diff * (cards.Count - 1)
                 };
             }
 
