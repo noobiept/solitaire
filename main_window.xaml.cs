@@ -17,6 +17,7 @@ namespace Solitaire
 
         void addMenuElements( StackPanel container );
         void addInfoElements( StackPanel container );
+        CommandBinding[] getKeyboardShortcuts();
         }
 
 
@@ -30,11 +31,29 @@ namespace Solitaire
             InitializeComponent();
 
             this.currentGame = new GoldMine( this.MainCanvas, this.CustomButtons, this.CustomInfo );
-            this.setupKeyboardShortcuts();
+            this.setupGlobalShortcuts();
+            this.setupGameShortcuts();
             }
 
 
-        private void setupKeyboardShortcuts()
+        /**
+         * Game specific keyboard shortcuts.
+         */
+        private void setupGameShortcuts()
+            {
+            var shortcuts = this.currentGame.getKeyboardShortcuts();
+
+            for (var a = 0 ; a < shortcuts.Length ; a++)
+                {
+                this.CommandBindings.Add( shortcuts[ a ] );
+                }
+            }
+
+
+        /**
+         * Global keyboard shortcuts (works for any game).
+         */
+        private void setupGlobalShortcuts()
             {
                 // ctrl + n -- start a new game
             var newGame = new RoutedCommand();
@@ -51,13 +70,7 @@ namespace Solitaire
             openStatistics.InputGestures.Add( new KeyGesture( Key.S, ModifierKeys.Control ) );
             this.CommandBindings.Add( new CommandBinding( openStatistics, this.openStatisticsWindow ) );
 
-            // ctrl + f -- try to move all the possible cards to the foundation
-            /*var moveToFoundation = new RoutedCommand();
-            moveToFoundation.InputGestures.Add( new KeyGesture( Key.F, ModifierKeys.Control ) );
-            this.CommandBindings.Add( new CommandBinding( moveToFoundation, this.toFoundationClick ) );*/
-            //HERE
-
-            // ctrl + a -- open the about webpage
+                // ctrl + a -- open the about webpage
             var openAbout = new RoutedCommand();
             openAbout.InputGestures.Add( new KeyGesture( Key.A, ModifierKeys.Control ) );
             this.CommandBindings.Add( new CommandBinding( openAbout, this.openAboutPage ) );

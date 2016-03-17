@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 
 namespace Solitaire
@@ -25,6 +27,12 @@ namespace Solitaire
         public void addInfoElements( StackPanel container )
             {
 
+            }
+
+
+        public CommandBinding[] getKeyboardShortcuts()
+            {
+            return new CommandBinding[] { };
             }
 
 
