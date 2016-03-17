@@ -2,7 +2,7 @@
 using System.Windows;
 
 
-namespace GoldMine
+namespace Solitaire
     {
     public class Foundation : Container
         {

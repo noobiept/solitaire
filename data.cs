@@ -4,7 +4,7 @@ using System.Text;
 using Newtonsoft.Json;
 
 
-namespace GoldMine
+namespace Solitaire
     {
     public static class Data
         {

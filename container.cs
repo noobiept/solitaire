@@ -5,7 +5,7 @@ using System.Windows.Media;
 using Microsoft.Expression.Media.Effects;
 
 
-namespace GoldMine
+namespace Solitaire
     {
     public class Container : Panel
         {

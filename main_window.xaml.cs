@@ -6,11 +6,12 @@ using System.Windows.Controls;
 using System.Windows.Input;
 
 
-namespace GoldMine
+namespace Solitaire
     {
-    interface Solitaire
+    interface SolitaireGame
         {
         void restart();
+        void restartSameGame();
         void positionResizeElements();
         void end();
         }
@@ -18,7 +19,7 @@ namespace GoldMine
 
     public partial class MainWindow : Window
         {
-        Solitaire currentGame;
+        SolitaireGame currentGame;
 
 
         public MainWindow()
@@ -26,6 +27,37 @@ namespace GoldMine
             InitializeComponent();
 
             this.currentGame = new GoldMine( this.MainCanvas );
+            this.setupKeyboardShortcuts();
+            }
+
+
+        private void setupKeyboardShortcuts()
+            {
+                // ctrl + n -- start a new game
+            var newGame = new RoutedCommand();
+            newGame.InputGestures.Add( new KeyGesture( Key.N, ModifierKeys.Control ) );
+            this.CommandBindings.Add( new CommandBinding( newGame, this.newGameClick ) );
+
+                // ctrl + r -- restart the game
+            var restart = new RoutedCommand();
+            restart.InputGestures.Add( new KeyGesture( Key.R, ModifierKeys.Control ) );
+            this.CommandBindings.Add( new CommandBinding( restart, this.restartSameGameClick ) );
+
+                // ctrl + s -- open the statistics window
+            var openStatistics = new RoutedCommand();
+            openStatistics.InputGestures.Add( new KeyGesture( Key.S, ModifierKeys.Control ) );
+            this.CommandBindings.Add( new CommandBinding( openStatistics, this.openStatisticsWindow ) );
+
+            // ctrl + f -- try to move all the possible cards to the foundation
+            /*var moveToFoundation = new RoutedCommand();
+            moveToFoundation.InputGestures.Add( new KeyGesture( Key.F, ModifierKeys.Control ) );
+            this.CommandBindings.Add( new CommandBinding( moveToFoundation, this.toFoundationClick ) );*/
+            //HERE
+
+            // ctrl + a -- open the about webpage
+            var openAbout = new RoutedCommand();
+            openAbout.InputGestures.Add( new KeyGesture( Key.A, ModifierKeys.Control ) );
+            this.CommandBindings.Add( new CommandBinding( openAbout, this.openAboutPage ) );
             }
 
 
@@ -47,6 +79,31 @@ namespace GoldMine
         private void onWindowClosing( object sender, System.ComponentModel.CancelEventArgs e )
             {
             this.currentGame.end();
+            }
+
+
+        private void newGameClick( object sender, RoutedEventArgs e )
+            {
+            this.currentGame.restart();
+            }
+
+
+        private void restartSameGameClick( object sender, RoutedEventArgs e )
+            {
+            this.currentGame.restartSameGame();
+            }
+
+
+        private void openStatisticsWindow( object sender, RoutedEventArgs e )
+            {
+            var statistics = new Statistics();
+            statistics.ShowDialog();
+            }
+
+
+        private void openAboutPage( object sender, RoutedEventArgs e )
+            {
+            System.Diagnostics.Process.Start( "https://bitbucket.org/drk4/gold_mine" );
             }
         }
     }

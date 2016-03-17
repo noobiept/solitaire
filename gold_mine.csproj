@@ -7,7 +7,7 @@
     <ProjectGuid>{0C67285E-714E-498E-8571-373B2524E7EA}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>gold_mine</RootNamespace>
+    <RootNamespace>Solitaire</RootNamespace>
     <AssemblyName>gold_mine</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -35,7 +35,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>GoldMine.App</StartupObject>
+    <StartupObject>Solitaire.App</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>images\icon.ico</ApplicationIcon>
@@ -43,7 +43,7 @@
   <ItemGroup>
     <Reference Include="Microsoft.Expression.Effects, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>packages\Newtonsoft.Json.8.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />

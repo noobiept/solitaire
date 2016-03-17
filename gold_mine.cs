@@ -6,9 +6,9 @@ using System.Windows.Controls;
 using System.Windows.Input;
 
 
-namespace GoldMine
+namespace Solitaire
     {
-    class GoldMine : Solitaire
+    class GoldMine : SolitaireGame
         {
             // data use for the drag and drop operation of cards
         public struct Drag
@@ -43,7 +43,6 @@ namespace GoldMine
             this.timer = new Timer( 1000 );
             this.timer.Elapsed += this.onTimeElapsed;
 
-            this.setupKeyboardShortcuts();
             Data.load();
 
             // initialize all the game elements
@@ -87,37 +86,6 @@ namespace GoldMine
                 }
 
             this.startGame();
-            }
-
-
-        private void setupKeyboardShortcuts()
-            {
-            var mainWindow = ((MainWindow) Application.Current.MainWindow); //HERE
-
-            // ctrl + n -- start a new game
-            var newGame = new RoutedCommand();
-            newGame.InputGestures.Add( new KeyGesture( Key.N, ModifierKeys.Control ) );
-            mainWindow.CommandBindings.Add( new CommandBinding( newGame, this.newGameClick ) );
-
-            // ctrl + r -- restart the game
-            var restart = new RoutedCommand();
-            restart.InputGestures.Add( new KeyGesture( Key.R, ModifierKeys.Control ) );
-            mainWindow.CommandBindings.Add( new CommandBinding( restart, this.restartGame ) );
-
-            // ctrl + s -- open the statistics window
-            var openStatistics = new RoutedCommand();
-            openStatistics.InputGestures.Add( new KeyGesture( Key.S, ModifierKeys.Control ) );
-            mainWindow.CommandBindings.Add( new CommandBinding( openStatistics, this.openStatisticsWindow ) );
-
-            // ctrl + f -- try to move all the possible cards to the foundation
-            var moveToFoundation = new RoutedCommand();
-            moveToFoundation.InputGestures.Add( new KeyGesture( Key.F, ModifierKeys.Control ) );
-            mainWindow.CommandBindings.Add( new CommandBinding( moveToFoundation, this.toFoundationClick ) );
-
-            // ctrl + a -- open the about webpage
-            var openAbout = new RoutedCommand();
-            openAbout.InputGestures.Add( new KeyGesture( Key.A, ModifierKeys.Control ) );
-            mainWindow.CommandBindings.Add( new CommandBinding( openAbout, this.openAboutPage ) );
             }
 
 
@@ -529,13 +497,7 @@ namespace GoldMine
             return true;
             }
 
-
-        private void newGameClick( object sender, RoutedEventArgs e )
-            {
-            this.startGame();
-            }
-
-
+        
         private void updateStockLeft()
             {
             var mainWindow = ((MainWindow) Application.Current.MainWindow); //HERE
@@ -546,39 +508,23 @@ namespace GoldMine
 
         private void updateTimePassed()
             {
-            var mainWindow = ((MainWindow) Application.Current.MainWindow); //HERE
-
-            mainWindow.TimePassed.Text = "Time: " + Utilities.timeToString( (int) this.secondsPassed );
+            Application.Current.Dispatcher.Invoke( (() => {
+                var mainWindow = ((MainWindow) Application.Current.MainWindow);
+                mainWindow.TimePassed.Text = "Time: " + Utilities.timeToString( (int) this.secondsPassed );
+                }));
             }
 
 
         private void onTimeElapsed( Object source, ElapsedEventArgs e )
             {
-            var mainWindow = ((MainWindow) Application.Current.MainWindow); //HERE
-
-            mainWindow.Dispatcher.Invoke( (Action) (() =>
-            {
-                this.secondsPassed++;
-                this.updateTimePassed();
-            }) );
+            this.secondsPassed++;
+            this.updateTimePassed();
             }
       
 
         public void end()
             {
             this.timer.Stop();
-            }
-
-        private void openStatisticsWindow( object sender, RoutedEventArgs e )
-            {
-            var statistics = new Statistics();
-            statistics.ShowDialog();
-            }
-
-
-        private void openAboutPage( object sender, RoutedEventArgs e )
-            {
-            System.Diagnostics.Process.Start( "https://bitbucket.org/drk4/gold_mine" );
             }
 
 
@@ -614,15 +560,15 @@ namespace GoldMine
             }
 
 
-        private void restartGame( object sender, RoutedEventArgs e )
+        public void restart()
             {
-            this.startGame( false );
+            this.startGame();
             }
 
 
-        public void restart()
+        public void restartSameGame()
             {
-
+            this.startGame( false );
             }
         }
     }

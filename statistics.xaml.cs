@@ -2,7 +2,7 @@
 using System.Windows.Input;
 
 
-namespace GoldMine
+namespace Solitaire
     {
     public partial class Statistics : Window
         {

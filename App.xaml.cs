@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 
 
-namespace GoldMine
+namespace Solitaire
     {
     public partial class App : Application
         {

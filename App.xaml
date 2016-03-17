@@ -1,7 +1,7 @@
-﻿<Application x:Class="GoldMine.App"
+﻿<Application x:Class="Solitaire.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:GoldMine"
+             xmlns:local="clr-namespace:Solitaire"
              StartupUri="main_window.xaml">
     <Application.Resources>
         <BitmapImage x:Key="card_back" UriSource="images/card_back_orange.png" />

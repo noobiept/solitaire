@@ -4,7 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 
 
-namespace GoldMine
+namespace Solitaire
     {
     public class Tableau : Container
         {

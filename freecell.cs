@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GoldMine
+namespace Solitaire
     {
-    class FreeCell : Solitaire
+    class FreeCell : SolitaireGame
         {
         public FreeCell()
             {
@@ -15,6 +15,12 @@ namespace GoldMine
 
 
         public void restart()
+            {
+
+            }
+
+
+        public void restartSameGame()
             {
 
             }

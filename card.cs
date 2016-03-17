@@ -3,7 +3,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 
 
-namespace GoldMine
+namespace Solitaire
     {
     public class Card : Image
         {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 
-namespace GoldMine
+namespace Solitaire
     {
     public static class Utilities
         {
