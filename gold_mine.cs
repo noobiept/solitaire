@@ -22,6 +22,7 @@ namespace Solitaire
             }
 
         private Canvas canvas;
+        private TextBlock stockLeft;
 
         private Drag drag;
         private Timer timer;
@@ -35,7 +36,7 @@ namespace Solitaire
         private readonly List<Tableau> tableaus = new List<Tableau>();
         
 
-        public GoldMine( Canvas mainCanvas )
+        public GoldMine( Canvas mainCanvas, StackPanel customButtons, StackPanel customInfo )
             {
             this.canvas = mainCanvas;
 
@@ -85,7 +86,29 @@ namespace Solitaire
                     }
                 }
 
+            this.addMenuElements( customButtons );
+            this.addInfoElements( customInfo );
             this.startGame();
+            }
+
+
+        public void addMenuElements( StackPanel container )
+            {
+            var button = new Button();
+            button.ToolTip = "ctrl + f";
+            button.Content = "To Foundation";
+            button.Click += this.toFoundationClick;
+
+            container.Children.Add( button );
+            }
+
+
+        public void addInfoElements( StackPanel container )
+            {
+            var textBlock = new TextBlock();
+            container.Children.Add( textBlock );
+
+            this.stockLeft = textBlock;
             }
 
 
@@ -500,9 +523,7 @@ namespace Solitaire
         
         private void updateStockLeft()
             {
-            var mainWindow = ((MainWindow) Application.Current.MainWindow); //HERE
-
-            mainWindow.StockLeft.Text = "In stock: " + this.stock.Children.Count;
+            this.stockLeft.Text = "In stock: " + this.stock.Children.Count;
             }
 
 

@@ -21,10 +21,12 @@
             <Button Margin="2,2,2,6" Click="newGameClick" ToolTip="ctrl + n">New Game</Button>
             <Button Margin="2,2,2,6" Click="restartSameGameClick" ToolTip="ctrl + r">Restart</Button>
             <Button Margin="2,2,2,6" Click="openStatisticsWindow" ToolTip="ctrl + s">Statistics</Button>
-            <!--<Button Margin="2,2,2,6" Click="toFoundationClick" ToolTip="ctrl + f">To Foundation</Button> //HERE -->
             <Button Margin="2,2,2,6" Click="openAboutPage" ToolTip="ctrl + a">About</Button>
+            <StackPanel Name="CustomButtons"></StackPanel>
+            
             <TextBlock Name="TimePassed" Margin="6,2,6,6" DockPanel.Dock="Right">Time: 0s</TextBlock>
-            <TextBlock Name="StockLeft" Margin="6,2,6,6" DockPanel.Dock="Right">In stock: x</TextBlock>
+            <StackPanel Name="CustomInfo" Margin="6,2,6,6" DockPanel.Dock="Right"></StackPanel>
+            
         </DockPanel>
         <Canvas Name="MainCanvas" DockPanel.Dock="Bottom" Background="#004F0F" />
     </DockPanel>

@@ -14,6 +14,9 @@ namespace Solitaire
         void restartSameGame();
         void positionResizeElements();
         void end();
+
+        void addMenuElements( StackPanel container );
+        void addInfoElements( StackPanel container );
         }
 
 
@@ -26,7 +29,7 @@ namespace Solitaire
             {
             InitializeComponent();
 
-            this.currentGame = new GoldMine( this.MainCanvas );
+            this.currentGame = new GoldMine( this.MainCanvas, this.CustomButtons, this.CustomInfo );
             this.setupKeyboardShortcuts();
             }
 
