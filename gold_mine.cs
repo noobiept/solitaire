@@ -10,25 +10,11 @@ namespace Solitaire
     {
     class GoldMine : SolitaireGame
         {
-            // data use for the drag and drop operation of cards
-        public struct Drag
-            {
-            public bool isDragging;
-            public const int diff = 25;            // space between each card during the drag
-            public List<Card> cardsDragging;
-            public Point clickPosition;
-            public Container originalContainer;    // original container before the drag occurred. if the drag isn't valid, we need to return the cards to the original place
-            public Container highlightedContainer; // when dragging a card on top of a container, highlight that container, and keep a reference to it (to know when to remove the highlight)
-            }
-
-        private Canvas canvas;
         private TextBlock stockLeft;
 
-        private Drag drag;
         private Timer timer;
         private uint secondsPassed;
 
-        private readonly List<Container> droppableElements = new List<Container>();
         private readonly List<Card> cards = new List<Card>();
         private readonly Stock stock;
         private readonly Waste waste;
@@ -36,11 +22,8 @@ namespace Solitaire
         private readonly List<Tableau> tableaus = new List<Tableau>();
         
 
-        public GoldMine( Canvas mainCanvas, StackPanel customButtons, StackPanel customInfo )
+        public GoldMine( Canvas mainCanvas, StackPanel customButtons, StackPanel customInfo ) : base( mainCanvas )
             {
-            this.canvas = mainCanvas;
-
-            this.drag.cardsDragging = new List<Card>();
             this.timer = new Timer( 1000 );
             this.timer.Elapsed += this.onTimeElapsed;
 
@@ -165,7 +148,7 @@ namespace Solitaire
          * Checks if the game has ended, and if so then show a message.
          * The game is over when all the cards are in the foundations.
          */
-        private void checkGameEnd()
+        protected override void checkGameEnd()
             {
             int cardCount = this.cards.Count;
             int foundationCount = 0;
@@ -175,7 +158,7 @@ namespace Solitaire
                 foundationCount += foundation.Children.Count;
                 }
 
-            // game has ended
+                // game has ended
             if (cardCount == foundationCount)
                 {
                 this.timer.Stop();
@@ -218,6 +201,12 @@ namespace Solitaire
             }
 
 
+        protected override void doubleClick( Card card, Container parent )
+            {
+            this.sendToFoundation( parent );
+            }
+
+
         /**
          * Try to send the last card of a container to a foundation.
          */
@@ -240,114 +229,6 @@ namespace Solitaire
                 }
 
             return false;
-            }
-
-
-        /**
-         * Calculates the intersection area between the reference element and the droppable elements, and returns the one where the area was higher.
-         */
-        private Container collisionDetection( List<Card> cards )
-            {
-            var cardsBox = this.cardsDimension( cards );
-            Container colliding = null;
-            double collidingArea = 0;
-
-            for (var a = 0 ; a < this.droppableElements.Count ; a++)
-                {
-                var container = this.droppableElements[ a ];
-
-                if (container != this.drag.originalContainer && container.canDrop( cards ))
-                    {
-                    var containerBox = container.getDimensionBox();
-
-                    var area = Utilities.calculateIntersectionArea( cardsBox, containerBox );
-
-                    if (area > collidingArea)
-                        {
-                        collidingArea = area;
-                        colliding = container;
-                        }
-                    }
-                }
-
-            return colliding;
-            }
-
-
-        private void onMouseDown( object sender, MouseButtonEventArgs e )
-            {
-            var card = (Card) sender;
-            var parent = card.Parent as Container;
-
-            if (!this.isCardDraggable( card ))
-                {
-                return;
-                }
-
-            if (e.ClickCount == 2)
-                {
-                this.sendToFoundation( parent );
-                return;
-                }
-
-            if (this.drag.isDragging == true)
-                {
-                this.moveCards( this.drag.cardsDragging, this.drag.originalContainer );
-                return;
-                }
-
-            this.drag.isDragging = true;
-            this.drag.clickPosition = Mouse.GetPosition( card );
-            this.drag.originalContainer = parent;
-            parent.dragCards( card, this.drag.cardsDragging );
-
-            foreach (Card dragCard in this.drag.cardsDragging)
-                {
-                parent.Children.Remove( dragCard );
-                this.canvas.Children.Add( dragCard );
-                }
-
-            this.positionCards( this.drag.cardsDragging, e );
-            }
-
-
-        private void onMouseMove( object sender, MouseEventArgs e )
-            {
-            if (this.drag.isDragging)
-                {
-                if (e.LeftButton == MouseButtonState.Released)
-                    {
-                    this.moveCards( this.drag.cardsDragging, this.drag.originalContainer );
-                    }
-
-                else
-                    {
-                    this.positionCards( this.drag.cardsDragging, e );
-                    }
-                }
-            }
-
-
-        private void onMouseUp( object sender, MouseButtonEventArgs e )
-            {
-            if (!this.drag.isDragging)
-                {
-                return;
-                }
-
-            var container = this.collisionDetection( this.drag.cardsDragging );
-
-            if (container != null)
-                {
-                this.moveCards( this.drag.cardsDragging, container );
-                this.checkGameEnd();
-                }
-
-            // wasn't dropped on any container, so its not a valid drag operation. return to the original container
-            else
-                {
-                this.moveCards( this.drag.cardsDragging, this.drag.originalContainer );
-                }
             }
 
 
@@ -441,79 +322,9 @@ namespace Solitaire
 
 
         /**
-         * Finishes the drag operation, moving a list of cards to a container.
-         */
-        private void moveCards( List<Card> cards, Container container )
-            {
-            if (this.drag.highlightedContainer != null)
-                {
-                this.drag.highlightedContainer.removeDropEffect();
-                this.drag.highlightedContainer = null;
-                }
-
-            foreach (Card card in cards)
-                {
-                var parent = card.Parent as Panel;
-                parent.Children.Remove( card );
-                container.Children.Add( card );
-                }
-
-            this.drag.originalContainer = null;
-            this.drag.cardsDragging.Clear();
-            this.drag.isDragging = false;
-            }
-
-
-        private void positionCards( List<Card> cards, MouseEventArgs e )
-            {
-            var position = e.GetPosition( this.canvas );
-
-            for (int a = 0 ; a < cards.Count ; a++)
-                {
-                Canvas.SetLeft( cards[ a ], position.X - this.drag.clickPosition.X );
-                Canvas.SetTop( cards[ a ], position.Y - this.drag.clickPosition.Y + Drag.diff * a );
-                }
-
-            var container = this.collisionDetection( cards );
-
-            if (this.drag.highlightedContainer != null)
-                {
-                this.drag.highlightedContainer.removeDropEffect();
-                this.drag.highlightedContainer = null;
-                }
-
-            if (container != null)
-                {
-                container.applyDropEffect();
-
-                this.drag.highlightedContainer = container;
-                }
-            }
-
-
-        /**
-         * Determine the dimensions of the cards stack.
-         * Use the first card to determine the x/y/width.
-         * The height is calculated from the number of cards.
-         * The 'diff' is the space between each card.
-         */
-        private Utilities.Box cardsDimension( List<Card> cards )
-            {
-            var firstCard = cards[ 0 ];
-            return new Utilities.Box
-                {
-                x = Canvas.GetLeft( firstCard ),
-                y = Canvas.GetTop( firstCard ),
-                width = firstCard.ActualWidth,
-                height = firstCard.ActualHeight + Drag.diff * (cards.Count - 1)
-                };
-            }
-
-
-        /**
          * Depending on where the card is located, it may be draggable or not.
          */
-        private bool isCardDraggable( Card card )
+        protected override bool isCardDraggable( Card card )
             {
             var parent = card.Parent;
 
@@ -522,7 +333,7 @@ namespace Solitaire
                 return false;
                 }
 
-            // the last card is draggable, the others aren't
+                // the last card is draggable, the others aren't
             if (parent is Waste)
                 {
                 var last = this.waste.getLast();

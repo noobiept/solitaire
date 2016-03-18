@@ -12,18 +12,14 @@ namespace Solitaire
     {
     class FreeCell : SolitaireGame
         {
-        private Canvas canvas;
         private readonly List<Foundation> foundations = new List<Foundation>();
         private readonly List<Cell> cells = new List<Cell>();
         private readonly List<Tableau> tableaus = new List<Tableau>();
-        private readonly List<Container> droppableElements = new List<Container>();
         private readonly List<Card> cards = new List<Card>();
 
 
-        public FreeCell( Canvas mainCanvas, StackPanel customButtons, StackPanel customInfo )
+        public FreeCell( Canvas mainCanvas, StackPanel customButtons, StackPanel customInfo ) : base( mainCanvas )
             {
-            this.canvas = mainCanvas;
-
             for (int a = 0 ; a < 4 ; a++)
                 {
                 var cell = new Cell();
@@ -57,9 +53,9 @@ namespace Solitaire
                     {
                     var card = new Card( suit, value );
 
-                    //card.MouseDown += this.onMouseDown;
-                    //card.MouseMove += this.onMouseMove; //HERE
-                    //card.MouseUp += this.onMouseUp;
+                    card.MouseDown += this.onMouseDown;
+                    card.MouseMove += this.onMouseMove;
+                    card.MouseUp += this.onMouseUp;
                     card.showFront();
 
                     this.cards.Add( card );
@@ -207,6 +203,24 @@ namespace Solitaire
         public override void end()
             {
 
+            }
+
+
+        protected override void checkGameEnd()
+            {
+            
+            }
+
+
+        protected override bool isCardDraggable( Card card )
+            {
+            return true;
+            }
+
+
+        protected override void doubleClick( Card card, Container parent )
+            {
+            
             }
         }
     }
