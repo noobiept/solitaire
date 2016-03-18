@@ -34,8 +34,6 @@ namespace Solitaire
         private readonly Waste waste;
         private readonly List<Foundation> foundations = new List<Foundation>();
         private readonly List<Tableau> tableaus = new List<Tableau>();
-
-        public CommandBinding[] shortcuts;
         
 
         public GoldMine( Canvas mainCanvas, StackPanel customButtons, StackPanel customInfo )
@@ -95,7 +93,7 @@ namespace Solitaire
             }
 
 
-        public void addMenuElements( StackPanel container )
+        public override void addMenuElements( StackPanel container )
             {
             var button = new Button();
             button.ToolTip = "ctrl + f";
@@ -106,7 +104,7 @@ namespace Solitaire
             }
 
 
-        public void addInfoElements( StackPanel container )
+        public override void addInfoElements( StackPanel container )
             {
             var textBlock = new TextBlock();
             container.Children.Add( textBlock );
@@ -127,12 +125,6 @@ namespace Solitaire
             this.shortcuts = new CommandBinding[] {
                 new CommandBinding( moveToFoundation, this.toFoundationClick )
                 };
-            }
-
-
-        public CommandBinding[] getKeyboardShortcuts()
-            {
-            return this.shortcuts;
             }
 
 
@@ -362,7 +354,7 @@ namespace Solitaire
         /**
          * Position/resize all the elements in the right place (given the current width/height of the canvas).
          */
-        public void positionResizeElements()
+        public override void positionResizeElements()
             {
             // the layout is a grid with 7 columns and 3 lines
             // each position has space for a card + margin
@@ -567,7 +559,7 @@ namespace Solitaire
             }
       
 
-        public void end()
+        public override void end()
             {
             this.timer.Stop();
             }
@@ -605,13 +597,13 @@ namespace Solitaire
             }
 
 
-        public void restart()
+        public override void restart()
             {
             this.startGame();
             }
 
 
-        public void restartSameGame()
+        public override void restartSameGame()
             {
             this.startGame( false );
             }

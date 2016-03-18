@@ -32,37 +32,31 @@ namespace Solitaire
             }
 
 
-        public void addMenuElements( StackPanel container )
+        public override void addMenuElements( StackPanel container )
+            {
+            
+            }
+
+
+        public override void addInfoElements( StackPanel container )
             {
 
             }
 
 
-        public void addInfoElements( StackPanel container )
+        public override void restart()
             {
 
             }
 
 
-        public CommandBinding[] getKeyboardShortcuts()
-            {
-            return new CommandBinding[] { };
-            }
-
-
-        public void restart()
+        public override void restartSameGame()
             {
 
             }
 
 
-        public void restartSameGame()
-            {
-
-            }
-
-
-        public void positionResizeElements()
+        public override void positionResizeElements()
             {
                 // the layout is a grid with 7 columns and 3 lines
                 // each position has space for a card + margin
@@ -105,7 +99,7 @@ namespace Solitaire
             }
 
 
-        public void end()
+        public override void end()
             {
 
             }

@@ -8,19 +8,6 @@ using System.Windows.Input;
 
 namespace Solitaire
     {
-    public interface SolitaireGame
-        {
-        void restart();
-        void restartSameGame();
-        void positionResizeElements();
-        void end();
-
-        void addMenuElements( StackPanel container );
-        void addInfoElements( StackPanel container );
-        CommandBinding[] getKeyboardShortcuts();
-        }
-
-
     public partial class MainWindow : Window
         {
         SolitaireGame currentGame;
@@ -69,22 +56,28 @@ namespace Solitaire
          */
         private void setupGameShortcuts()
             {
-            var shortcuts = this.currentGame.getKeyboardShortcuts();
+            var shortcuts = this.currentGame.shortcuts;
 
-            for (var a = 0 ; a < shortcuts.Length ; a++)
+            if ( shortcuts != null )
                 {
-                this.CommandBindings.Add( shortcuts[ a ] );
+                for (var a = 0 ; a < shortcuts.Length ; a++)
+                    {
+                    this.CommandBindings.Add( shortcuts[ a ] );
+                    }
                 }
             }
 
 
         private void removeGameShortcuts()
             {
-            var shortcuts = this.currentGame.getKeyboardShortcuts();
+            var shortcuts = this.currentGame.shortcuts;
 
-            for (var a = 0 ; a < shortcuts.Length ; a++)
+            if ( shortcuts != null )
                 {
-                this.CommandBindings.Remove( shortcuts[ a ] );
+                for (var a = 0 ; a < shortcuts.Length ; a++)
+                    {
+                    this.CommandBindings.Remove( shortcuts[ a ] );
+                    }
                 }
             }
 

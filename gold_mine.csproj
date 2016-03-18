@@ -70,6 +70,7 @@
     <Compile Include="data.cs" />
     <Compile Include="freecell.cs" />
     <Compile Include="gold_mine.cs" />
+    <Compile Include="solitaire_game.cs" />
     <Compile Include="statistics.xaml.cs">
       <DependentUpon>statistics.xaml</DependentUpon>
     </Compile>
