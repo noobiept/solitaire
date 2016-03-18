@@ -112,18 +112,6 @@ namespace Solitaire
             }
 
 
-        public override void restart()
-            {
-
-            }
-
-
-        public override void restartSameGame()
-            {
-
-            }
-
-
         public override void positionResizeElements()
             {
                 // the layout is a grid with 8 columns and 3 lines
@@ -146,6 +134,12 @@ namespace Solitaire
 
             var horizontalMargin = (positionWidth - cardWidth) / 2;   // divide by 2 since there's margin in both sides
             var verticalMargin = (positionHeight - cardHeight) / 2;
+
+                // resize all the elements
+            foreach (Card card in this.cards)
+                {
+                card.Height = cardHeight;   // the image will maintain the aspect ratio, so only need to set one
+                }
 
             foreach (Cell cell in this.cells)
                 {

@@ -406,17 +406,5 @@ namespace Solitaire
 
             while (moved == true);
             }
-
-
-        public override void restart()
-            {
-            this.startGame();
-            }
-
-
-        public override void restartSameGame()
-            {
-            this.startGame( false );
-            }
         }
     }

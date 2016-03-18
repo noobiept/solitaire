@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System;
+using System.Collections.Generic;
+using System.Windows;
 
 
 namespace Solitaire
@@ -13,6 +15,12 @@ namespace Solitaire
                 }
 
             return finalSize;
+            }
+
+
+        public override bool canDrop( List<Card> cards )
+            {
+            return false;
             }
         }
     }

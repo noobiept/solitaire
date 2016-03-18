@@ -68,13 +68,13 @@ namespace Solitaire
                 {
                 var container = this.droppableElements[ a ];
 
-                if (container != this.drag.originalContainer && container.canDrop( cards ))
+                if ( container != this.drag.originalContainer && container.canDrop( cards ) )
                     {
                     var containerBox = container.getDimensionBox();
 
                     var area = Utilities.calculateIntersectionArea( cardsBox, containerBox );
 
-                    if (area > collidingArea)
+                    if ( area > collidingArea )
                         {
                         collidingArea = area;
                         colliding = container;
@@ -142,18 +142,18 @@ namespace Solitaire
             var card = (Card) sender;
             var parent = card.Parent as Container;
 
-            if (!this.isCardDraggable( card ))
+            if ( !this.isCardDraggable( card ) )
                 {
                 return;
                 }
 
-            if (e.ClickCount == 2)
+            if ( e.ClickCount == 2 )
                 {
                 this.doubleClick( card, parent );
                 return;
                 }
 
-            if (this.drag.isDragging == true)
+            if ( this.drag.isDragging == true )
                 {
                 this.moveCards( this.drag.cardsDragging, this.drag.originalContainer );
                 return;
@@ -193,14 +193,14 @@ namespace Solitaire
 
         protected void onMouseUp( object sender, MouseButtonEventArgs e )
             {
-            if (!this.drag.isDragging)
+            if ( !this.drag.isDragging )
                 {
                 return;
                 }
 
             var container = this.collisionDetection( this.drag.cardsDragging );
 
-            if (container != null)
+            if ( container != null )
                 {
                 this.moveCards( this.drag.cardsDragging, container );
                 this.checkGameEnd();
@@ -214,9 +214,19 @@ namespace Solitaire
             }
 
 
+        public void restart()
+            {
+            this.startGame();
+            }
+
+
+        public void restartSameGame()
+            {
+            this.startGame( false );
+            }
+
+
         abstract public void startGame( bool shuffle= true );
-        abstract public void restart();
-        abstract public void restartSameGame();
         abstract public void positionResizeElements();
         abstract public void end();
         abstract protected bool isCardDraggable( Card card );

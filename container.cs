@@ -7,7 +7,7 @@ using Microsoft.Expression.Media.Effects;
 
 namespace Solitaire
     {
-    public class Container : Panel
+    abstract public class Container : Panel
         {
         private readonly ColorToneEffect dropEffect;
 
@@ -63,10 +63,7 @@ namespace Solitaire
         /**
          * Says if the given cards can be dropped unto this container or not.
          */
-        public virtual bool canDrop( List<Card> cards )
-            {
-            return false;
-            }
+        public abstract bool canDrop( List<Card> cards );
 
 
         /**
