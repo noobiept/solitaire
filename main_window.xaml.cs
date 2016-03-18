@@ -17,7 +17,7 @@ namespace Solitaire
             {
             InitializeComponent();
 
-            this.selectGame( typeof( GoldMine ) );
+            this.selectGame( typeof( FreeCell ) );
             }
 
 

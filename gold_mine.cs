@@ -46,7 +46,7 @@ namespace Solitaire
 
             Data.load();
 
-            // initialize all the game elements
+                // initialize all the game elements
             this.stock = new Stock();
             this.stock.MouseUp += this.onStockMouseUp;
             this.canvas.Children.Add( this.stock );
@@ -128,9 +128,9 @@ namespace Solitaire
             }
 
 
-        private void startGame( bool shuffle = true )
+        public override void startGame( bool shuffle= true )
             {
-            // disconnect the cards from their previous container
+                // disconnect the cards from their previous container
             foreach (Card card in this.cards)
                 {
                 var parent = card.Parent as Panel;
@@ -146,7 +146,7 @@ namespace Solitaire
                 Utilities.shuffle( this.cards );
                 }
 
-            // add all the shuffled cards to the stock
+                // add all the shuffled cards to the stock
             foreach (Card card in this.cards)
                 {
                 card.showBack();
@@ -356,9 +356,9 @@ namespace Solitaire
          */
         public override void positionResizeElements()
             {
-            // the layout is a grid with 7 columns and 3 lines
-            // each position has space for a card + margin
-            // we calculate these values from the available window dimensions
+                // the layout is a grid with 7 columns and 3 lines
+                // each position has space for a card + margin
+                // we calculate these values from the available window dimensions
             var canvasWidth = this.canvas.ActualWidth;
             var canvasHeight = this.canvas.ActualHeight;
             var positionWidth = canvasWidth / 7;
@@ -377,7 +377,7 @@ namespace Solitaire
             var horizontalMargin = (positionWidth - cardWidth) / 2;   // divide by 2 since there's margin in both sides
             var verticalMargin = (positionHeight - cardHeight) / 2;
 
-            // resize all the elements
+                // resize all the elements
             foreach (Card card in this.cards)
                 {
                 card.Height = cardHeight;   // the image will maintain the aspect ratio, so only need to set one
@@ -401,21 +401,21 @@ namespace Solitaire
             this.stock.Width = cardWidth;
             this.stock.Height = cardHeight;
 
-            // position all the elements
-            // add the stock element in the top left
+                // position all the elements
+                // add the stock element in the top left
             double left = horizontalMargin;
             double top = verticalMargin;
 
             Canvas.SetLeft( this.stock, left );
             Canvas.SetTop( this.stock, top );
 
-            // add the waste element next to the stock
+                // add the waste element next to the stock
             left += cardWidth + horizontalMargin * 2;
 
             Canvas.SetLeft( this.waste, left );
             Canvas.SetTop( this.waste, top );
 
-            // add the foundations in the top right corner (the foundation is to where the cards need to be stacked (starting on an ace until the king)
+                // add the foundations in the top right corner (the foundation is to where the cards need to be stacked (starting on an ace until the king)
             left = canvasWidth - cardWidth - horizontalMargin;
 
             foreach (var foundation in this.foundations)
@@ -426,7 +426,7 @@ namespace Solitaire
                 left -= cardWidth + 2 * horizontalMargin;
                 }
 
-            // add the tableau piles (where you can move any card to)
+                // add the tableau piles (where you can move any card to)
             left = horizontalMargin;
             top += cardHeight + verticalMargin;
 

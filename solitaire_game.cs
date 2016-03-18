@@ -14,6 +14,7 @@ namespace Solitaire
         {
         public CommandBinding[] shortcuts;
 
+        abstract public void startGame( bool shuffle= true );
         abstract public void restart();
         abstract public void restartSameGame();
         abstract public void positionResizeElements();
