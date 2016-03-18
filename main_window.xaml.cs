@@ -8,7 +8,7 @@ using System.Windows.Input;
 
 namespace Solitaire
     {
-    interface SolitaireGame
+    public interface SolitaireGame
         {
         void restart();
         void restartSameGame();
@@ -30,8 +30,24 @@ namespace Solitaire
             {
             InitializeComponent();
 
-            this.currentGame = new GoldMine( this.MainCanvas, this.CustomButtons, this.CustomInfo );
-            this.setupGlobalShortcuts();
+            this.selectGame( typeof( GoldMine ) );
+            }
+
+
+        public void selectGame( Type gameType )
+            {
+            if ( this.currentGame != null )
+                {
+                if ( this.currentGame.GetType() == gameType )
+                    {
+                    this.currentGame.restart();
+                    return;
+                    }
+
+                this.currentGame.end();
+                }
+
+            this.currentGame = (SolitaireGame) Activator.CreateInstance( gameType, new object[] { this.MainCanvas, this.CustomButtons, this.CustomInfo } );
             this.setupGameShortcuts();
             }
 
@@ -120,6 +136,18 @@ namespace Solitaire
         private void openAboutPage( object sender, RoutedEventArgs e )
             {
             System.Diagnostics.Process.Start( "https://bitbucket.org/drk4/gold_mine" );
+            }
+
+
+        private void selectFreeCell( object sender, RoutedEventArgs e )
+            {
+            selectGame( typeof( FreeCell ) );
+            }
+
+
+        private void selectGoldMine( object sender, RoutedEventArgs e )
+            {
+            selectGame( typeof( GoldMine ) );
             }
         }
     }

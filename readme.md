@@ -1,8 +1,8 @@
 ﻿![example](images/game_example.png)
 
 
-Description
-===========
+Gold Mine
+=========
 
 You can read about the game here [http://politaire.com/help/goldmine](http://politaire.com/help/goldmine).
 
@@ -16,6 +16,13 @@ You can read about the game here [http://politaire.com/help/goldmine](http://pol
 - So basically, keep combining the cards in the tableau (bottom), try not to use all the available empty tableaus (they are useful to make the combinations).
 - As possible, you need to keep filling the foundation as well, starting with the ace and going from there.
 - If you manage to move all the cards to the foundation (four stacks from ace to king) then you'll win the game.
+
+
+FreeCell
+========
+
+- [http://politaire.com/help/freecell](http://politaire.com/help/freecell)
+
 
 Shortcuts
 =========

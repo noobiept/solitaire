@@ -14,8 +14,8 @@
         <DockPanel Name="Menu" DockPanel.Dock="Top" LastChildFill="False" Background="LightGray">
             <Menu>
                 <MenuItem Header="_Game">
-                    <MenuItem Header="_FreeCell" />
-                    <MenuItem Header="_Gold Mine" />
+                    <MenuItem Header="_FreeCell" Click="selectFreeCell" />
+                    <MenuItem Header="_Gold Mine" Click="selectGoldMine" />
                 </MenuItem>
             </Menu>
             <Button Margin="2,2,2,6" Click="newGameClick" ToolTip="ctrl + n">New Game</Button>
