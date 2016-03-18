@@ -23,7 +23,7 @@ namespace Solitaire
 
         public override bool canDrop( List<Card> cards )
             {
-            if ( this.Children.Count == 0 )
+            if ( this.Children.Count == 0 && cards.Count == 1 )
                 {
                 return true;
                 }

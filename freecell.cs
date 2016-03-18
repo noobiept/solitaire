@@ -208,6 +208,38 @@ namespace Solitaire
 
         protected override bool isCardDraggable( Card card )
             {
+            var parent = card.Parent;
+
+                // can't take a card once its added to the foundation
+            if ( parent is Foundation )
+                {
+                return false;
+                }
+
+            if ( parent is Tableau )
+                {
+                var tableau = parent as Tableau;
+
+                    // only if the stack of cards has the correct decreasing value, and alternating color
+                var position = tableau.Children.IndexOf( card ) + 1;    // the next card
+                var count = tableau.Children.Count;
+                var currentCard = card;
+
+                while( position < count )
+                    {
+                    var nextCard = tableau.Children[ position ] as Card;
+
+                    if ( currentCard.value - 1 != nextCard.value || 
+                         currentCard.color == nextCard.color )
+                        {
+                        return false;
+                        }
+
+                    currentCard = nextCard;
+                    position++;
+                    }
+                }
+
             return true;
             }
 
