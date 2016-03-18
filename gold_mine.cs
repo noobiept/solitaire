@@ -34,6 +34,8 @@ namespace Solitaire
         private readonly Waste waste;
         private readonly List<Foundation> foundations = new List<Foundation>();
         private readonly List<Tableau> tableaus = new List<Tableau>();
+
+        public CommandBinding[] shortcuts;
         
 
         public GoldMine( Canvas mainCanvas, StackPanel customButtons, StackPanel customInfo )
@@ -88,6 +90,7 @@ namespace Solitaire
 
             this.addMenuElements( customButtons );
             this.addInfoElements( customInfo );
+            this.initKeyboardShortcuts();
             this.startGame();
             }
 
@@ -115,15 +118,21 @@ namespace Solitaire
         /**
          * Return an array of game specific keyboard shortcuts (to be added to the main window).
          */
-        public CommandBinding[] getKeyboardShortcuts()
+        public void initKeyboardShortcuts()
             {
                 // ctrl + f -- try to move all the possible cards to the foundation
             var moveToFoundation = new RoutedCommand();
             moveToFoundation.InputGestures.Add( new KeyGesture( Key.F, ModifierKeys.Control ) );
 
-            return new CommandBinding[] {
+            this.shortcuts = new CommandBinding[] {
                 new CommandBinding( moveToFoundation, this.toFoundationClick )
                 };
+            }
+
+
+        public CommandBinding[] getKeyboardShortcuts()
+            {
+            return this.shortcuts;
             }
 
 

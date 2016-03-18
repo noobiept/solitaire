@@ -44,11 +44,23 @@ namespace Solitaire
                     return;
                     }
 
-                this.currentGame.end();
+                this.clearGame();
                 }
 
             this.currentGame = (SolitaireGame) Activator.CreateInstance( gameType, new object[] { this.MainCanvas, this.CustomButtons, this.CustomInfo } );
             this.setupGameShortcuts();
+            this.currentGame.positionResizeElements();
+            }
+
+
+        public void clearGame()
+            {
+            this.currentGame.end();
+            this.MainCanvas.Children.Clear();
+            this.CustomButtons.Children.Clear();
+            this.CustomInfo.Children.Clear();
+            this.removeGameShortcuts();
+            this.currentGame = null;
             }
 
 
@@ -62,6 +74,17 @@ namespace Solitaire
             for (var a = 0 ; a < shortcuts.Length ; a++)
                 {
                 this.CommandBindings.Add( shortcuts[ a ] );
+                }
+            }
+
+
+        private void removeGameShortcuts()
+            {
+            var shortcuts = this.currentGame.getKeyboardShortcuts();
+
+            for (var a = 0 ; a < shortcuts.Length ; a++)
+                {
+                this.CommandBindings.Remove( shortcuts[ a ] );
                 }
             }
 
