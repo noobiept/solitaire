@@ -36,6 +36,8 @@ namespace Solitaire
 
             this.currentGame = (SolitaireGame) Activator.CreateInstance( gameType, new object[] { this.MainCanvas } );
             this.setupGameShortcuts();
+            this.currentGame.addMenuElements( this.MainMenu );
+            this.currentGame.addInfoElements( this.Info );
             this.currentGame.positionResizeElements();
             this.Title = this.currentGame.getTitle();
             }
@@ -43,10 +45,10 @@ namespace Solitaire
 
         public void clearGame()
             {
-            this.currentGame.end();
+            this.currentGame.removeMenuElements( this.MainMenu );
+            this.currentGame.removeInfoElements( this.Info );
+            this.currentGame.clear();
             this.MainCanvas.Children.Clear();
-            //this.CustomButtons.Children.Clear();
-            //this.CustomInfo.Children.Clear(); //HERE
             this.removeGameShortcuts();
             this.currentGame = null;
             }
@@ -127,7 +129,7 @@ namespace Solitaire
 
         private void onWindowClosing( object sender, System.ComponentModel.CancelEventArgs e )
             {
-            this.currentGame.end();
+            this.currentGame.clear();
             }
 
 

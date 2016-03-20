@@ -10,6 +10,7 @@ namespace Solitaire
     {
     class GoldMine : SolitaireGame
         {
+        private MenuItem toFoundation;
         private TextBlock stockLeft;
 
         private Timer timer;
@@ -69,30 +70,42 @@ namespace Solitaire
                     }
                 }
 
-            //this.addMenuElements( customButtons );
-            //this.addInfoElements( customInfo ); //HERE
             this.initKeyboardShortcuts();
             this.startGame();
             }
 
 
-        public override void addMenuElements( StackPanel container )
+        public override void addMenuElements( Menu container )
             {
-            var button = new Button();
+            var button = new MenuItem();
             button.ToolTip = "ctrl + f";
-            button.Content = "To Foundation";
+            button.Header = "To _Foundation";
             button.Click += this.toFoundationClick;
 
-            container.Children.Add( button );
+            container.Items.Add( button );
+
+            this.toFoundation = button;
+            }
+
+        public override void removeMenuElements( Menu container )
+            {
+            container.Items.Remove( this.toFoundation );
             }
 
 
-        public override void addInfoElements( StackPanel container )
+        public override void addInfoElements( Panel container )
             {
             var textBlock = new TextBlock();
             container.Children.Add( textBlock );
 
             this.stockLeft = textBlock;
+            this.updateStockLeft();
+            }
+
+
+        public override void removeInfoElements( Panel container )
+            {
+            container.Children.Remove( this.stockLeft );
             }
 
 
@@ -136,7 +149,6 @@ namespace Solitaire
                 this.stock.Children.Add( card );
                 }
 
-            this.updateStockLeft();
             this.timer.Stop();
             this.secondsPassed = 0;
             this.updateTimePassed();
@@ -370,7 +382,7 @@ namespace Solitaire
             }
       
 
-        public override void end()
+        public override void clear()
             {
             this.timer.Stop();
             }

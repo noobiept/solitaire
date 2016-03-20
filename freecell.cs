@@ -100,18 +100,6 @@ namespace Solitaire
             }
 
 
-        public override void addMenuElements( StackPanel container )
-            {
-            
-            }
-
-
-        public override void addInfoElements( StackPanel container )
-            {
-
-            }
-
-
         public override void positionResizeElements()
             {
                 // the layout is a grid with 8 columns and 3 lines
@@ -191,12 +179,6 @@ namespace Solitaire
 
                 left += cardWidth + 2 * horizontalMargin;
                 }
-            }
-
-
-        public override void end()
-            {
-
             }
 
 

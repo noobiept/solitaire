@@ -16,24 +16,22 @@
             <RowDefinition />
             <RowDefinition Height="25" />
         </Grid.RowDefinitions>
-        <DockPanel Name="Menu" Background="LightGray" Grid.Row="0">
-            <Menu>
-                <MenuItem Header="_Select Game">
-                    <MenuItem Header="_FreeCell" Click="selectFreeCell" />
-                    <MenuItem Header="_Gold Mine" Click="selectGoldMine" />
-                </MenuItem>
-                <MenuItem Header="_New" Click="newGameClick" ToolTip="ctrl + n"></MenuItem>
-                <MenuItem Header="_Restart" Click="restartSameGameClick" ToolTip="ctrl + r"></MenuItem>
-                <MenuItem Header="_Statistics" Click="openStatisticsWindow" ToolTip="ctrl + s"></MenuItem>
-                <MenuItem Header="_About" Click="openAboutPage" ToolTip="ctrl + a"></MenuItem>
-            </Menu>
-        </DockPanel>
+        
+        <Menu Name="MainMenu" Grid.Row="0">
+            <MenuItem Header="_Select Game">
+                <MenuItem Header="_FreeCell" Click="selectFreeCell" />
+                <MenuItem Header="_Gold Mine" Click="selectGoldMine" />
+            </MenuItem>
+            <MenuItem Header="_New" Click="newGameClick" ToolTip="ctrl + n"></MenuItem>
+            <MenuItem Header="_Restart" Click="restartSameGameClick" ToolTip="ctrl + r"></MenuItem>
+            <MenuItem Header="_Statistics" Click="openStatisticsWindow" ToolTip="ctrl + s"></MenuItem>
+            <MenuItem Header="_About" Click="openAboutPage" ToolTip="ctrl + a"></MenuItem>
+        </Menu>
         
         <Canvas Name="MainCanvas" Background="#004F0F" Grid.Row="1" />
         
-        <DockPanel Grid.Row="2">
-            <TextBlock Name="TimePassed" Margin="6,2,6,6" DockPanel.Dock="Right">Time: 0s</TextBlock>
-            <StackPanel Name="CustomInfo" Margin="6,2,6,6" DockPanel.Dock="Right"></StackPanel>
+        <DockPanel Name="Info" Grid.Row="2" Margin="5">
+            <TextBlock Name="TimePassed" DockPanel.Dock="Right">Time: 0s</TextBlock>
         </DockPanel>
     </Grid>
 </Window>

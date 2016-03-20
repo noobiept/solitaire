@@ -240,15 +240,18 @@ namespace Solitaire
             this.startGame( false );
             }
 
+        virtual public void addMenuElements( Menu container ) {}
+        virtual public void addInfoElements( Panel container ) {}
+        virtual public void removeMenuElements( Menu container ) {}
+        virtual public void removeInfoElements( Panel container ) {}
+        virtual public void clear() {}
 
         abstract public void startGame( bool shuffle= true );
         abstract public void positionResizeElements();
-        abstract public void end();
+        
         abstract protected bool isCardDraggable( Card card );
         abstract protected void checkGameEnd();
         abstract protected void doubleClick( Card card, Container parent );
         abstract public string getTitle();
-        abstract public void addMenuElements( StackPanel container );
-        abstract public void addInfoElements( StackPanel container );
         }
     }
