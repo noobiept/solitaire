@@ -13,9 +13,6 @@ namespace Solitaire
         private MenuItem toFoundation;
         private TextBlock stockLeft;
 
-        private Timer timer;
-        private uint secondsPassed;
-
         private readonly List<Card> cards = new List<Card>();
         private readonly Stock stock;
         private readonly Waste waste;
@@ -25,10 +22,7 @@ namespace Solitaire
 
         public GoldMine( Canvas mainCanvas ) : base( mainCanvas )
             {
-            this.timer = new Timer( 1000 );
-            this.timer.Elapsed += this.onTimeElapsed;
-
-            Data.load();
+            Data.load();    //HERE
 
                 // initialize all the game elements
             this.stock = new Stock();
@@ -96,6 +90,7 @@ namespace Solitaire
         public override void addInfoElements( Panel container )
             {
             var textBlock = new TextBlock();
+            textBlock.Margin = new Thickness( 5 );
             container.Children.Add( textBlock );
 
             this.stockLeft = textBlock;
@@ -149,10 +144,7 @@ namespace Solitaire
                 this.stock.Children.Add( card );
                 }
 
-            this.timer.Stop();
-            this.secondsPassed = 0;
-            this.updateTimePassed();
-            this.timer.Start();
+            base.startGame( shuffle );
             }
 
 
@@ -363,28 +355,6 @@ namespace Solitaire
         private void updateStockLeft()
             {
             this.stockLeft.Text = "In stock: " + this.stock.Children.Count;
-            }
-
-
-        private void updateTimePassed()
-            {
-            Application.Current.Dispatcher.Invoke( (() => {
-                var mainWindow = ((MainWindow) Application.Current.MainWindow);
-                mainWindow.TimePassed.Text = "Time: " + Utilities.timeToString( (int) this.secondsPassed );
-                }));
-            }
-
-
-        private void onTimeElapsed( Object source, ElapsedEventArgs e )
-            {
-            this.secondsPassed++;
-            this.updateTimePassed();
-            }
-      
-
-        public override void clear()
-            {
-            this.timer.Stop();
             }
 
 

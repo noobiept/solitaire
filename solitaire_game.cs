@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Collections.Generic;
 
 
 namespace Solitaire
@@ -23,6 +21,8 @@ namespace Solitaire
             public Container highlightedContainer; // when dragging a card on top of a container, highlight that container, and keep a reference to it (to know when to remove the highlight)
             }
 
+        protected Timer timer;
+        protected uint secondsPassed;
         protected Canvas canvas;
         protected readonly List<Container> droppableElements = new List<Container>();
         private Drag drag;
@@ -31,8 +31,20 @@ namespace Solitaire
 
         public SolitaireGame( Canvas canvas )
             {
+            this.timer = new Timer( 1000 );
+            this.timer.Elapsed += this.onTimeElapsed;
+
             this.canvas = canvas;
             this.drag.cardsDragging = new List<Card>();
+            }
+
+
+        public virtual void startGame( bool shuffle = true )
+            {
+            this.timer.Stop();
+            this.secondsPassed = 0;
+            this.updateTimePassed();
+            this.timer.Start();
             }
 
 
@@ -240,15 +252,35 @@ namespace Solitaire
             this.startGame( false );
             }
 
+
+        private void updateTimePassed()
+            {
+            Application.Current.Dispatcher.Invoke( (() => {
+                var mainWindow = (MainWindow) Application.Current.MainWindow;
+                mainWindow.TimePassed.Text = "Time: " + Utilities.timeToString( (int) this.secondsPassed );
+                }));
+            }
+
+
+        private void onTimeElapsed( Object source, ElapsedEventArgs e )
+            {
+            this.secondsPassed++;
+            this.updateTimePassed();
+            }
+
+
+        virtual public void clear()
+            {
+            this.timer.Stop();
+            }
+
+
         virtual public void addMenuElements( Menu container ) {}
         virtual public void addInfoElements( Panel container ) {}
         virtual public void removeMenuElements( Menu container ) {}
         virtual public void removeInfoElements( Panel container ) {}
-        virtual public void clear() {}
-
-        abstract public void startGame( bool shuffle= true );
-        abstract public void positionResizeElements();
         
+        abstract public void positionResizeElements();
         abstract protected bool isCardDraggable( Card card );
         abstract protected void checkGameEnd();
         abstract protected void doubleClick( Card card, Container parent );

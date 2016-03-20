@@ -30,8 +30,8 @@
         
         <Canvas Name="MainCanvas" Background="#004F0F" Grid.Row="1" />
         
-        <DockPanel Name="Info" Grid.Row="2" Margin="5">
-            <TextBlock Name="TimePassed" DockPanel.Dock="Right">Time: 0s</TextBlock>
+        <DockPanel Name="Info" Grid.Row="2">
+            <TextBlock Margin="5" Name="TimePassed">Time: 0s</TextBlock>
         </DockPanel>
     </Grid>
 </Window>

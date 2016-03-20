@@ -97,6 +97,8 @@ namespace Solitaire
                     tableauPosition = 0;
                     }
                 }
+
+            base.startGame( shuffle );
             }
 
 
