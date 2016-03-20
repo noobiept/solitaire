@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gold_mine", "gold_mine.csproj", "{0C67285E-714E-498E-8571-373B2524E7EA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "solitaire", "solitaire.csproj", "{0C67285E-714E-498E-8571-373B2524E7EA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
