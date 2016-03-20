@@ -247,7 +247,7 @@ namespace Solitaire
         abstract protected bool isCardDraggable( Card card );
         abstract protected void checkGameEnd();
         abstract protected void doubleClick( Card card, Container parent );
-
+        abstract public string getTitle();
         abstract public void addMenuElements( StackPanel container );
         abstract public void addInfoElements( StackPanel container );
         }

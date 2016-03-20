@@ -34,9 +34,10 @@ namespace Solitaire
                 this.clearGame();
                 }
 
-            this.currentGame = (SolitaireGame) Activator.CreateInstance( gameType, new object[] { this.MainCanvas, this.CustomButtons, this.CustomInfo } );
+            this.currentGame = (SolitaireGame) Activator.CreateInstance( gameType, new object[] { this.MainCanvas } );
             this.setupGameShortcuts();
             this.currentGame.positionResizeElements();
+            this.Title = this.currentGame.getTitle();
             }
 
 
@@ -44,8 +45,8 @@ namespace Solitaire
             {
             this.currentGame.end();
             this.MainCanvas.Children.Clear();
-            this.CustomButtons.Children.Clear();
-            this.CustomInfo.Children.Clear();
+            //this.CustomButtons.Children.Clear();
+            //this.CustomInfo.Children.Clear(); //HERE
             this.removeGameShortcuts();
             this.currentGame = null;
             }

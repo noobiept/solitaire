@@ -6,28 +6,34 @@
         xmlns:ee="http://schemas.microsoft.com/expression/2010/effects"
         xmlns:local="clr-namespace:Solitaire"
         mc:Ignorable="d"
-        Title="Gold Mine" Height="650" Width="1000" 
+        Height="650" Width="1000" 
         MinWidth="600" MinHeight="400"
         SizeChanged="onSizeChange" StateChanged="onStateChange"
         Closing="onWindowClosing">
-    <DockPanel>
-        <DockPanel Name="Menu" DockPanel.Dock="Top" LastChildFill="False" Background="LightGray">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25" />
+            <RowDefinition />
+            <RowDefinition Height="25" />
+        </Grid.RowDefinitions>
+        <DockPanel Name="Menu" Background="LightGray" Grid.Row="0">
             <Menu>
-                <MenuItem Header="_Game">
+                <MenuItem Header="_Select Game">
                     <MenuItem Header="_FreeCell" Click="selectFreeCell" />
                     <MenuItem Header="_Gold Mine" Click="selectGoldMine" />
                 </MenuItem>
+                <MenuItem Header="_New" Click="newGameClick" ToolTip="ctrl + n"></MenuItem>
+                <MenuItem Header="_Restart" Click="restartSameGameClick" ToolTip="ctrl + r"></MenuItem>
+                <MenuItem Header="_Statistics" Click="openStatisticsWindow" ToolTip="ctrl + s"></MenuItem>
+                <MenuItem Header="_About" Click="openAboutPage" ToolTip="ctrl + a"></MenuItem>
             </Menu>
-            <Button Margin="2,2,2,6" Click="newGameClick" ToolTip="ctrl + n">New Game</Button>
-            <Button Margin="2,2,2,6" Click="restartSameGameClick" ToolTip="ctrl + r">Restart</Button>
-            <Button Margin="2,2,2,6" Click="openStatisticsWindow" ToolTip="ctrl + s">Statistics</Button>
-            <Button Margin="2,2,2,6" Click="openAboutPage" ToolTip="ctrl + a">About</Button>
-            <StackPanel Name="CustomButtons"></StackPanel>
-            
+        </DockPanel>
+        
+        <Canvas Name="MainCanvas" Background="#004F0F" Grid.Row="1" />
+        
+        <DockPanel Grid.Row="2">
             <TextBlock Name="TimePassed" Margin="6,2,6,6" DockPanel.Dock="Right">Time: 0s</TextBlock>
             <StackPanel Name="CustomInfo" Margin="6,2,6,6" DockPanel.Dock="Right"></StackPanel>
-            
         </DockPanel>
-        <Canvas Name="MainCanvas" DockPanel.Dock="Bottom" Background="#004F0F" />
-    </DockPanel>
+    </Grid>
 </Window>

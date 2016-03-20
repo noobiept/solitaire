@@ -22,7 +22,7 @@ namespace Solitaire
         private readonly List<Tableau> tableaus = new List<Tableau>();
         
 
-        public GoldMine( Canvas mainCanvas, StackPanel customButtons, StackPanel customInfo ) : base( mainCanvas )
+        public GoldMine( Canvas mainCanvas ) : base( mainCanvas )
             {
             this.timer = new Timer( 1000 );
             this.timer.Elapsed += this.onTimeElapsed;
@@ -69,8 +69,8 @@ namespace Solitaire
                     }
                 }
 
-            this.addMenuElements( customButtons );
-            this.addInfoElements( customInfo );
+            //this.addMenuElements( customButtons );
+            //this.addInfoElements( customInfo ); //HERE
             this.initKeyboardShortcuts();
             this.startGame();
             }
@@ -405,6 +405,12 @@ namespace Solitaire
                 }
 
             while (moved == true);
+            }
+
+
+        public override string getTitle()
+            {
+            return "Gold Mine";
             }
         }
     }

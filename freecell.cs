@@ -18,7 +18,7 @@ namespace Solitaire
         private readonly List<Card> cards = new List<Card>();
 
 
-        public FreeCell( Canvas mainCanvas, StackPanel customButtons, StackPanel customInfo ) : base( mainCanvas )
+        public FreeCell( Canvas mainCanvas ) : base( mainCanvas )
             {
             for (int a = 0 ; a < 4 ; a++)
                 {
@@ -355,6 +355,12 @@ namespace Solitaire
                 }
 
             return base.canDrop( cards, container );
+            }
+
+
+        public override string getTitle()
+            {
+            return "FreeCell";
             }
         }
     }
