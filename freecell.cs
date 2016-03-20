@@ -316,5 +316,45 @@ namespace Solitaire
                     }
                 } while( moved == true );
             }
+
+
+        /**
+         * A group of cards can only be dragged if there's enough empty spaces (search freecell supermove).
+         * Reference: http://www.solitairecentral.com/articles/FreecellPowerMovesExplained.html
+         */
+        protected override bool canDrop( List<Card> cards, Container container )
+            {
+            var emptyFreeCells = 0;
+            var emptyColumns = 0;
+
+            foreach( var cell in this.cells )
+                {
+                if ( cell.isEmpty() )
+                    {
+                    emptyFreeCells++;
+                    }
+                }
+
+            foreach( var tableau in this.tableaus )
+                {
+                if ( tableau.isEmpty() )
+                    {
+                    emptyColumns++;
+                    }
+                }
+
+                // only other empty containers count (not the one we're going to)
+            if ( container.isEmpty() )
+                {
+                emptyColumns--;
+                }
+
+            if ( cards.Count > (1 + emptyFreeCells) * Math.Pow( 2, emptyColumns ) )
+                {
+                return false;
+                }
+
+            return base.canDrop( cards, container );
+            }
         }
     }

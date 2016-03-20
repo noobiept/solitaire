@@ -68,7 +68,7 @@ namespace Solitaire
                 {
                 var container = this.droppableElements[ a ];
 
-                if ( container != this.drag.originalContainer && container.canDrop( cards ) )
+                if ( this.canDrop( cards, container ) )
                     {
                     var containerBox = container.getDimensionBox();
 
@@ -83,6 +83,21 @@ namespace Solitaire
                 }
 
             return colliding;
+            }
+
+
+        /**
+         * Checks if the cards can be dropped into the given container. Can be extended by derived classes for games that have extra rules.
+         */
+        protected virtual bool canDrop( List<Card> cards, Container container )
+            {
+            if ( container != this.drag.originalContainer &&
+                container.canDrop( cards ) )
+                {
+                return true;
+                }
+
+            return false;
             }
 
 
