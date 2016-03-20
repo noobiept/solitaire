@@ -8,6 +8,11 @@ using System.Windows.Input;
 
 namespace Solitaire
     {
+    public enum GameKey
+        {
+        goldMine, freeCell
+        }
+
     public partial class MainWindow : Window
         {
         SolitaireGame currentGame;
@@ -17,6 +22,7 @@ namespace Solitaire
             {
             InitializeComponent();
 
+            Data.load();
             this.selectGame( typeof( FreeCell ) );
             }
 
@@ -147,7 +153,7 @@ namespace Solitaire
 
         private void openStatisticsWindow( object sender, RoutedEventArgs e )
             {
-            var statistics = new Statistics();
+            var statistics = new Statistics( this.currentGame.getGameKey() );
             statistics.ShowDialog();
             }
 

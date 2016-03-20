@@ -22,8 +22,6 @@ namespace Solitaire
 
         public GoldMine( Canvas mainCanvas ) : base( mainCanvas )
             {
-            Data.load();    //HERE
-
                 // initialize all the game elements
             this.stock = new Stock();
             this.stock.MouseUp += this.onStockMouseUp;
@@ -167,7 +165,7 @@ namespace Solitaire
                 {
                 this.timer.Stop();
 
-                var best = Data.oneMoreWin( this.secondsPassed );//HERE
+                var best = Data.oneMoreWin( this.getGameKey(), this.secondsPassed );
                 var message = String.Format( "You Win!\nTime: {0}", Utilities.timeToString( (int) this.secondsPassed ) );
 
                 if ( this.secondsPassed == best )
@@ -393,6 +391,12 @@ namespace Solitaire
         public override string getTitle()
             {
             return "Gold Mine";
+            }
+
+
+        public override GameKey getGameKey()
+            {
+            return GameKey.goldMine;
             }
         }
     }

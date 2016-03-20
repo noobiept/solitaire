@@ -6,10 +6,14 @@ namespace Solitaire
     {
     public partial class Statistics : Window
         {
-        public Statistics()
+        GameKey gameKey;
+
+
+        public Statistics( GameKey gameKey )
             {
             InitializeComponent();
-            
+
+            this.gameKey = gameKey;
             this.updateUi();
             this.setupKeyboardShortcuts();
             }
@@ -17,10 +21,11 @@ namespace Solitaire
 
         private void updateUi()
             {
-            uint totalWins = Data.DATA.totalWins;
-            uint bestTime = Data.DATA.bestTime;
+            var gameData = Data.get( this.gameKey );
+            uint totalWins = gameData.totalWins;
+            uint bestTime = gameData.bestTime;
 
-            this.TotalWins.Text = Data.DATA.totalWins.ToString();
+            this.TotalWins.Text = gameData.totalWins.ToString();
 
             if ( bestTime == 0 )
                 {
@@ -49,7 +54,7 @@ namespace Solitaire
 
             if ( result == MessageBoxResult.OK )
                 {
-                Data.resetStatistics();
+                Data.resetStatistics( this.gameKey );
                 this.updateUi();
                 }
             }

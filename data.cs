@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Text;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 
@@ -8,10 +9,15 @@ namespace Solitaire
     {
     public static class Data
         {
-        public struct AppData
+        public class GameData
             {
             public uint totalWins;
             public uint bestTime;
+            }
+
+        public struct AppData
+            {
+            public Dictionary<GameKey, GameData> data;
 
             public int version;         // version of the loaded data structure (useful to compare with the application version, when updating from different versions that have incompatible changes)
             }
@@ -23,7 +29,7 @@ namespace Solitaire
         #else
             const string FILE_NAME = "data.txt";
         #endif
-        static string DATA_PATH = Path.Combine( Environment.GetFolderPath( Environment.SpecialFolder.LocalApplicationData ), "gold_mine", Data.FILE_NAME );
+        static string DATA_PATH = Path.Combine( Environment.GetFolderPath( Environment.SpecialFolder.LocalApplicationData ), "solitaire", Data.FILE_NAME );
 
         const int DATA_VERSION = 1;  // current version of the application data
 
@@ -55,8 +61,7 @@ namespace Solitaire
         static private void loadDefaults()
             {
             Data.DATA = new AppData {
-                    totalWins = 0,
-                    bestTime = 0,
+                    data = new Dictionary<GameKey, GameData>(),
                     version = Data.DATA_VERSION
                 };
             }
@@ -84,32 +89,43 @@ namespace Solitaire
             }
 
 
-        static public uint oneMoreWin( uint time )
+        static public uint oneMoreWin( GameKey gameKey, uint time )
             {
-            Data.DATA.totalWins++;
+            var gameData = Data.get( gameKey );
+
+            gameData.totalWins++;
             
                 // first win
-            if ( Data.DATA.bestTime == 0 )
+            if ( gameData.bestTime == 0 )
                 {
-                Data.DATA.bestTime = time;
+                gameData.bestTime = time;
                 }
 
-            else if ( time < Data.DATA.bestTime )
+            else if ( time < gameData.bestTime )
                 {
-                Data.DATA.bestTime = time;
+                gameData.bestTime = time;
                 }
 
             Data.save();
-
-            return Data.DATA.bestTime;
+            return gameData.bestTime;
             }
 
 
-        static public void resetStatistics()
+        static public void resetStatistics( GameKey gameKey )
             {
-            Data.DATA.totalWins = 0;
-            Data.DATA.bestTime = 0;
+            Data.DATA.data[ gameKey ] = new GameData { bestTime = 0, totalWins = 0 };
             Data.save();
+            }
+
+
+        static public GameData get( GameKey key )
+            {
+            if ( !Data.DATA.data.ContainsKey( key ) )
+                {
+                Data.DATA.data[ key ] = new GameData { bestTime = 0, totalWins = 0 };
+                }
+
+            return Data.DATA.data[ key ];
             }
         }
     }

@@ -199,7 +199,17 @@ namespace Solitaire
                 // game has ended
             if ( cardCount == foundationCount )
                 {
-                MessageBox.Show( "You Win!", "Game Over!", MessageBoxButton.OK );
+                this.timer.Stop();
+
+                var best = Data.oneMoreWin( this.getGameKey(), this.secondsPassed );
+                var message = String.Format( "You Win!\nTime: {0}", Utilities.timeToString( (int) this.secondsPassed ) );
+
+                if ( this.secondsPassed == best )
+                    {
+                    message += "\nYou beat your best time!";
+                    }
+
+                MessageBox.Show( message, "Game Over!", MessageBoxButton.OK );
                 this.startGame();
                 }
             }
@@ -345,6 +355,12 @@ namespace Solitaire
         public override string getTitle()
             {
             return "FreeCell";
+            }
+
+
+        public override GameKey getGameKey()
+            {
+            return GameKey.freeCell;
             }
         }
     }
