@@ -202,7 +202,22 @@ namespace Solitaire
 
         protected override void checkGameEnd()
             {
-            
+            this.sendCardsToFoundation();
+
+            int cardCount = this.cards.Count;
+            int foundationCount = 0;
+
+            foreach( var foundation in this.foundations )
+                {
+                foundationCount += foundation.Children.Count;
+                }
+
+                // game has ended
+            if ( cardCount == foundationCount )
+                {
+                MessageBox.Show( "You Win!", "Game Over!", MessageBoxButton.OK );
+                this.startGame();
+                }
             }
 
 
@@ -244,9 +259,62 @@ namespace Solitaire
             }
 
 
+        /**
+         * Try to send the card to an empty 'Cell'.
+         */
         protected override void doubleClick( Card card, Container parent )
             {
-            
+            foreach( var cell in this.cells )
+                {
+                if ( cell.isEmpty() )
+                    {
+                    this.moveCards( new List<Card> { card }, cell );
+                    this.checkGameEnd();
+                    return;
+                    }
+                }
+            }
+
+
+        /**
+         * After each play, check if there are cards we can send directly to the foundation.
+         */
+        private void sendCardsToFoundation()
+            {
+            bool moved = false;
+
+            do
+                {
+                moved = false;
+
+                foreach( var cell in this.cells )
+                    {
+                    var cards = new List<Card>() { cell.getLast() };
+
+                    foreach( var foundation in this.foundations )
+                        {
+                        if ( foundation.canDrop( cards ) )
+                            {
+                            this.moveCards( cards, foundation );
+                            moved = true;
+                            }
+                        }
+                    }
+
+                foreach ( var tableau in this.tableaus )
+                    {
+                    var cards = new List<Card>() { tableau.getLast() };
+
+                    foreach( var foundation in this.foundations )
+                        {
+                        if ( foundation.canDrop( cards ) )
+                            {
+                            this.moveCards( cards, foundation );
+                            moved = true;
+                            }
+                        }
+                    }
+                } while( moved == true );
             }
         }
     }

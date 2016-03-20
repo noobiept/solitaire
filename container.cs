@@ -48,6 +48,12 @@ namespace Solitaire
             }
 
 
+        public bool isEmpty()
+            {
+            return this.Children.Count == 0;
+            }
+
+
         public void applyDropEffect()
             {
             this.Effect = this.dropEffect;

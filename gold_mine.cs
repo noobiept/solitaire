@@ -153,20 +153,20 @@ namespace Solitaire
             int cardCount = this.cards.Count;
             int foundationCount = 0;
 
-            foreach (var foundation in this.foundations)
+            foreach( var foundation in this.foundations )
                 {
                 foundationCount += foundation.Children.Count;
                 }
 
                 // game has ended
-            if (cardCount == foundationCount)
+            if ( cardCount == foundationCount )
                 {
                 this.timer.Stop();
 
-                var best = Data.oneMoreWin( this.secondsPassed );
+                var best = Data.oneMoreWin( this.secondsPassed );//HERE
                 var message = String.Format( "You Win!\nTime: {0}", Utilities.timeToString( (int) this.secondsPassed ) );
 
-                if (this.secondsPassed == best)
+                if ( this.secondsPassed == best )
                     {
                     message += "\nYou beat your best time!";
                     }
