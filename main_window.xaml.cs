@@ -10,7 +10,7 @@ namespace Solitaire
     {
     public enum GameKey
         {
-        goldMine, freeCell
+        goldMine, freeCell, klondike
         }
 
     public partial class MainWindow : Window
@@ -23,7 +23,7 @@ namespace Solitaire
             InitializeComponent();
 
             Data.load();
-            this.selectGame( typeof( FreeCell ) );
+            this.selectGame( typeof( Klondike ) );
             }
 
 

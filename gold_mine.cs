@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Timers;
-using System.Collections.Generic;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Controls;
+using System.Collections.Generic;
 
 
 namespace Solitaire
