@@ -93,6 +93,8 @@ namespace Solitaire
                     tableau.Children.Add( card );
                     }
 
+                tableau.getLast().showFront();
+
                 index += cardsPerTableau;
                 cardsPerTableau++;
                 }
@@ -117,20 +119,35 @@ namespace Solitaire
             {
             var count = this.stock.Children.Count;
 
-            for( int a = 0 ; a < 3 && count > 0 ; a++ )
+            // move all the cards from the waste back to the stock
+            if ( count == 0 )
                 {
-                int lastPosition = count - 1;
+                while( this.waste.Children.Count > 0 )
+                    {
+                    Card card = (Card) this.waste.Children[ 0 ];
+                    card.showBack();
 
-                var card = (Card) this.stock.Children[ lastPosition ];
-                this.stock.Children.RemoveAt( lastPosition );
-                this.waste.Children.Add( card );
-
-                card.showFront();
-
-                count = this.stock.Children.Count;
+                    this.waste.Children.Remove( card );
+                    this.stock.Children.Add( card );
+                    }
                 }
 
-            //this.updateStockLeft(); //HERE
+                // move 3 cards to the waste
+            else
+                {
+                for( int a = 0 ; a < 3 && count > 0 ; a++ )
+                    {
+                    int lastPosition = count - 1;
+
+                    var card = (Card) this.stock.Children[ lastPosition ];
+                    this.stock.Children.RemoveAt( lastPosition );
+                    this.waste.Children.Add( card );
+
+                    card.showFront();
+
+                    count = this.stock.Children.Count;
+                    }
+                }
             }
 
 
@@ -148,6 +165,24 @@ namespace Solitaire
 
         protected override bool isCardDraggable( Card card )
             {
+            var parent = card.Parent;
+
+            if ( parent is Stock )
+                {
+                return false;
+                }
+
+            // the last card is draggable, the others aren't
+            if( parent is Waste )
+                {
+                var last = this.waste.getLast();
+
+                if( last != null && last != card )
+                    {
+                    return false;
+                    }
+                }
+
             return true;
             }
 
