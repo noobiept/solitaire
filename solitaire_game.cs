@@ -229,7 +229,11 @@ namespace Solitaire
 
             if ( container != null )
                 {
+                var cards = this.drag.cardsDragging;
+                var originalContainer = this.drag.originalContainer;
+
                 this.moveCards( this.drag.cardsDragging, container );
+                this.cardsPlayed( cards, originalContainer, container );
                 this.checkGameEnd();
                 }
 
@@ -283,6 +287,7 @@ namespace Solitaire
         virtual public void addInfoElements( Panel container ) {}
         virtual public void removeMenuElements( Menu container ) {}
         virtual public void removeInfoElements( Panel container ) {}
+        virtual public void cardsPlayed( List<Card> cards, Container sourceContainer, Container destContainer ) {}
         
         abstract public void positionResizeElements();
         abstract protected bool isCardDraggable( Card card );

@@ -151,9 +151,41 @@ namespace Solitaire
             }
 
 
+        public override void cardsPlayed( List<Card> cards, Container sourceContainer, Container destContainer )
+            {
+            foreach( var tableau in this.tableaus )
+                {
+                tableau.getLast()?.showFront();
+                }
+            }
+
+
         protected override void checkGameEnd()
             {
-            throw new NotImplementedException();
+            int cardCount = this.cards.Count;
+            int foundationCount = 0;
+
+            foreach( var foundation in this.foundations )
+                {
+                foundationCount += foundation.Children.Count;
+                }
+
+            // game has ended
+            if( cardCount == foundationCount )
+                {
+                this.timer.Stop();
+
+                var best = Data.oneMoreWin( this.getGameKey(), this.secondsPassed );
+                var message = String.Format( "You Win!\nTime: {0}", Utilities.timeToString( (int) this.secondsPassed ) );
+
+                if( this.secondsPassed == best )
+                    {
+                    message += "\nYou beat your best time!";
+                    }
+
+                MessageBox.Show( message, "Game Over!", MessageBoxButton.OK );
+                this.startGame();
+                }
             }
 
 
@@ -181,6 +213,11 @@ namespace Solitaire
                     {
                     return false;
                     }
+                }
+
+            if ( !card.hasFrontSide() )
+                {
+                return false;
                 }
 
             return true;
@@ -279,9 +316,23 @@ namespace Solitaire
             }
 
 
+        /**
+         * Try to send the card to the foundation.
+         */
         protected override void doubleClick( Card card, Container parent )
             {
-            throw new NotImplementedException();
+            var cards = new List<Card>() { card };
+
+            foreach( var foundation in this.foundations )
+                {
+                if ( foundation.canDrop( cards ) )
+                    {
+                    this.moveCards( cards, foundation );
+                    this.cardsPlayed( null, null, null );
+                    this.checkGameEnd();
+                    return;
+                    }
+                }
             }
         }
     }

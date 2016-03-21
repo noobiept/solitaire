@@ -19,6 +19,7 @@ namespace Solitaire
         public readonly Suit suit;
         public readonly Value value;
         public readonly Color color;
+        public bool frontSide;
 
 
         public Card( Suit suit, Value value )
@@ -45,6 +46,7 @@ namespace Solitaire
             var mainResources = Application.Current.Resources;
 
             this.Source = (ImageSource) mainResources[ "card_back" ];
+            this.frontSide = false;
             }
 
 
@@ -54,6 +56,13 @@ namespace Solitaire
 
             var imageName = this.value.ToString() + "_of_" + this.suit.ToString();
             this.Source = (ImageSource) mainResources[ imageName ];
+            this.frontSide = true;
+            }
+
+
+        public bool hasFrontSide()
+            {
+            return this.frontSide;
             }
         }
     }
