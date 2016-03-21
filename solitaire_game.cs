@@ -257,7 +257,11 @@ namespace Solitaire
             {
             Application.Current.Dispatcher.Invoke( (() => {
                 var mainWindow = (MainWindow) Application.Current.MainWindow;
-                mainWindow.TimePassed.Text = "Time: " + Utilities.timeToString( (int) this.secondsPassed );
+
+                if ( mainWindow != null )
+                    {
+                    mainWindow.TimePassed.Text = "Time: " + Utilities.timeToString( (int) this.secondsPassed );
+                    }
                 }));
             }
 

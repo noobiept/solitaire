@@ -152,14 +152,23 @@ namespace Solitaire
             double top = verticalMargin;
             double left = horizontalMargin;
 
+                // first line
+                // 4 cells, 4 foundations and some space in-between
+            var inBetweenSpace = canvasWidth * 0.05;
+            var firstPositionWidth = (canvasWidth - inBetweenSpace) / 8;
+            var firstHorizontalMargin = (firstPositionWidth - cardWidth) / 2;
+
                 // 4 cells in the top-left
             foreach (Cell cell in this.cells)
                 {
                 Canvas.SetLeft( cell, left );
                 Canvas.SetTop( cell, top );
 
-                left += cardWidth + 2 * horizontalMargin;
+                left += cardWidth + 2 * firstHorizontalMargin;
                 }
+
+                // add space in-between
+            left += inBetweenSpace - 2 * firstHorizontalMargin;
 
                 // 4 foundations in the top-right
             foreach (Foundation foundation in this.foundations)
@@ -167,9 +176,10 @@ namespace Solitaire
                 Canvas.SetLeft( foundation, left );
                 Canvas.SetTop( foundation, top );
 
-                left += cardWidth + 2 * horizontalMargin;
+                left += cardWidth + 2 * firstHorizontalMargin;
                 }
 
+                // second line
                 // 8 tableaus in the 2nd line
             left = horizontalMargin;
             top += cardHeight + verticalMargin;

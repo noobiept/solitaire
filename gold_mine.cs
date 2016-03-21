@@ -75,9 +75,9 @@ namespace Solitaire
             button.Click += this.toFoundationClick;
 
             container.Items.Add( button );
-
             this.toFoundation = button;
             }
+
 
         public override void removeMenuElements( Menu container )
             {

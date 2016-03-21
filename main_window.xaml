@@ -10,6 +10,16 @@
         MinWidth="600" MinHeight="400"
         SizeChanged="onSizeChange" StateChanged="onStateChange"
         Closing="onWindowClosing">
+    <Window.Resources>
+        <LinearGradientBrush x:Key="MenuBackgroundColor" StartPoint="0,0" EndPoint="0,1">
+            <GradientStopCollection>
+                <GradientStop Color="#FFF6F6F6" Offset="0" />
+                <GradientStop Color="#E4E1E1" Offset="0.25" />
+                <GradientStop Color="#E4E1E1" Offset="0.75" />
+                <GradientStop Color="#FFF6F6F6" Offset="1" />
+            </GradientStopCollection>
+        </LinearGradientBrush>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="25" />
@@ -17,7 +27,7 @@
             <RowDefinition Height="25" />
         </Grid.RowDefinitions>
         
-        <Menu Name="MainMenu" Grid.Row="0">
+        <Menu Name="MainMenu" Grid.Row="0" Background="{StaticResource MenuBackgroundColor}">
             <MenuItem Header="_Select Game">
                 <MenuItem Header="_FreeCell" Click="selectFreeCell" />
                 <MenuItem Header="_Gold Mine" Click="selectGoldMine" />
@@ -30,7 +40,7 @@
         
         <Canvas Name="MainCanvas" Background="#004F0F" Grid.Row="1" />
         
-        <DockPanel Name="Info" Grid.Row="2">
+        <DockPanel Name="Info" Grid.Row="2" Background="{StaticResource MenuBackgroundColor}">
             <TextBlock Margin="5" Name="TimePassed">Time: 0s</TextBlock>
         </DockPanel>
     </Grid>
