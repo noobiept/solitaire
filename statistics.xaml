@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="Statistics" 
         Height="150" Width="250"
+        ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         Background="LightGray">
     <Grid Margin="5">

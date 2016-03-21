@@ -45,7 +45,7 @@ namespace Solitaire
             var top = Math.Max( one.y, two.y );
 
                 // if there's an intersection
-            if (left < right && bottom > top)
+            if ( left < right && bottom > top )
                 {
                 return (right - left) * (bottom - top);
                 }

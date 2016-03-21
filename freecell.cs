@@ -73,13 +73,13 @@ namespace Solitaire
                 {
                 var parent = card.Parent as Panel;
 
-                if (parent != null)
+                if ( parent != null )
                     {
                     parent.Children.Remove( card );
                     }
                 }
 
-            if (shuffle == true)
+            if ( shuffle == true )
                 {
                 Utilities.shuffle( this.cards );
                 }
@@ -116,7 +116,7 @@ namespace Solitaire
             var cardHeight = positionHeight * 0.9;
             var cardWidth = cardHeight * Card.Ratio;
 
-            if (cardWidth > availableCardWidth)
+            if ( cardWidth > availableCardWidth )
                 {
                 cardWidth = availableCardWidth;
                 cardHeight = cardWidth / Card.Ratio;
@@ -305,7 +305,7 @@ namespace Solitaire
                         }
                     }
 
-                foreach ( var tableau in this.tableaus )
+                foreach( var tableau in this.tableaus )
                     {
                     var cards = new List<Card>() { tableau.getLast() };
 

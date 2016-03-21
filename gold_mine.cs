@@ -124,13 +124,13 @@ namespace Solitaire
                 {
                 var parent = card.Parent as Panel;
 
-                if (parent != null)
+                if ( parent != null )
                     {
                     parent.Children.Remove( card );
                     }
                 }
 
-            if (shuffle == true)
+            if ( shuffle == true )
                 {
                 Utilities.shuffle( this.cards );
                 }
@@ -222,7 +222,7 @@ namespace Solitaire
 
             foreach (var foundation in this.foundations)
                 {
-                if (foundation.canDrop( cards ))
+                if ( foundation.canDrop( cards ) )
                     {
                     this.moveCards( cards, foundation );
                     this.checkGameEnd();
@@ -336,7 +336,7 @@ namespace Solitaire
                 }
 
                 // the last card is draggable, the others aren't
-            if (parent is Waste)
+            if ( parent is Waste )
                 {
                 var last = this.waste.getLast();
 
@@ -384,7 +384,7 @@ namespace Solitaire
                     }
                 }
 
-            while (moved == true);
+            while( moved == true );
             }
 
 

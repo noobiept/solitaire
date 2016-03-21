@@ -118,7 +118,7 @@ namespace Solitaire
          */
         protected void moveCards( List<Card> cards, Container container )
             {
-            if (this.drag.highlightedContainer != null)
+            if ( this.drag.highlightedContainer != null )
                 {
                 this.drag.highlightedContainer.removeDropEffect();
                 this.drag.highlightedContainer = null;
@@ -149,13 +149,13 @@ namespace Solitaire
 
             var container = this.collisionDetection( cards );
 
-            if (this.drag.highlightedContainer != null)
+            if ( this.drag.highlightedContainer != null )
                 {
                 this.drag.highlightedContainer.removeDropEffect();
                 this.drag.highlightedContainer = null;
                 }
 
-            if (container != null)
+            if ( container != null )
                 {
                 container.applyDropEffect();
 
@@ -203,7 +203,7 @@ namespace Solitaire
 
         protected void onMouseMove( object sender, MouseEventArgs e )
             {
-            if (this.drag.isDragging)
+            if ( this.drag.isDragging )
                 {
                 if (e.LeftButton == MouseButtonState.Released)
                     {
