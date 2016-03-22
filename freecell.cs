@@ -239,8 +239,7 @@ namespace Solitaire
                 {
                 if( cell.isEmpty() )
                     {
-                    this.moveCards( new List<Card> { card }, cell );
-                    this.checkGameEnd();
+                    this.cardsPlayed( new List<Card> { card }, null, cell );
                     return;
                     }
                 }

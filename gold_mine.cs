@@ -194,8 +194,7 @@ namespace Solitaire
                 {
                 if( foundation.canDrop( cards ) )
                     {
-                    this.moveCards( cards, foundation );
-                    this.checkGameEnd();
+                    this.cardsPlayed( cards, null, foundation );
                     return true;
                     }
                 }

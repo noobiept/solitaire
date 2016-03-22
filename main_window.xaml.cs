@@ -174,5 +174,11 @@ namespace Solitaire
             {
             selectGame( typeof( GoldMine ) );
             }
+
+
+        private void selectKlondike( object sender, RoutedEventArgs e )
+            {
+            selectGame( typeof( Klondike ) );
+            }
         }
     }

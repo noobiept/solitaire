@@ -146,6 +146,8 @@ namespace Solitaire
 
         public override void cardsPlayed( List<Card> cards, Container sourceContainer, Container destContainer )
             {
+            base.cardsPlayed( cards, sourceContainer, destContainer );
+
             foreach( var tableau in this.tableaus )
                 {
                 tableau.getLast()?.showFront();
@@ -297,9 +299,7 @@ namespace Solitaire
                 {
                 if( foundation.canDrop( cards ) )
                     {
-                    this.moveCards( cards, foundation );
-                    this.cardsPlayed( null, null, null );
-                    this.checkGameEnd();
+                    this.cardsPlayed( cards, null, foundation );
                     return;
                     }
                 }

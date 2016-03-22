@@ -26,20 +26,21 @@
             <RowDefinition />
             <RowDefinition Height="25" />
         </Grid.RowDefinitions>
-        
+
         <Menu Name="MainMenu" Grid.Row="0" Background="{StaticResource MenuBackgroundColor}">
             <MenuItem Header="_Select Game">
                 <MenuItem Header="_FreeCell" Click="selectFreeCell" />
                 <MenuItem Header="_Gold Mine" Click="selectGoldMine" />
+                <MenuItem Header="_Klondike" Click="selectKlondike" />
             </MenuItem>
             <MenuItem Header="_New" Click="newGameClick" ToolTip="ctrl + n"></MenuItem>
             <MenuItem Header="_Restart" Click="restartSameGameClick" ToolTip="ctrl + r"></MenuItem>
             <MenuItem Header="_Statistics" Click="openStatisticsWindow" ToolTip="ctrl + s"></MenuItem>
             <MenuItem Header="_About" Click="openAboutPage" ToolTip="ctrl + a"></MenuItem>
         </Menu>
-        
+
         <Canvas Name="MainCanvas" Background="#004F0F" Grid.Row="1" />
-        
+
         <DockPanel Name="Info" Grid.Row="2" Background="{StaticResource MenuBackgroundColor}">
             <TextBlock Margin="5" Name="TimePassed">Time: 0s</TextBlock>
         </DockPanel>
