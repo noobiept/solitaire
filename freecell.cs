@@ -9,12 +9,6 @@ namespace Solitaire
     {
     class FreeCell : SolitaireGame
         {
-        private readonly List<Foundation> foundations = new List<Foundation>();
-        private readonly List<Cell> cells = new List<Cell>();
-        private readonly List<Tableau> tableaus = new List<Tableau>();
-        private readonly List<Card> cards = new List<Card>();
-
-
         public FreeCell( Canvas mainCanvas ) : base( mainCanvas )
             {
             for (int a = 0 ; a < 4 ; a++)
@@ -194,31 +188,7 @@ namespace Solitaire
         protected override void checkGameEnd()
             {
             this.sendCardsToFoundation();
-
-            int cardCount = this.cards.Count;
-            int foundationCount = 0;
-
-            foreach( var foundation in this.foundations )
-                {
-                foundationCount += foundation.Children.Count;
-                }
-
-                // game has ended
-            if ( cardCount == foundationCount )
-                {
-                this.timer.Stop();
-
-                var best = Data.oneMoreWin( this.getGameKey(), this.secondsPassed );
-                var message = String.Format( "You Win!\nTime: {0}", Utilities.timeToString( (int) this.secondsPassed ) );
-
-                if ( this.secondsPassed == best )
-                    {
-                    message += "\nYou beat your best time!";
-                    }
-
-                MessageBox.Show( message, "Game Over!", MessageBoxButton.OK );
-                this.startGame();
-                }
+            this.checkGameEndFoundation();
             }
 
 

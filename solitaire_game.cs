@@ -28,6 +28,13 @@ namespace Solitaire
         private Drag drag;
         public CommandBinding[] shortcuts;
 
+        protected readonly List<Foundation> foundations = new List<Foundation>();
+        protected readonly List<Cell> cells = new List<Cell>();
+        protected readonly List<Tableau> tableaus = new List<Tableau>();
+        protected readonly List<Card> cards = new List<Card>();
+        protected Stock stock;
+        protected Waste waste;
+
 
         public SolitaireGame( Canvas canvas )
             {
@@ -280,6 +287,38 @@ namespace Solitaire
         virtual public void clear()
             {
             this.timer.Stop();
+            }
+
+
+        /**
+         * When the game ending condition is having all cards in the foundation.
+         */
+        virtual protected void checkGameEndFoundation()
+            {
+            int cardCount = this.cards.Count;
+            int foundationCount = 0;
+
+            foreach( var foundation in this.foundations )
+                {
+                foundationCount += foundation.Children.Count;
+                }
+
+            // game has ended
+            if( cardCount == foundationCount )
+                {
+                this.timer.Stop();
+
+                var best = Data.oneMoreWin( this.getGameKey(), this.secondsPassed );
+                var message = String.Format( "You Win!\nTime: {0}", Utilities.timeToString( (int) this.secondsPassed ) );
+
+                if( this.secondsPassed == best )
+                    {
+                    message += "\nYou beat your best time!";
+                    }
+
+                MessageBox.Show( message, "Game Over!", MessageBoxButton.OK );
+                this.startGame();
+                }
             }
 
 

@@ -11,13 +11,7 @@ namespace Solitaire
         {
         private MenuItem toFoundation;
         private TextBlock stockLeft;
-
-        private readonly List<Card> cards = new List<Card>();
-        private readonly Stock stock;
-        private readonly Waste waste;
-        private readonly List<Foundation> foundations = new List<Foundation>();
-        private readonly List<Tableau> tableaus = new List<Tableau>();
-        
+       
 
         public GoldMine( Canvas mainCanvas ) : base( mainCanvas )
             {
@@ -151,30 +145,7 @@ namespace Solitaire
          */
         protected override void checkGameEnd()
             {
-            int cardCount = this.cards.Count;
-            int foundationCount = 0;
-
-            foreach( var foundation in this.foundations )
-                {
-                foundationCount += foundation.Children.Count;
-                }
-
-                // game has ended
-            if ( cardCount == foundationCount )
-                {
-                this.timer.Stop();
-
-                var best = Data.oneMoreWin( this.getGameKey(), this.secondsPassed );
-                var message = String.Format( "You Win!\nTime: {0}", Utilities.timeToString( (int) this.secondsPassed ) );
-
-                if ( this.secondsPassed == best )
-                    {
-                    message += "\nYou beat your best time!";
-                    }
-
-                MessageBox.Show( message, "Game Over!", MessageBoxButton.OK );
-                this.startGame();
-                }
+            this.checkGameEndFoundation();
             }
 
 

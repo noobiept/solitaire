@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Solitaire
     {
-    class Waste : Container
+    public class Waste : Container
         {
         protected override Size ArrangeOverride( Size finalSize )
             {

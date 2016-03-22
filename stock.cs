@@ -5,7 +5,7 @@ using System.Windows;
 
 namespace Solitaire
     {
-    class Stock : Container
+    public class Stock : Container
         {
         protected override Size ArrangeOverride( Size finalSize )
             {

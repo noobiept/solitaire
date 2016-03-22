@@ -8,7 +8,7 @@ namespace Solitaire
     /**
      * A cell can only hold one card.
      */
-    class Cell : Container
+    public class Cell : Container
         {
         protected override Size ArrangeOverride( Size finalSize )
             {
