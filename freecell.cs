@@ -337,5 +337,11 @@ namespace Solitaire
             {
             return GameKey.freeCell;
             }
+
+
+        public override string getHelpText()
+            {
+            return @"FreeCell help text";
+            }
         }
     }

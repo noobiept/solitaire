@@ -389,5 +389,6 @@ namespace Solitaire
         abstract protected void doubleClick( Card card, Container parent );
         abstract public string getTitle();
         abstract public GameKey getGameKey();
+        abstract public string getHelpText();
         }
     }

@@ -305,5 +305,11 @@ namespace Solitaire
             {
             return GameKey.goldMine;
             }
+
+
+        public override string getHelpText()
+            {
+            return @"Gold Mine help text";
+            }
         }
     }

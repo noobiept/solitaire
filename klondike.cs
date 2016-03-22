@@ -352,5 +352,11 @@ namespace Solitaire
 
             return base.canDrop( cards, container );
             }
+
+
+        public override string getHelpText()
+            {
+            return @"Klondike help text";
+            }
         }
     }

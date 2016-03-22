@@ -71,6 +71,9 @@
     <Compile Include="data.cs" />
     <Compile Include="freecell.cs" />
     <Compile Include="gold_mine.cs" />
+    <Compile Include="help.xaml.cs">
+      <DependentUpon>help.xaml</DependentUpon>
+    </Compile>
     <Compile Include="klondike.cs" />
     <Compile Include="solitaire_game.cs" />
     <Compile Include="statistics.xaml.cs">
@@ -80,6 +83,10 @@
     <Compile Include="tableau.cs" />
     <Compile Include="utilities.cs" />
     <Compile Include="waste.cs" />
+    <Page Include="help.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="main_window.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

@@ -95,6 +95,13 @@ namespace Solitaire
             }
 
 
+        private void openHelpWindow( object sender, RoutedEventArgs e )
+            {
+            var help = new Help( this.currentGame );
+            help.ShowDialog();
+            }
+
+
         private void openAboutPage( object sender, RoutedEventArgs e )
             {
             System.Diagnostics.Process.Start( "https://bitbucket.org/drk4/gold_mine" );
