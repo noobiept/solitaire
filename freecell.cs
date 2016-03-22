@@ -335,7 +335,7 @@ namespace Solitaire
 
         public override GameKey getGameKey()
             {
-            return GameKey.freeCell;
+            return GameKey.FreeCell;
             }
 
 

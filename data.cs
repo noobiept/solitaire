@@ -19,6 +19,7 @@ namespace Solitaire
             {
             public Dictionary<GameKey, GameData> data;
 
+            public GameKey selectedGame;
             public int version;         // version of the loaded data structure (useful to compare with the application version, when updating from different versions that have incompatible changes)
             }
 
@@ -62,6 +63,7 @@ namespace Solitaire
             {
             Data.DATA = new AppData {
                 data = new Dictionary<GameKey, GameData>(),
+                selectedGame = GameKey.FreeCell,
                 version = Data.DATA_VERSION
                 };
             }
@@ -126,6 +128,24 @@ namespace Solitaire
                 }
 
             return Data.DATA.data[ key ];
+            }
+
+
+        static public GameKey getSelectedGame()
+            {
+            return Data.DATA.selectedGame;
+            }
+
+
+        static public void setSelectedGame( GameKey key )
+            {
+            if( key == Data.DATA.selectedGame )
+                {
+                return;
+                }
+
+            Data.DATA.selectedGame = key;
+            Data.save();
             }
         }
     }

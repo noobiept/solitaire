@@ -303,7 +303,7 @@ namespace Solitaire
 
         public override GameKey getGameKey()
             {
-            return GameKey.goldMine;
+            return GameKey.GoldMine;
             }
 
 

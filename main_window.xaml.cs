@@ -5,9 +5,10 @@ using System.Windows.Input;
 
 namespace Solitaire
     {
+    // needs to be the same as the class name
     public enum GameKey
         {
-        goldMine, freeCell, klondike
+        GoldMine, FreeCell, Klondike
         }
 
     public partial class MainWindow : Window
@@ -20,7 +21,10 @@ namespace Solitaire
             InitializeComponent();
 
             Data.load();
-            this.selectGame( typeof( Klondike ) );
+            var selectedGame = Data.getSelectedGame();
+            Type gameType = Type.GetType( "Solitaire." + selectedGame.ToString() );
+
+            this.selectGame( gameType );
             }
 
 
@@ -42,6 +46,8 @@ namespace Solitaire
             this.currentGame.addInfoElements( this.Info );
             this.currentGame.positionResizeElements();
             this.Title = this.currentGame.getTitle();
+
+            Data.setSelectedGame( this.currentGame.getGameKey() );
             }
 
 

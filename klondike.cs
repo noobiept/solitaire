@@ -201,7 +201,7 @@ namespace Solitaire
 
         public override GameKey getGameKey()
             {
-            return GameKey.klondike;
+            return GameKey.Klondike;
             }
 
 
