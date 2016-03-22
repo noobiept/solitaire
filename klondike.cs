@@ -351,5 +351,22 @@ namespace Solitaire
                 new CommandBinding( moveToFoundation, this.toFoundationClick )
                 };
             }
+
+
+        /**
+         * Add extra rule, only a king can be sent to an empty tableau.
+         */
+        protected override bool canDrop( List<Card> cards, Container container )
+            {
+            if( container is Tableau )
+                {
+                if( container.isEmpty() && cards[ 0 ].value != Card.Value.king )
+                    {
+                    return false;
+                    }
+                }
+
+            return base.canDrop( cards, container );
+            }
         }
     }
