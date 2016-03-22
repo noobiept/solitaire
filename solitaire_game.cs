@@ -323,6 +323,62 @@ namespace Solitaire
             }
 
 
+        /**
+         * Try to send the last card of a container to a foundation.
+         */
+        protected bool sendToFoundation( Container container )
+            {
+            var last = container.getLast();
+
+            // need to have a list to work with the 'canDrop' function
+            var cards = new List<Card>();
+            cards.Add( last );
+
+            foreach( var foundation in this.foundations )
+                {
+                if( foundation.canDrop( cards ) )
+                    {
+                    this.cardsPlayed( cards, null, foundation );
+                    return true;
+                    }
+                }
+
+            return false;
+            }
+
+
+        /**
+         * Tries to move all the possible cards from the waste/tableau to the foundation.
+         * Useful for the ending of a game, so that you don't have to manually move all the last cards.
+         */
+        protected void sendAllToFoundation()
+            {
+            // if a card was moved to the foundation
+            // we keep checking until there's no more possible moves
+            bool moved = false;
+
+            do
+                {
+                moved = false;
+
+                if( this.sendToFoundation( this.waste ) )
+                    {
+                    moved = true;
+                    }
+
+                foreach( var tableau in this.tableaus )
+                    {
+                    if( this.sendToFoundation( tableau ) )
+                        {
+                        moved = true;
+                        }
+                    }
+                }
+
+            while( moved == true );
+            }
+
+
         virtual public void addMenuElements( Menu container ) { }
         virtual public void addInfoElements( Panel container ) { }
         virtual public void removeMenuElements( Menu container ) { }

@@ -9,6 +9,9 @@ namespace Solitaire
     {
     class Klondike : SolitaireGame
         {
+        private MenuItem toFoundation;
+
+
         public Klondike( Canvas mainCanvas ) : base( mainCanvas )
             {
             this.stock = new Stock();
@@ -50,6 +53,7 @@ namespace Solitaire
                     }
                 }
 
+            this.initKeyboardShortcuts();
             this.startGame();
             }
 
@@ -303,6 +307,49 @@ namespace Solitaire
                     return;
                     }
                 }
+            }
+
+
+        public override void addMenuElements( Menu container )
+            {
+            var toFoundation = new MenuItem();
+            toFoundation.ToolTip = "ctrl + f";
+            toFoundation.Header = "To _Foundation";
+            toFoundation.Click += this.toFoundationClick;
+
+            container.Items.Add( toFoundation );
+            this.toFoundation = toFoundation;
+            }
+
+
+        public override void removeMenuElements( Menu container )
+            {
+            container.Items.Remove( this.toFoundation );
+            }
+
+
+        /**
+         * Tries to move all the possible cards from the waste/tableau to the foundation.
+         * Useful for the ending of a game, so that you don't have to manually move all the last cards.
+         */
+        private void toFoundationClick( object sender, RoutedEventArgs e )
+            {
+            this.sendAllToFoundation();
+            }
+
+
+        /**
+         * Return an array of game specific keyboard shortcuts (to be added to the main window).
+         */
+        public void initKeyboardShortcuts()
+            {
+            // ctrl + f -- try to move all the possible cards to the foundation
+            var moveToFoundation = new RoutedCommand();
+            moveToFoundation.InputGestures.Add( new KeyGesture( Key.F, ModifierKeys.Control ) );
+
+            this.shortcuts = new CommandBinding[] {
+                new CommandBinding( moveToFoundation, this.toFoundationClick )
+                };
             }
         }
     }

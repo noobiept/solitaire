@@ -180,30 +180,6 @@ namespace Solitaire
 
 
         /**
-         * Try to send the last card of a container to a foundation.
-         */
-        private bool sendToFoundation( Container container )
-            {
-            var last = container.getLast();
-
-            // need to have a list to work with the 'canDrop' function
-            var cards = new List<Card>();
-            cards.Add( last );
-
-            foreach( var foundation in this.foundations )
-                {
-                if( foundation.canDrop( cards ) )
-                    {
-                    this.cardsPlayed( cards, null, foundation );
-                    return true;
-                    }
-                }
-
-            return false;
-            }
-
-
-        /**
          * Position/resize all the elements in the right place (given the current width/height of the canvas).
          */
         public override void positionResizeElements()
@@ -331,29 +307,7 @@ namespace Solitaire
          */
         private void toFoundationClick( object sender, RoutedEventArgs e )
             {
-            // if a card was moved to the foundation
-            // we keep checking until there's no more possible moves
-            bool moved = false;
-
-            do
-                {
-                moved = false;
-
-                if( this.sendToFoundation( this.waste ) )
-                    {
-                    moved = true;
-                    }
-
-                foreach( var tableau in this.tableaus )
-                    {
-                    if( this.sendToFoundation( tableau ) )
-                        {
-                        moved = true;
-                        }
-                    }
-                }
-
-            while( moved == true );
+            this.sendAllToFoundation();
             }
 
 
