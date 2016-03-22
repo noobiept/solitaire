@@ -13,14 +13,14 @@ namespace Solitaire
             double step = Math.Round( finalSize.Width * 0.3 );
             int count = this.InternalChildren.Count;
 
-            for (int a = 0 ; a < count ; a++)
+            for( int a = 0 ; a < count ; a++ )
                 {
                 var child = this.InternalChildren[ a ];
 
                 child.Arrange( new Rect( new Point( x, 0 ), child.DesiredSize ) );
 
-                    // the last 3 cards are place with a x-offset, the others are stacked in each other
-                if ( a >= count - 3 )
+                // the last 3 cards are place with a x-offset, the others are stacked in each other
+                if( a >= count - 3 )
                     {
                     x += step;
                     }

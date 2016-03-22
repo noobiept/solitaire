@@ -24,11 +24,11 @@ namespace Solitaire
 
         static public AppData DATA;
 
-        #if DEBUG
-            const string FILE_NAME = "data_debug.txt";
-        #else
-            const string FILE_NAME = "data.txt";
-        #endif
+#if DEBUG
+        const string FILE_NAME = "data_debug.txt";
+#else
+        const string FILE_NAME = "data.txt";
+#endif
         static string DATA_PATH = Path.Combine( Environment.GetFolderPath( Environment.SpecialFolder.LocalApplicationData ), "solitaire", Data.FILE_NAME );
 
         const int DATA_VERSION = 1;  // current version of the application data
@@ -45,7 +45,7 @@ namespace Solitaire
 
                 Data.DATA = JsonConvert.DeserializeObject<AppData>( jsonData );
 
-                if ( Data.DATA.version != Data.DATA_VERSION )
+                if( Data.DATA.version != Data.DATA_VERSION )
                     {
                     Data.update();
                     }
@@ -61,8 +61,8 @@ namespace Solitaire
         static private void loadDefaults()
             {
             Data.DATA = new AppData {
-                    data = new Dictionary<GameKey, GameData>(),
-                    version = Data.DATA_VERSION
+                data = new Dictionary<GameKey, GameData>(),
+                version = Data.DATA_VERSION
                 };
             }
 
@@ -72,15 +72,15 @@ namespace Solitaire
          */
         static private void update()
             {
-                // no updates yet
+            // no updates yet
             }
-        
+
 
         static private void save()
             {
             string dataJson = JsonConvert.SerializeObject( Data.DATA );
 
-                // make sure there's a directory created (otherwise the stream writer call will fail)
+            // make sure there's a directory created (otherwise the stream writer call will fail)
             System.IO.Directory.CreateDirectory( Path.GetDirectoryName( Data.DATA_PATH ) );
             StreamWriter file = new StreamWriter( Data.DATA_PATH, false, Encoding.UTF8 );
 
@@ -94,14 +94,14 @@ namespace Solitaire
             var gameData = Data.get( gameKey );
 
             gameData.totalWins++;
-            
-                // first win
-            if ( gameData.bestTime == 0 )
+
+            // first win
+            if( gameData.bestTime == 0 )
                 {
                 gameData.bestTime = time;
                 }
 
-            else if ( time < gameData.bestTime )
+            else if( time < gameData.bestTime )
                 {
                 gameData.bestTime = time;
                 }
@@ -120,7 +120,7 @@ namespace Solitaire
 
         static public GameData get( GameKey key )
             {
-            if ( !Data.DATA.data.ContainsKey( key ) )
+            if( !Data.DATA.data.ContainsKey( key ) )
                 {
                 Data.DATA.data[ key ] = new GameData { bestTime = 0, totalWins = 0 };
                 }

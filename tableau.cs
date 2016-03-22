@@ -17,12 +17,12 @@ namespace Solitaire
 
             foreach( Card card in this.Children )
                 {
-                if ( card == refCard )
+                if( card == refCard )
                     {
                     reached = true;
                     }
 
-                if ( reached )
+                if( reached )
                     {
                     cardsDragging.Add( card );
                     }
@@ -36,21 +36,21 @@ namespace Solitaire
         public override Utilities.Box getDimensionBox()
             {
             var box = new Utilities.Box {
-                    x = Canvas.GetLeft( this ),
-                    y = Canvas.GetTop( this ),
-                    width = this.ActualWidth,
-                    height = this.ActualHeight
+                x = Canvas.GetLeft( this ),
+                y = Canvas.GetTop( this ),
+                width = this.ActualWidth,
+                height = this.ActualHeight
                 };
 
             var lastCard = this.getLast();
 
-                // the last card may be outside the container dimensions, so need to consider that
-            if ( lastCard != null )
+            // the last card may be outside the container dimensions, so need to consider that
+            if( lastCard != null )
                 {
                 var point = lastCard.TranslatePoint( new Point( 0, 0 ), this );
                 var combinedHeight = point.Y + lastCard.ActualHeight;
 
-                if ( combinedHeight > box.height )
+                if( combinedHeight > box.height )
                     {
                     box.height = combinedHeight;
                     }
@@ -67,11 +67,11 @@ namespace Solitaire
             {
             var lastTableau = this.getLast();
 
-            if ( lastTableau != null )
+            if( lastTableau != null )
                 {
                 Card firstDrag = cards[ 0 ];
 
-                if ( lastTableau.value - 1 == firstDrag.value &&
+                if( lastTableau.value - 1 == firstDrag.value &&
                      lastTableau.color != firstDrag.color )
                     {
                     return true;
@@ -83,7 +83,7 @@ namespace Solitaire
                     }
                 }
 
-                // its empty, so any card is valid
+            // its empty, so any card is valid
             else
                 {
                 return true;
@@ -99,8 +99,8 @@ namespace Solitaire
             int count = this.InternalChildren.Count;
             double neededHeight = count * step;
 
-                // if there's no space available for the default step, then calculate the possible step
-            if ( neededHeight > availableHeight )
+            // if there's no space available for the default step, then calculate the possible step
+            if( neededHeight > availableHeight )
                 {
                 step = Math.Floor( availableHeight / count );
                 }

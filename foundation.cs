@@ -14,27 +14,27 @@ namespace Solitaire
          */
         public override bool canDrop( List<Card> cards )
             {
-            if ( cards.Count == 1 )
+            if( cards.Count == 1 )
                 {
                 var card = cards[ 0 ];
 
-                if ( card == null )
+                if( card == null )
                     {
                     return false;
                     }
 
                 var last = this.getLast();
 
-                if ( last != null )
+                if( last != null )
                     {
-                    if ( card.value == last.value + 1 && 
+                    if( card.value == last.value + 1 &&
                          card.suit == last.suit )
                         {
                         return true;
                         }
                     }
 
-                else if ( card.value == Card.Value.ace )
+                else if( card.value == Card.Value.ace )
                     {
                     return true;
                     }

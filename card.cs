@@ -27,7 +27,7 @@ namespace Solitaire
             this.suit = suit;
             this.value = value;
 
-            if ( suit == Suit.clubs || suit == Suit.spades )
+            if( suit == Suit.clubs || suit == Suit.spades )
                 {
                 this.color = Color.black;
                 }

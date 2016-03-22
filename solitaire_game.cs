@@ -10,7 +10,7 @@ namespace Solitaire
     {
     public abstract class SolitaireGame
         {
-            // data use for the drag and drop operation of cards
+        // data use for the drag and drop operation of cards
         public struct Drag
             {
             public bool isDragging;
@@ -64,8 +64,7 @@ namespace Solitaire
         private Utilities.Box cardsDimension( List<Card> cards )
             {
             var firstCard = cards[ 0 ];
-            return new Utilities.Box
-                {
+            return new Utilities.Box {
                 x = Canvas.GetLeft( firstCard ),
                 y = Canvas.GetTop( firstCard ),
                 width = firstCard.ActualWidth,
@@ -83,17 +82,17 @@ namespace Solitaire
             Container colliding = null;
             double collidingArea = 0;
 
-            for (var a = 0 ; a < this.droppableElements.Count ; a++)
+            for( var a = 0 ; a < this.droppableElements.Count ; a++ )
                 {
                 var container = this.droppableElements[ a ];
 
-                if ( this.canDrop( cards, container ) )
+                if( this.canDrop( cards, container ) )
                     {
                     var containerBox = container.getDimensionBox();
 
                     var area = Utilities.calculateIntersectionArea( cardsBox, containerBox );
 
-                    if ( area > collidingArea )
+                    if( area > collidingArea )
                         {
                         collidingArea = area;
                         colliding = container;
@@ -110,7 +109,7 @@ namespace Solitaire
          */
         protected virtual bool canDrop( List<Card> cards, Container container )
             {
-            if ( container != this.drag.originalContainer &&
+            if( container != this.drag.originalContainer &&
                 container.canDrop( cards ) )
                 {
                 return true;
@@ -125,13 +124,13 @@ namespace Solitaire
          */
         protected void moveCards( List<Card> cards, Container container )
             {
-            if ( this.drag.highlightedContainer != null )
+            if( this.drag.highlightedContainer != null )
                 {
                 this.drag.highlightedContainer.removeDropEffect();
                 this.drag.highlightedContainer = null;
                 }
 
-            foreach (Card card in cards)
+            foreach( Card card in cards )
                 {
                 var parent = card.Parent as Panel;
                 parent.Children.Remove( card );
@@ -142,13 +141,13 @@ namespace Solitaire
             this.drag.cardsDragging.Clear();
             this.drag.isDragging = false;
             }
-        
+
 
         private void positionCards( List<Card> cards, MouseEventArgs e )
             {
             var position = e.GetPosition( this.canvas );
 
-            for (int a = 0 ; a < cards.Count ; a++)
+            for( int a = 0 ; a < cards.Count ; a++ )
                 {
                 Canvas.SetLeft( cards[ a ], position.X - this.drag.clickPosition.X );
                 Canvas.SetTop( cards[ a ], position.Y - this.drag.clickPosition.Y + Drag.diff * a );
@@ -156,13 +155,13 @@ namespace Solitaire
 
             var container = this.collisionDetection( cards );
 
-            if ( this.drag.highlightedContainer != null )
+            if( this.drag.highlightedContainer != null )
                 {
                 this.drag.highlightedContainer.removeDropEffect();
                 this.drag.highlightedContainer = null;
                 }
 
-            if ( container != null )
+            if( container != null )
                 {
                 container.applyDropEffect();
 
@@ -176,18 +175,18 @@ namespace Solitaire
             var card = (Card) sender;
             var parent = card.Parent as Container;
 
-            if ( !this.isCardDraggable( card ) )
+            if( !this.isCardDraggable( card ) )
                 {
                 return;
                 }
 
-            if ( e.ClickCount == 2 )
+            if( e.ClickCount == 2 )
                 {
                 this.doubleClick( card, parent );
                 return;
                 }
 
-            if ( this.drag.isDragging == true )
+            if( this.drag.isDragging == true )
                 {
                 this.moveCards( this.drag.cardsDragging, this.drag.originalContainer );
                 return;
@@ -198,7 +197,7 @@ namespace Solitaire
             this.drag.originalContainer = parent;
             parent.dragCards( card, this.drag.cardsDragging );
 
-            foreach (Card dragCard in this.drag.cardsDragging)
+            foreach( Card dragCard in this.drag.cardsDragging )
                 {
                 parent.Children.Remove( dragCard );
                 this.canvas.Children.Add( dragCard );
@@ -210,9 +209,9 @@ namespace Solitaire
 
         protected void onMouseMove( object sender, MouseEventArgs e )
             {
-            if ( this.drag.isDragging )
+            if( this.drag.isDragging )
                 {
-                if (e.LeftButton == MouseButtonState.Released)
+                if( e.LeftButton == MouseButtonState.Released )
                     {
                     this.moveCards( this.drag.cardsDragging, this.drag.originalContainer );
                     }
@@ -227,14 +226,14 @@ namespace Solitaire
 
         protected void onMouseUp( object sender, MouseButtonEventArgs e )
             {
-            if ( !this.drag.isDragging )
+            if( !this.drag.isDragging )
                 {
                 return;
                 }
 
             var container = this.collisionDetection( this.drag.cardsDragging );
 
-            if ( container != null )
+            if( container != null )
                 {
                 var cards = this.drag.cardsDragging;
                 var originalContainer = this.drag.originalContainer;
@@ -244,7 +243,7 @@ namespace Solitaire
                 this.checkGameEnd();
                 }
 
-                // wasn't dropped on any container, so its not a valid drag operation. return to the original container
+            // wasn't dropped on any container, so its not a valid drag operation. return to the original container
             else
                 {
                 this.moveCards( this.drag.cardsDragging, this.drag.originalContainer );
@@ -269,11 +268,11 @@ namespace Solitaire
             Application.Current.Dispatcher.Invoke( (() => {
                 var mainWindow = (MainWindow) Application.Current.MainWindow;
 
-                if ( mainWindow != null )
+                if( mainWindow != null )
                     {
                     mainWindow.TimePassed.Text = "Time: " + Utilities.timeToString( (int) this.secondsPassed );
                     }
-                }));
+            }) );
             }
 
 
@@ -322,12 +321,12 @@ namespace Solitaire
             }
 
 
-        virtual public void addMenuElements( Menu container ) {}
-        virtual public void addInfoElements( Panel container ) {}
-        virtual public void removeMenuElements( Menu container ) {}
-        virtual public void removeInfoElements( Panel container ) {}
-        virtual public void cardsPlayed( List<Card> cards, Container sourceContainer, Container destContainer ) {}
-        
+        virtual public void addMenuElements( Menu container ) { }
+        virtual public void addInfoElements( Panel container ) { }
+        virtual public void removeMenuElements( Menu container ) { }
+        virtual public void removeInfoElements( Panel container ) { }
+        virtual public void cardsPlayed( List<Card> cards, Container sourceContainer, Container destContainer ) { }
+
         abstract public void positionResizeElements();
         abstract protected bool isCardDraggable( Card card );
         abstract protected void checkGameEnd();

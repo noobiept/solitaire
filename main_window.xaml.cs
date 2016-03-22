@@ -29,9 +29,9 @@ namespace Solitaire
 
         public void selectGame( Type gameType )
             {
-            if ( this.currentGame != null )
+            if( this.currentGame != null )
                 {
-                if ( this.currentGame.GetType() == gameType )
+                if( this.currentGame.GetType() == gameType )
                     {
                     this.currentGame.restart();
                     return;
@@ -67,9 +67,9 @@ namespace Solitaire
             {
             var shortcuts = this.currentGame.shortcuts;
 
-            if ( shortcuts != null )
+            if( shortcuts != null )
                 {
-                for (var a = 0 ; a < shortcuts.Length ; a++)
+                for( var a = 0 ; a < shortcuts.Length ; a++ )
                     {
                     this.CommandBindings.Add( shortcuts[ a ] );
                     }
@@ -81,9 +81,9 @@ namespace Solitaire
             {
             var shortcuts = this.currentGame.shortcuts;
 
-            if ( shortcuts != null )
+            if( shortcuts != null )
                 {
-                for (var a = 0 ; a < shortcuts.Length ; a++)
+                for( var a = 0 ; a < shortcuts.Length ; a++ )
                     {
                     this.CommandBindings.Remove( shortcuts[ a ] );
                     }
@@ -96,22 +96,22 @@ namespace Solitaire
          */
         private void setupGlobalShortcuts()
             {
-                // ctrl + n -- start a new game
+            // ctrl + n -- start a new game
             var newGame = new RoutedCommand();
             newGame.InputGestures.Add( new KeyGesture( Key.N, ModifierKeys.Control ) );
             this.CommandBindings.Add( new CommandBinding( newGame, this.newGameClick ) );
 
-                // ctrl + r -- restart the game
+            // ctrl + r -- restart the game
             var restart = new RoutedCommand();
             restart.InputGestures.Add( new KeyGesture( Key.R, ModifierKeys.Control ) );
             this.CommandBindings.Add( new CommandBinding( restart, this.restartSameGameClick ) );
 
-                // ctrl + s -- open the statistics window
+            // ctrl + s -- open the statistics window
             var openStatistics = new RoutedCommand();
             openStatistics.InputGestures.Add( new KeyGesture( Key.S, ModifierKeys.Control ) );
             this.CommandBindings.Add( new CommandBinding( openStatistics, this.openStatisticsWindow ) );
 
-                // ctrl + a -- open the about webpage
+            // ctrl + a -- open the about webpage
             var openAbout = new RoutedCommand();
             openAbout.InputGestures.Add( new KeyGesture( Key.A, ModifierKeys.Control ) );
             this.CommandBindings.Add( new CommandBinding( openAbout, this.openAboutPage ) );

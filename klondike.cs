@@ -78,7 +78,7 @@ namespace Solitaire
 
             foreach( var tableau in this.tableaus )
                 {
-                for (int a = index ; a < index + cardsPerTableau ; a++)
+                for( int a = index ; a < index + cardsPerTableau ; a++ )
                     {
                     var card = this.cards[ a ];
 
@@ -113,7 +113,7 @@ namespace Solitaire
             var count = this.stock.Children.Count;
 
             // move all the cards from the waste back to the stock
-            if ( count == 0 )
+            if( count == 0 )
                 {
                 while( this.waste.Children.Count > 0 )
                     {
@@ -125,7 +125,7 @@ namespace Solitaire
                     }
                 }
 
-                // move 3 cards to the waste
+            // move 3 cards to the waste
             else
                 {
                 for( int a = 0 ; a < 3 && count > 0 ; a++ )
@@ -169,7 +169,7 @@ namespace Solitaire
             {
             var parent = card.Parent;
 
-            if ( parent is Stock )
+            if( parent is Stock )
                 {
                 return false;
                 }
@@ -185,7 +185,7 @@ namespace Solitaire
                     }
                 }
 
-            if ( !card.hasFrontSide() )
+            if( !card.hasFrontSide() )
                 {
                 return false;
                 }
@@ -295,7 +295,7 @@ namespace Solitaire
 
             foreach( var foundation in this.foundations )
                 {
-                if ( foundation.canDrop( cards ) )
+                if( foundation.canDrop( cards ) )
                     {
                     this.moveCards( cards, foundation );
                     this.cardsPlayed( null, null, null );

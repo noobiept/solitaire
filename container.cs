@@ -17,8 +17,8 @@ namespace Solitaire
             this.Background = new SolidColorBrush( Color.FromRgb( 87, 129, 50 ) );
 
             this.dropEffect = new ColorToneEffect {
-                    DarkColor = Colors.Black,
-                    LightColor = Colors.CornflowerBlue
+                DarkColor = Colors.Black,
+                LightColor = Colors.CornflowerBlue
                 };
             }
 
@@ -29,17 +29,17 @@ namespace Solitaire
         public virtual Utilities.Box getDimensionBox()
             {
             return new Utilities.Box {
-                    x = Canvas.GetLeft( this ),
-                    y = Canvas.GetTop( this ),
-                    width = this.ActualWidth,
-                    height = this.ActualHeight
+                x = Canvas.GetLeft( this ),
+                y = Canvas.GetTop( this ),
+                width = this.ActualWidth,
+                height = this.ActualHeight
                 };
             }
 
 
         public Card getLast()
             {
-            if ( this.Children.Count > 0 )
+            if( this.Children.Count > 0 )
                 {
                 return (Card) this.Children[ this.Children.Count - 1 ];
                 }

@@ -11,11 +11,11 @@ namespace Solitaire
         {
         private MenuItem toFoundation;
         private TextBlock stockLeft;
-       
+
 
         public GoldMine( Canvas mainCanvas ) : base( mainCanvas )
             {
-                // initialize all the game elements
+            // initialize all the game elements
             this.stock = new Stock();
             this.stock.MouseUp += this.onStockMouseUp;
             this.canvas.Children.Add( this.stock );
@@ -23,7 +23,7 @@ namespace Solitaire
             this.waste = new Waste();
             this.canvas.Children.Add( this.waste );
 
-            for (int a = 0 ; a < 4 ; a++)
+            for( int a = 0 ; a < 4 ; a++ )
                 {
                 var foundation = new Foundation();
 
@@ -32,7 +32,7 @@ namespace Solitaire
                 this.foundations.Add( foundation );
                 }
 
-            for (int a = 0 ; a < 7 ; a++)
+            for( int a = 0 ; a < 7 ; a++ )
                 {
                 var tableau = new Tableau();
 
@@ -41,9 +41,9 @@ namespace Solitaire
                 this.tableaus.Add( tableau );
                 }
 
-            foreach (Card.Suit suit in Enum.GetValues( typeof( Card.Suit ) ))
+            foreach( Card.Suit suit in Enum.GetValues( typeof( Card.Suit ) ) )
                 {
-                foreach (Card.Value value in Enum.GetValues( typeof( Card.Value ) ))
+                foreach( Card.Value value in Enum.GetValues( typeof( Card.Value ) ) )
                     {
                     var card = new Card( suit, value );
 
@@ -100,7 +100,7 @@ namespace Solitaire
          */
         public void initKeyboardShortcuts()
             {
-                // ctrl + f -- try to move all the possible cards to the foundation
+            // ctrl + f -- try to move all the possible cards to the foundation
             var moveToFoundation = new RoutedCommand();
             moveToFoundation.InputGestures.Add( new KeyGesture( Key.F, ModifierKeys.Control ) );
 
@@ -110,26 +110,26 @@ namespace Solitaire
             }
 
 
-        public override void startGame( bool shuffle= true )
+        public override void startGame( bool shuffle = true )
             {
-                // disconnect the cards from their previous container
-            foreach (Card card in this.cards)
+            // disconnect the cards from their previous container
+            foreach( Card card in this.cards )
                 {
                 var parent = card.Parent as Panel;
 
-                if ( parent != null )
+                if( parent != null )
                     {
                     parent.Children.Remove( card );
                     }
                 }
 
-            if ( shuffle == true )
+            if( shuffle == true )
                 {
                 Utilities.shuffle( this.cards );
                 }
 
-                // add all the shuffled cards to the stock
-            foreach (Card card in this.cards)
+            // add all the shuffled cards to the stock
+            foreach( Card card in this.cards )
                 {
                 card.showBack();
                 this.stock.Children.Add( card );
@@ -156,7 +156,7 @@ namespace Solitaire
             {
             var count = this.stock.Children.Count;
 
-            for (int a = 0 ; a < 3 && count > 0 ; a++)
+            for( int a = 0 ; a < 3 && count > 0 ; a++ )
                 {
                 int lastPosition = count - 1;
 
@@ -190,9 +190,9 @@ namespace Solitaire
             var cards = new List<Card>();
             cards.Add( last );
 
-            foreach (var foundation in this.foundations)
+            foreach( var foundation in this.foundations )
                 {
-                if ( foundation.canDrop( cards ) )
+                if( foundation.canDrop( cards ) )
                     {
                     this.moveCards( cards, foundation );
                     this.checkGameEnd();
@@ -209,9 +209,9 @@ namespace Solitaire
          */
         public override void positionResizeElements()
             {
-                // the layout is a grid with 7 columns and 3 lines
-                // each position has space for a card + margin
-                // we calculate these values from the available window dimensions
+            // the layout is a grid with 7 columns and 3 lines
+            // each position has space for a card + margin
+            // we calculate these values from the available window dimensions
             var canvasWidth = this.canvas.ActualWidth;
             var canvasHeight = this.canvas.ActualHeight;
             var positionWidth = canvasWidth / 7;
@@ -221,7 +221,7 @@ namespace Solitaire
             var cardHeight = positionHeight * 0.9;
             var cardWidth = cardHeight * Card.Ratio;
 
-            if (cardWidth > availableCardWidth)
+            if( cardWidth > availableCardWidth )
                 {
                 cardWidth = availableCardWidth;
                 cardHeight = cardWidth / Card.Ratio;
@@ -230,19 +230,19 @@ namespace Solitaire
             var horizontalMargin = (positionWidth - cardWidth) / 2;   // divide by 2 since there's margin in both sides
             var verticalMargin = (positionHeight - cardHeight) / 2;
 
-                // resize all the elements
-            foreach (Card card in this.cards)
+            // resize all the elements
+            foreach( Card card in this.cards )
                 {
                 card.Height = cardHeight;   // the image will maintain the aspect ratio, so only need to set one
                 }
 
-            foreach (Tableau tableau in this.tableaus)
+            foreach( Tableau tableau in this.tableaus )
                 {
                 tableau.Width = cardWidth;
                 tableau.Height = cardHeight;
                 }
 
-            foreach (Foundation foundation in this.foundations)
+            foreach( Foundation foundation in this.foundations )
                 {
                 foundation.Width = cardWidth;
                 foundation.Height = cardHeight;
@@ -254,24 +254,24 @@ namespace Solitaire
             this.stock.Width = cardWidth;
             this.stock.Height = cardHeight;
 
-                // position all the elements
-                // add the stock element in the top left
+            // position all the elements
+            // add the stock element in the top left
             double left = horizontalMargin;
             double top = verticalMargin;
 
             Canvas.SetLeft( this.stock, left );
             Canvas.SetTop( this.stock, top );
 
-                // add the waste element next to the stock
+            // add the waste element next to the stock
             left += cardWidth + horizontalMargin * 2;
 
             Canvas.SetLeft( this.waste, left );
             Canvas.SetTop( this.waste, top );
 
-                // add the foundations in the top right corner (the foundation is to where the cards need to be stacked (starting on an ace until the king)
+            // add the foundations in the top right corner (the foundation is to where the cards need to be stacked (starting on an ace until the king)
             left = canvasWidth - cardWidth - horizontalMargin;
 
-            foreach (var foundation in this.foundations)
+            foreach( var foundation in this.foundations )
                 {
                 Canvas.SetLeft( foundation, left );
                 Canvas.SetTop( foundation, top );
@@ -279,11 +279,11 @@ namespace Solitaire
                 left -= cardWidth + 2 * horizontalMargin;
                 }
 
-                // add the tableau piles (where you can move any card to)
+            // add the tableau piles (where you can move any card to)
             left = horizontalMargin;
             top += cardHeight + verticalMargin;
 
-            foreach (var tableau in this.tableaus)
+            foreach( var tableau in this.tableaus )
                 {
                 Canvas.SetLeft( tableau, left );
                 Canvas.SetTop( tableau, top );
@@ -300,17 +300,17 @@ namespace Solitaire
             {
             var parent = card.Parent;
 
-            if (parent is Stock)
+            if( parent is Stock )
                 {
                 return false;
                 }
 
-                // the last card is draggable, the others aren't
-            if ( parent is Waste )
+            // the last card is draggable, the others aren't
+            if( parent is Waste )
                 {
                 var last = this.waste.getLast();
 
-                if (last != null && last != card)
+                if( last != null && last != card )
                     {
                     return false;
                     }
@@ -319,7 +319,7 @@ namespace Solitaire
             return true;
             }
 
-        
+
         private void updateStockLeft()
             {
             this.stockLeft.Text = "In stock: " + this.stock.Children.Count;
@@ -340,14 +340,14 @@ namespace Solitaire
                 {
                 moved = false;
 
-                if (this.sendToFoundation( this.waste ))
+                if( this.sendToFoundation( this.waste ) )
                     {
                     moved = true;
                     }
 
-                foreach (var tableau in this.tableaus)
+                foreach( var tableau in this.tableaus )
                     {
-                    if (this.sendToFoundation( tableau ))
+                    if( this.sendToFoundation( tableau ) )
                         {
                         moved = true;
                         }
