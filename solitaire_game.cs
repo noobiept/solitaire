@@ -26,7 +26,6 @@ namespace Solitaire
         protected Canvas canvas;
         protected readonly List<Container> droppableElements = new List<Container>();
         private Drag drag;
-        public CommandBinding[] shortcuts;
 
         protected readonly List<Foundation> foundations = new List<Foundation>();
         protected readonly List<Cell> cells = new List<Cell>();

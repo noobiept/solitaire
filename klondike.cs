@@ -53,7 +53,6 @@ namespace Solitaire
                     }
                 }
 
-            this.initKeyboardShortcuts();
             this.startGame();
             }
 
@@ -335,21 +334,6 @@ namespace Solitaire
         private void toFoundationClick( object sender, RoutedEventArgs e )
             {
             this.sendAllToFoundation();
-            }
-
-
-        /**
-         * Return an array of game specific keyboard shortcuts (to be added to the main window).
-         */
-        public void initKeyboardShortcuts()
-            {
-            // ctrl + f -- try to move all the possible cards to the foundation
-            var moveToFoundation = new RoutedCommand();
-            moveToFoundation.InputGestures.Add( new KeyGesture( Key.F, ModifierKeys.Control ) );
-
-            this.shortcuts = new CommandBinding[] {
-                new CommandBinding( moveToFoundation, this.toFoundationClick )
-                };
             }
 
 

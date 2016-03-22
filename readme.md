@@ -27,11 +27,20 @@ FreeCell
 Shortcuts
 =========
 
-- `ctrl + n` -- Start a `n`ew game.
-- `ctrl + r` -- `R`estart the game.
-- `ctrl + s` -- Open the `s`tatistics window.
-- `ctrl + f` -- Try to move all the possible cards from the waste/tableau to the `f`oundation.
-- `ctrl + a` -- Open the `a`bout webpage.
+You can click on the `alt` key to see an highlight of the key shortcut on the main menu.
+
+- `alt + s` -- Open the `Select Game` sub-menu.
+    - `+ f` -- `F`reeCell.
+    - `+ g` -- `G`old Mine.
+    - `+ k` -- `K`londike.
+- `alt + n` -- Start a `n`ew game.
+- `alt + r` -- `R`estart the same game.
+- `alt + o` -- Open the `other` sub-menu.
+    - `+ s` -- Open the `s`tatistics window.
+    - `+ h` -- Open the `h`elp window.
+    - `+ a` -- Open the `a`bout window.
+- `alt + f` -- Try to move all the possible cards from the waste/tableau to the `f`oundation (available on some games).
+
 
 Also, double-clicking on a card will attempt to move it to the foundation (if it is possible within the rules of the game).
 
