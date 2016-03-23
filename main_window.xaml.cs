@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 
 
 namespace Solitaire
@@ -25,6 +26,7 @@ namespace Solitaire
             Type gameType = Type.GetType( "Solitaire." + selectedGame.ToString() );
 
             this.selectGame( gameType );
+            Audio.playBackgroundMusic();
             }
 
 

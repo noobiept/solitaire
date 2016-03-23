@@ -20,7 +20,7 @@
             </GradientStopCollection>
         </LinearGradientBrush>
     </Window.Resources>
-
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="25" />

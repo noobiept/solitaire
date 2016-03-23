@@ -49,8 +49,39 @@ Images
 
 - cards images : 1.3
     - https://code.google.com/p/vector-playing-cards/
+    - http://opengameart.org/content/playing-cards-vector-png
     - public domain
 
 - cards back
     - http://opengameart.org/content/colorful-poker-card-back
     - license: CC-BY 3.0 (Attribution 3.0 Un-ported)
+
+Sounds
+======
+
+- Dealing Card
+    - https://www.freesound.org/people/f4ngy/sounds/240777/
+    - license: CC-BY 3.0 (Attribution 3.0 Un-ported)
+
+- Error
+    - https://www.freesound.org/people/ecfike/sounds/135125/
+    - license: CC0 1.0 (Public Domain)
+
+- Victory
+    - https://www.freesound.org/people/LittleRobotSoundFactory/sounds/270404/
+    - license: CC-BY 3.0 (Attribution 3.0 Un-ported)
+
+Background Music
+================
+
+- http://opengameart.org/content/peaceful-scene
+    - license: CC-BY 3.0 (Attribution 3.0 Un-ported)
+
+- http://opengameart.org/content/northern-isles
+    - license: CC-BY 3.0 (Attribution 3.0 Un-ported)
+
+- http://opengameart.org/content/home
+    - license: CC-BY 3.0 (Attribution 3.0 Un-ported)
+
+- http://opengameart.org/content/cats-and-spies
+    - license CC-BY-SA 3.0 (Attribution-ShareAlike 3.0 Un-ported)
