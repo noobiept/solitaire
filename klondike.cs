@@ -144,6 +144,8 @@ namespace Solitaire
                     count = this.stock.Children.Count;
                     }
                 }
+
+            Audio.playDealingCard();
             }
 
 

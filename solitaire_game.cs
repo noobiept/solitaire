@@ -241,6 +241,7 @@ namespace Solitaire
             else
                 {
                 this.moveCards( this.drag.cardsDragging, this.drag.originalContainer );
+                Audio.playError();
                 }
             }
 
@@ -309,6 +310,7 @@ namespace Solitaire
                     message += "\nYou beat your best time!";
                     }
 
+                Audio.playVictory();
                 MessageBox.Show( message, "Game Over!", MessageBoxButton.OK );
                 this.startGame();
                 }
@@ -319,6 +321,7 @@ namespace Solitaire
             {
             this.moveCards( cards, destContainer );
             this.checkGameEnd();
+            Audio.playDealingCard();
             }
 
 

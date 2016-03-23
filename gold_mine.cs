@@ -140,20 +140,24 @@ namespace Solitaire
             {
             var count = this.stock.Children.Count;
 
-            for( int a = 0 ; a < 3 && count > 0 ; a++ )
+            if ( count > 0 )
                 {
-                int lastPosition = count - 1;
+                for( int a = 0 ; a < 3 && count > 0 ; a++ )
+                    {
+                    int lastPosition = count - 1;
 
-                var card = (Card) this.stock.Children[ lastPosition ];
-                this.stock.Children.RemoveAt( lastPosition );
-                this.waste.Children.Add( card );
+                    var card = (Card) this.stock.Children[ lastPosition ];
+                    this.stock.Children.RemoveAt( lastPosition );
+                    this.waste.Children.Add( card );
 
-                card.showFront();
+                    card.showFront();
 
-                count = this.stock.Children.Count;
+                    count = this.stock.Children.Count;
+                    }
+
+                this.updateStockLeft();
+                Audio.playDealingCard();
                 }
-
-            this.updateStockLeft();
             }
 
 

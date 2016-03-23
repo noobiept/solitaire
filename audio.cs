@@ -16,6 +16,11 @@ namespace Solitaire
             };
         static private int currentMusic = 0;
 
+        static private MediaPlayer audioPlayer = new MediaPlayer();
+        static private Uri dealingCard = new Uri( @"sounds/dealing card.mp3", UriKind.Relative );
+        static private Uri error = new Uri( @"sounds/error.mp3", UriKind.Relative );
+        static private Uri victory = new Uri( @"sounds/victory.mp3", UriKind.Relative );
+
 
         static Audio()
             {
@@ -38,6 +43,27 @@ namespace Solitaire
                 Audio.currentMusic = 0;
                 }
             Audio.playBackgroundMusic();
+            }
+
+
+        static public void playDealingCard()
+            {
+            Audio.audioPlayer.Open( Audio.dealingCard );
+            Audio.audioPlayer.Play();
+            }
+
+
+        static public void playError()
+            {
+            Audio.audioPlayer.Open( Audio.error );
+            Audio.audioPlayer.Play();
+            }
+
+
+        static public void playVictory()
+            {
+            Audio.audioPlayer.Open( Audio.victory );
+            Audio.audioPlayer.Play();
             }
         }
     }
