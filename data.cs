@@ -15,10 +15,17 @@ namespace Solitaire
             public uint bestTime;
             }
 
+        public struct OptionsData
+            {
+            public double soundVolume;
+            public double musicVolume;
+            }
+
         public struct AppData
             {
             public Dictionary<GameKey, GameData> data;
 
+            public OptionsData options;
             public GameKey selectedGame;
             public int version;         // version of the loaded data structure (useful to compare with the application version, when updating from different versions that have incompatible changes)
             }
@@ -62,9 +69,10 @@ namespace Solitaire
         static private void loadDefaults()
             {
             Data.DATA = new AppData {
-                data = new Dictionary<GameKey, GameData>(),
+                data         = new Dictionary<GameKey, GameData>(),
                 selectedGame = GameKey.FreeCell,
-                version = Data.DATA_VERSION
+                options      = { musicVolume= 0.5, soundVolume= 0.5 },
+                version      = Data.DATA_VERSION
                 };
             }
 
@@ -78,7 +86,7 @@ namespace Solitaire
             }
 
 
-        static private void save()
+        static public void save()
             {
             string dataJson = JsonConvert.SerializeObject( Data.DATA );
 
@@ -93,7 +101,7 @@ namespace Solitaire
 
         static public uint oneMoreWin( GameKey gameKey, uint time )
             {
-            var gameData = Data.get( gameKey );
+            var gameData = Data.getGame( gameKey );
 
             gameData.totalWins++;
 
@@ -108,7 +116,6 @@ namespace Solitaire
                 gameData.bestTime = time;
                 }
 
-            Data.save();
             return gameData.bestTime;
             }
 
@@ -116,11 +123,10 @@ namespace Solitaire
         static public void resetStatistics( GameKey gameKey )
             {
             Data.DATA.data[ gameKey ] = new GameData { bestTime = 0, totalWins = 0 };
-            Data.save();
             }
 
 
-        static public GameData get( GameKey key )
+        static public GameData getGame( GameKey key )
             {
             if( !Data.DATA.data.ContainsKey( key ) )
                 {
@@ -145,7 +151,24 @@ namespace Solitaire
                 }
 
             Data.DATA.selectedGame = key;
-            Data.save();
+            }
+
+
+        static public OptionsData getOptions()
+            {
+            return Data.DATA.options;
+            }
+
+
+        static public void setMusicVolume( double volume )
+            {
+            Data.DATA.options.musicVolume = volume;
+            }
+
+
+        static public void setSoundVolume( double volume )
+            {
+            Data.DATA.options.soundVolume = volume;
             }
         }
     }

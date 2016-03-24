@@ -21,7 +21,7 @@ namespace Solitaire
 
         private void updateUi()
             {
-            var gameData = Data.get( this.gameKey );
+            var gameData = Data.getGame( this.gameKey );
             uint totalWins = gameData.totalWins;
             uint bestTime = gameData.bestTime;
 

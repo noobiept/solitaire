@@ -22,6 +22,7 @@ namespace Solitaire
             InitializeComponent();
 
             Data.load();
+            Audio.init();
             var selectedGame = Data.getSelectedGame();
             Type gameType = Type.GetType( "Solitaire." + selectedGame.ToString() );
 

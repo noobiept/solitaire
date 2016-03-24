@@ -16,15 +16,19 @@ namespace Solitaire
             };
         static private int currentMusic = 0;
 
-        static private MediaPlayer audioPlayer = new MediaPlayer();
+        static private MediaPlayer soundPlayer = new MediaPlayer();
         static private Uri dealingCard = new Uri( @"sounds/dealing card.mp3", UriKind.Relative );
         static private Uri error = new Uri( @"sounds/error.mp3", UriKind.Relative );
         static private Uri victory = new Uri( @"sounds/victory.mp3", UriKind.Relative );
 
 
-        static Audio()
+        static public void init()
             {
             Audio.musicPlayer.MediaEnded += Audio.changeMusic;
+
+            var options = Data.getOptions();
+            Audio.musicPlayer.Volume = options.musicVolume;
+            Audio.soundPlayer.Volume = options.soundVolume;
             }
 
 
@@ -48,22 +52,22 @@ namespace Solitaire
 
         static public void playDealingCard()
             {
-            Audio.audioPlayer.Open( Audio.dealingCard );
-            Audio.audioPlayer.Play();
+            Audio.soundPlayer.Open( Audio.dealingCard );
+            Audio.soundPlayer.Play();
             }
 
 
         static public void playError()
             {
-            Audio.audioPlayer.Open( Audio.error );
-            Audio.audioPlayer.Play();
+            Audio.soundPlayer.Open( Audio.error );
+            Audio.soundPlayer.Play();
             }
 
 
         static public void playVictory()
             {
-            Audio.audioPlayer.Open( Audio.victory );
-            Audio.audioPlayer.Play();
+            Audio.soundPlayer.Open( Audio.victory );
+            Audio.soundPlayer.Play();
             }
 
 
@@ -73,6 +77,7 @@ namespace Solitaire
         static public void setMusicVolume( double volume )
             {
             Audio.musicPlayer.Volume = volume;
+            Data.setMusicVolume( volume );
             }
 
 
@@ -87,13 +92,14 @@ namespace Solitaire
          */
         static public void setSoundVolume( double volume )
             {
-            Audio.audioPlayer.Volume = volume;
+            Audio.soundPlayer.Volume = volume;
+            Data.setSoundVolume( volume );
             }
 
 
         static public double getSoundVolume()
             {
-            return Audio.audioPlayer.Volume;
+            return Audio.soundPlayer.Volume;
             }
         }
     }
