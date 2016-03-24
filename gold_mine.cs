@@ -62,7 +62,7 @@ namespace Solitaire
         public override void addMenuElements( Menu container )
             {
             var button = new MenuItem();
-            button.ToolTip = "ctrl + f";
+            button.ToolTip = "alt + f";
             button.Header = "To _Foundation";
             button.Click += this.toFoundationClick;
 

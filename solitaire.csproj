@@ -76,6 +76,9 @@
       <DependentUpon>help.xaml</DependentUpon>
     </Compile>
     <Compile Include="klondike.cs" />
+    <Compile Include="options.xaml.cs">
+      <DependentUpon>options.xaml</DependentUpon>
+    </Compile>
     <Compile Include="solitaire_game.cs" />
     <Compile Include="statistics.xaml.cs">
       <DependentUpon>statistics.xaml</DependentUpon>
@@ -102,6 +105,10 @@
       <DependentUpon>main_window.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="options.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="statistics.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

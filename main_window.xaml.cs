@@ -96,6 +96,13 @@ namespace Solitaire
             }
 
 
+        private void openOptionsWindow( object sender, RoutedEventArgs e )
+            {
+            var options = new Options( this.currentGame );
+            options.ShowDialog();
+            }
+
+
         private void openStatisticsWindow( object sender, RoutedEventArgs e )
             {
             var statistics = new Statistics( this.currentGame.getGameKey() );

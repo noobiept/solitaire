@@ -4,6 +4,8 @@
              xmlns:local="clr-namespace:Solitaire"
              StartupUri="main_window.xaml">
     <Application.Resources>
+        <SolidColorBrush x:Key="WindowBackgroundColor" Color="LightGray"></SolidColorBrush>
+        
         <BitmapImage x:Key="card_back" UriSource="images/card_back_orange.png" />
 
         <BitmapImage x:Key="ace_of_clubs" UriSource="images/ace_of_clubs.png" />

@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
-        Background="LightGray"
+        Background="{StaticResource WindowBackgroundColor}"
         Title="Help" Height="300" Width="300">
     <Grid Margin="5">
         <Grid.RowDefinitions>

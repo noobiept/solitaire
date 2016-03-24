@@ -37,6 +37,7 @@
             <MenuItem Header="_New" Click="newGameClick" ToolTip="alt + n"></MenuItem>
             <MenuItem Header="_Restart" Click="restartSameGameClick" ToolTip="alt + r"></MenuItem>
             <MenuItem Header="_Other">
+                <MenuItem Header="_Options" Click="openOptionsWindow"></MenuItem>
                 <MenuItem Header="_Statistics" Click="openStatisticsWindow"></MenuItem>
                 <MenuItem Header="_Help" Click="openHelpWindow"></MenuItem>
                 <MenuItem Header="_About" Click="openAboutPage"></MenuItem>

@@ -9,7 +9,7 @@
         Height="150" Width="250"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
-        Background="LightGray">
+        Background="{StaticResource WindowBackgroundColor}">
     <Grid Margin="5">
         <Grid.RowDefinitions>
             <RowDefinition />

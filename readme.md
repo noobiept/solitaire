@@ -1,6 +1,12 @@
 ﻿![example](images/game_example.png)
 
 
+FreeCell
+========
+
+- [http://politaire.com/help/freecell](http://politaire.com/help/freecell)
+
+
 Gold Mine
 =========
 
@@ -18,10 +24,10 @@ You can read about the game here [http://politaire.com/help/goldmine](http://pol
 - If you manage to move all the cards to the foundation (four stacks from ace to king) then you'll win the game.
 
 
-FreeCell
+Klondike
 ========
 
-- [http://politaire.com/help/freecell](http://politaire.com/help/freecell)
+- [http://politaire.com/help/klondike](http://politaire.com/help/klondike)
 
 
 Shortcuts
