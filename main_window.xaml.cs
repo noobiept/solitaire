@@ -113,8 +113,7 @@ namespace Solitaire
 
         private void openHelpWindow( object sender, RoutedEventArgs e )
             {
-            var help = new Help( this.currentGame );
-            help.ShowDialog();
+            System.Diagnostics.Process.Start( this.currentGame.getHelpUrl() );
             }
 
 

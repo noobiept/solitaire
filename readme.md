@@ -6,6 +6,14 @@ FreeCell
 
 - [http://politaire.com/help/freecell](http://politaire.com/help/freecell)
 
+- The goal is to move all the cards to the foundation.
+- The cards need to be sent to the foundation in ascending order (ace, 2, 3, etc) in stacks of the same suit.
+- Any card can be sent to one of the four cells available (top-left).
+- A cell can only hold one card at a time.
+- All cards are dealt into the tableau in eight piles.
+- Cards can be combined in the tableau in descending order, and off opposite color.
+- Empty spaces in the tableau can receive any card.
+
 
 Gold Mine
 =========
@@ -29,6 +37,9 @@ Klondike
 
 - [http://politaire.com/help/klondike](http://politaire.com/help/klondike)
 
+- The goal is to move all the cards to the foundation.
+- The cards need to be sent to the foundation in ascending order (ace, 2, 3, etc) in stacks of the same suit.
+
 
 Shortcuts
 =========
@@ -42,6 +53,7 @@ You can click on the `alt` key to see an highlight of the key shortcut on the ma
 - `alt + n` -- Start a `n`ew game.
 - `alt + r` -- `R`estart the same game.
 - `alt + o` -- Open the `other` sub-menu.
+    - `+ o` -- Open th `o`ptions window.
     - `+ s` -- Open the `s`tatistics window.
     - `+ h` -- Open the `h`elp window.
     - `+ a` -- Open the `a`bout window.

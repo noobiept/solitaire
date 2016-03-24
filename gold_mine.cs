@@ -311,9 +311,9 @@ namespace Solitaire
             }
 
 
-        public override string getHelpText()
+        public override string getHelpUrl()
             {
-            return @"Gold Mine help text";
+            return @"http://politaire.com/help/goldmine";
             }
         }
     }

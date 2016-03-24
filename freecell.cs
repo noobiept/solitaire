@@ -339,9 +339,9 @@ namespace Solitaire
             }
 
 
-        public override string getHelpText()
+        public override string getHelpUrl()
             {
-            return @"FreeCell help text";
+            return @"http://politaire.com/help/freecell";
             }
         }
     }
