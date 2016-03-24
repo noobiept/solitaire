@@ -12,6 +12,19 @@ namespace Solitaire
             InitializeComponent();
 
             this.setupKeyboardShortcuts();
+            this.updateUi();
+            }
+
+
+        private void updateUi()
+            {
+            var musicVolume = Audio.getMusicVolume() * 100;
+            this.MusicVolume.Value = musicVolume;
+            this.MusicVolumeLabel.Content = musicVolume + "%";
+
+            var soundVolume = Audio.getSoundVolume() * 100;
+            this.SoundVolume.Value = soundVolume;
+            this.SoundVolumeLabel.Content = soundVolume + "%";
             }
 
 
@@ -27,6 +40,24 @@ namespace Solitaire
         private void closeWindow( object sender, RoutedEventArgs e )
             {
             this.Close();
+            }
+        
+
+        private void musicVolumeChanged( object sender, RoutedPropertyChangedEventArgs<double> e )
+            {
+            var volume = this.MusicVolume.Value;
+
+            Audio.setMusicVolume( volume / 100 );
+            this.MusicVolumeLabel.Content = volume + "%";
+            }
+
+
+        private void soundVolumeChanged( object sender, RoutedPropertyChangedEventArgs<double> e )
+            {
+            var volume = this.SoundVolume.Value;
+
+            Audio.setSoundVolume( volume / 100 );
+            this.SoundVolumeLabel.Content = volume + "%";
             }
         }
     }

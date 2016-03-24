@@ -65,5 +65,35 @@ namespace Solitaire
             Audio.audioPlayer.Open( Audio.victory );
             Audio.audioPlayer.Play();
             }
+
+
+        /**
+         * Set music volume (between 0 and 1).
+         */
+        static public void setMusicVolume( double volume )
+            {
+            Audio.musicPlayer.Volume = volume;
+            }
+
+
+        static public double getMusicVolume()
+            {
+            return Audio.musicPlayer.Volume;
+            }
+
+
+        /**
+         * Set the game sound volume (between 0 and 1).
+         */
+        static public void setSoundVolume( double volume )
+            {
+            Audio.audioPlayer.Volume = volume;
+            }
+
+
+        static public double getSoundVolume()
+            {
+            return Audio.audioPlayer.Volume;
+            }
         }
     }
