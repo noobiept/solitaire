@@ -10,6 +10,7 @@ namespace Solitaire
     class Klondike : SolitaireGame
         {
         private MenuItem toFoundation;
+        private int drawCount;
 
 
         public Klondike( Canvas mainCanvas ) : base( mainCanvas )
@@ -104,6 +105,8 @@ namespace Solitaire
                 this.stock.Children.Add( card );
                 }
 
+            this.drawCount = Data.KlondikeDraw;
+            this.waste.shownCount = this.drawCount;
             base.startGame( shuffle );
             }
 
@@ -128,10 +131,10 @@ namespace Solitaire
                     }
                 }
 
-            // move 3 cards to the waste
+            // move some cards to the waste
             else
                 {
-                for( int a = 0 ; a < 3 && count > 0 ; a++ )
+                for( int a = 0 ; a < this.drawCount && count > 0 ; a++ )
                     {
                     int lastPosition = count - 1;
 

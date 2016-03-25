@@ -72,7 +72,7 @@ namespace Solitaire
             Data.DATA = new AppData {
                 data = new Dictionary<GameKey, GameData>(),
                 selectedGame = GameKey.FreeCell,
-                options = { musicVolume = 0.5, soundVolume = 0.5 },
+                options = { musicVolume = 0.5, soundVolume = 0.5, klondikeDraw = 3 },
                 version = Data.DATA_VERSION
                 };
             }
