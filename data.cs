@@ -19,6 +19,7 @@ namespace Solitaire
             {
             public double soundVolume;
             public double musicVolume;
+            public int klondikeDraw;
             }
 
         public struct AppData
@@ -69,10 +70,10 @@ namespace Solitaire
         static private void loadDefaults()
             {
             Data.DATA = new AppData {
-                data         = new Dictionary<GameKey, GameData>(),
+                data = new Dictionary<GameKey, GameData>(),
                 selectedGame = GameKey.FreeCell,
-                options      = { musicVolume= 0.5, soundVolume= 0.5 },
-                version      = Data.DATA_VERSION
+                options = { musicVolume = 0.5, soundVolume = 0.5 },
+                version = Data.DATA_VERSION
                 };
             }
 
@@ -137,38 +138,31 @@ namespace Solitaire
             }
 
 
-        static public GameKey getSelectedGame()
+        static public GameKey SelectedGame
             {
-            return Data.DATA.selectedGame;
+            get { return Data.DATA.selectedGame; }
+            set { Data.DATA.selectedGame = value; }
             }
 
 
-        static public void setSelectedGame( GameKey key )
+        static public double SoundVolume
             {
-            if( key == Data.DATA.selectedGame )
-                {
-                return;
-                }
-
-            Data.DATA.selectedGame = key;
+            get { return Data.DATA.options.soundVolume; }
+            set { Data.DATA.options.soundVolume = value; }
             }
 
 
-        static public OptionsData getOptions()
+        static public double MusicVolume
             {
-            return Data.DATA.options;
+            get { return Data.DATA.options.musicVolume; }
+            set { Data.DATA.options.musicVolume = value; }
             }
 
 
-        static public void setMusicVolume( double volume )
+        static public int KlondikeDraw
             {
-            Data.DATA.options.musicVolume = volume;
-            }
-
-
-        static public void setSoundVolume( double volume )
-            {
-            Data.DATA.options.soundVolume = volume;
+            get { return Data.DATA.options.klondikeDraw; }
+            set { Data.DATA.options.klondikeDraw = value; }
             }
         }
     }

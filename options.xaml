@@ -8,9 +8,10 @@
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         Background="{StaticResource WindowBackgroundColor}"
-        Title="Options" Height="300" Width="300">
+        Title="Options" Height="200" Width="300">
     <Grid Margin="5">
         <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
             <RowDefinition Height="30" />
             <RowDefinition />
             <RowDefinition Height="30" />
@@ -32,9 +33,14 @@
         <Slider Name="SoundVolume" Minimum="0" Maximum="100" TickFrequency="10" IsSnapToTickEnabled="True" Grid.Row="1" Grid.Column="1" ValueChanged="soundVolumeChanged" />
         <Label Name="SoundVolumeLabel" Grid.Row="1" Grid.Column="2">-1</Label>
 
+        <!-- Klondike Settings -->
+        <Label Grid.Column="0" Grid.Row="2">Klondike: draw</Label>
+        <Slider Name="KlondikeDraw" Minimum="1" Maximum="3" IsSnapToTickEnabled="True" Grid.Row="2" Grid.Column="1" ValueChanged="klondikeDrawChanged" />
+        <Label Name="KlondikeDrawLabel" Grid.Row="2" Grid.Column="2">-1</Label>
+                
         <!-- Close Button -->
-        <Separator Grid.Row="2" Grid.ColumnSpan="3" />
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="3" Grid.ColumnSpan="3">
+        <Separator Grid.Row="3" Grid.ColumnSpan="3" />
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="4" Grid.ColumnSpan="3">
             <Button Margin="2" Click="closeWindow">Close</Button>
         </StackPanel>
     </Grid>

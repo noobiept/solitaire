@@ -23,8 +23,7 @@ namespace Solitaire
 
             Data.load();
             Audio.init();
-            var selectedGame = Data.getSelectedGame();
-            Type gameType = Type.GetType( "Solitaire." + selectedGame.ToString() );
+            Type gameType = Type.GetType( "Solitaire." + Data.SelectedGame.ToString() );
 
             this.selectGame( gameType );
             Audio.playBackgroundMusic();
@@ -50,7 +49,7 @@ namespace Solitaire
             this.currentGame.positionResizeElements();
             this.Title = this.currentGame.getTitle();
 
-            Data.setSelectedGame( this.currentGame.getGameKey() );
+            Data.SelectedGame = this.currentGame.getGameKey();
             }
 
 

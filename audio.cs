@@ -26,9 +26,8 @@ namespace Solitaire
             {
             Audio.musicPlayer.MediaEnded += Audio.changeMusic;
 
-            var options = Data.getOptions();
-            Audio.musicPlayer.Volume = options.musicVolume;
-            Audio.soundPlayer.Volume = options.soundVolume;
+            Audio.musicPlayer.Volume = Data.MusicVolume;
+            Audio.soundPlayer.Volume = Data.SoundVolume;
             }
 
 
@@ -77,7 +76,7 @@ namespace Solitaire
         static public void setMusicVolume( double volume )
             {
             Audio.musicPlayer.Volume = volume;
-            Data.setMusicVolume( volume );
+            Data.MusicVolume = volume;
             }
 
 
@@ -93,7 +92,7 @@ namespace Solitaire
         static public void setSoundVolume( double volume )
             {
             Audio.soundPlayer.Volume = volume;
-            Data.setSoundVolume( volume );
+            Data.SoundVolume = volume;
             }
 
 

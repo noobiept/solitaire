@@ -7,12 +7,16 @@ namespace Solitaire
     {
     public partial class Options : Window
         {
+        bool init = true;
+
+
         public Options( SolitaireGame game )
             {
             InitializeComponent();
 
             this.setupKeyboardShortcuts();
             this.updateUi();
+            this.init = false;
             }
 
 
@@ -25,6 +29,10 @@ namespace Solitaire
             var soundVolume = Audio.getSoundVolume() * 100;
             this.SoundVolume.Value = soundVolume;
             this.SoundVolumeLabel.Content = soundVolume + "%";
+
+            var klondikeDraw = Data.KlondikeDraw;
+            this.KlondikeDraw.Value = klondikeDraw;
+            this.KlondikeDrawLabel.Content = klondikeDraw.ToString();
             }
 
 
@@ -45,6 +53,11 @@ namespace Solitaire
 
         private void musicVolumeChanged( object sender, RoutedPropertyChangedEventArgs<double> e )
             {
+            if ( this.init )
+                {
+                return;
+                }
+
             var volume = this.MusicVolume.Value;
 
             Audio.setMusicVolume( volume / 100 );
@@ -54,10 +67,29 @@ namespace Solitaire
 
         private void soundVolumeChanged( object sender, RoutedPropertyChangedEventArgs<double> e )
             {
+            if( this.init )
+                {
+                return;
+                }
+
             var volume = this.SoundVolume.Value;
 
             Audio.setSoundVolume( volume / 100 );
             this.SoundVolumeLabel.Content = volume + "%";
+            }
+
+
+        private void klondikeDrawChanged( object sender, RoutedPropertyChangedEventArgs<double> e )
+            {
+            if( this.init )
+                {
+                return;
+                }
+
+            var draw = this.KlondikeDraw.Value;
+            
+            Data.KlondikeDraw = (int) draw;
+            this.KlondikeDrawLabel.Content = draw.ToString();
             }
         }
     }
