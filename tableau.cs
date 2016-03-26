@@ -8,6 +8,8 @@ namespace Solitaire
     {
     public class Tableau : Container
         {
+        public double AvailableHeight;
+
         /**
          * Drag all cards starting from the reference card.
          */
@@ -93,23 +95,28 @@ namespace Solitaire
 
         protected override Size ArrangeOverride( Size finalSize )
             {
-            double availableHeight = 1.4 * finalSize.Height;
-            double y = 0;
-            double step = Math.Round( availableHeight * 0.15 );
             int count = this.InternalChildren.Count;
-            double neededHeight = count * step;
 
-            // if there's no space available for the default step, then calculate the possible step
-            if( neededHeight > availableHeight )
+            if ( count > 0 )
                 {
-                step = Math.Floor( availableHeight / count );
-                }
+                var firstChild = (Card) this.InternalChildren[ 0 ];
+                var cardHeight = firstChild.Height;
+                double step = (this.AvailableHeight - cardHeight) / (count - 1);
+                double y = 0;
 
-            foreach( UIElement child in this.InternalChildren )
-                {
-                child.Arrange( new Rect( new Point( 0, y ), child.DesiredSize ) );
+                // maximum step allowed based on the card height
+                var maxStep = cardHeight * 0.3;
+                if ( step > maxStep )
+                    {
+                    step = maxStep;
+                    }
 
-                y += step;
+                foreach( UIElement child in this.InternalChildren )
+                    {
+                    child.Arrange( new Rect( new Point( 0, y ), child.DesiredSize ) );
+
+                    y += step;
+                    }
                 }
 
             return finalSize;

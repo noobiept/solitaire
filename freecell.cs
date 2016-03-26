@@ -97,6 +97,8 @@ namespace Solitaire
             // the layout is a grid with 8 columns and 3 lines
             // each position has space for a card + margin
             // we calculate these values from the available window dimensions
+            // first line has the 'Cell' and 'Foundation'
+            // other 2 lines the 'Tableau'
             var canvasWidth = this.canvas.ActualWidth;
             var canvasHeight = this.canvas.ActualHeight;
             var positionWidth = canvasWidth / 8;
@@ -157,20 +159,21 @@ namespace Solitaire
                 left += cardWidth + 2 * firstHorizontalMargin;
                 }
 
-            // add space in-between
-            left += inBetweenSpace - 2 * firstHorizontalMargin;
-
             // 4 foundations in the top-right
+            left = canvasWidth - 2 * firstHorizontalMargin - cardWidth;
+
             foreach( Foundation foundation in this.foundations )
                 {
                 Canvas.SetLeft( foundation, left );
                 Canvas.SetTop( foundation, top );
 
-                left += cardWidth + 2 * firstHorizontalMargin;
+                left -= cardWidth + 2 * firstHorizontalMargin;
                 }
 
-            // second line
+            // second and third line
             // 8 tableaus in the 2nd line
+            var tableauHeight = positionHeight * 2 - verticalMargin;
+
             left = horizontalMargin;
             top += cardHeight + verticalMargin;
 
@@ -180,6 +183,7 @@ namespace Solitaire
                 Canvas.SetTop( tableau, top );
 
                 left += cardWidth + 2 * horizontalMargin;
+                tableau.AvailableHeight = tableauHeight;
                 }
             }
 

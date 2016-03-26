@@ -243,6 +243,8 @@ namespace Solitaire
                 }
 
             // add the tableau piles (where you can move any card to)
+            var tableauHeight = positionHeight * 2 - verticalMargin;
+
             left = horizontalMargin;
             top += cardHeight + verticalMargin;
 
@@ -252,6 +254,7 @@ namespace Solitaire
                 Canvas.SetTop( tableau, top );
 
                 left += cardWidth + 2 * horizontalMargin;
+                tableau.AvailableHeight = tableauHeight;
                 }
             }
 
