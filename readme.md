@@ -1,4 +1,4 @@
-﻿![example](images/game_example.png)
+﻿![example](images/promotion/goldmine.png)
 
 
 FreeCell
