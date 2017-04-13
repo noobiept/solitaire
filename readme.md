@@ -1,4 +1,9 @@
-﻿![example](images/promotion/goldmine.png)
+﻿A collection of solitaire card games.
+
+
+![example](images/promotion/goldmine.png)
+
+[Playing a game of gold mine](https://www.youtube.com/watch?v=1Z6a1FbBpdo)
 
 
 FreeCell

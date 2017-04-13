@@ -118,7 +118,7 @@ namespace Solitaire
 
         private void openAboutPage( object sender, RoutedEventArgs e )
             {
-            System.Diagnostics.Process.Start( "https://bitbucket.org/drk4/gold_mine" );
+            System.Diagnostics.Process.Start( "https://bitbucket.org/drk4/solitaire" );
             }
 
 

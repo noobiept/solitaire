@@ -220,9 +220,6 @@
     <Resource Include="images\icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\game_example.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="sounds\dealing card.mp3">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
