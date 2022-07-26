@@ -2,24 +2,21 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-// using Microsoft.Expression.Media.Effects;
+using System.Windows.Media.Effects;
+using Solitaire.Effects;
 
 
 namespace Solitaire
     {
     abstract public class Container : Panel
         {
-        // private readonly ColorToneEffect dropEffect; //TODO
+        private readonly ShaderEffect dropEffect;
 
 
         public Container()
             {
-            this.Background = new SolidColorBrush( Color.FromRgb( 87, 129, 50 ) );
-
-            //this.dropEffect = new ColorToneEffect {
-              //  DarkColor = Colors.Black,
-                //LightColor = Colors.CornflowerBlue
-                //};
+            this.Background = new SolidColorBrush(Color.FromRgb(87, 129, 50));
+            this.dropEffect = new DropEffect();
             }
 
 
@@ -56,7 +53,7 @@ namespace Solitaire
 
         public void applyDropEffect()
             {
-            // this.Effect = this.dropEffect;
+            this.Effect = this.dropEffect;
             }
 
 
