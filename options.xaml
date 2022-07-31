@@ -41,7 +41,7 @@
         <!-- Close Button -->
         <Separator Grid.Row="3" Grid.ColumnSpan="3" />
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="4" Grid.ColumnSpan="3">
-            <Button Margin="2" Click="closeWindow">Close</Button>
+            <Button Margin="2" Padding="5 1" Click="closeWindow">Close</Button>
         </StackPanel>
     </Grid>
 </Window>

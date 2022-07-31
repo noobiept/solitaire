@@ -31,8 +31,8 @@
         <Separator Grid.Row="2" Grid.ColumnSpan="2" />
         
         <StackPanel Grid.Row="3" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
-            <Button Margin="2" Click="resetStatistics">Reset</Button>
-            <Button Margin="2" Click="closeWindow">Close</Button>
+            <Button Margin="2" Padding="5 1" Click="resetStatistics">Reset</Button>
+            <Button Margin="2" Padding="5 1" Click="closeWindow">Close</Button>
         </StackPanel>
     </Grid>
 </Window>
