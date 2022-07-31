@@ -67,6 +67,13 @@ You can click on the `alt` key to see an highlight of the key shortcut on the ma
 
 Also, double-clicking on a card will attempt to move it to the foundation (if it is possible within the rules of the game).
 
+
+Development
+===========
+
+- `dotnet tool run dotnet-csharpier ./ --check` (check code formatting)
+
+
 Images
 ======
 

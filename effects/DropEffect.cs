@@ -8,15 +8,14 @@ using System.Windows.Media;
 using System.Windows.Media.Effects;
 using System.Reflection;
 
-
 namespace Solitaire.Effects
 {
     internal class DropEffect : ShaderEffect
     {
-        private static PixelShader _pixelShader =
-            new PixelShader() { 
-                UriSource = MakePackUri("./effects/DropShader.ps")
-            };
+        private static PixelShader _pixelShader = new PixelShader()
+        {
+            UriSource = MakePackUri("./effects/DropShader.ps")
+        };
 
         public DropEffect()
         {
@@ -28,7 +27,7 @@ namespace Solitaire.Effects
         }
 
         // MakePackUri is a utility method for computing a pack uri
-        // for the given resource. 
+        // for the given resource.
         public static Uri MakePackUri(string relativeFile)
         {
             Assembly a = typeof(DropEffect).Assembly;
@@ -36,10 +35,8 @@ namespace Solitaire.Effects
             // Extract the short name.
             string assemblyShortName = a.ToString().Split(',')[0];
 
-            string uriString = "pack://application:,,,/" +
-                assemblyShortName +
-                ";component/" +
-                relativeFile;
+            string uriString =
+                "pack://application:,,,/" + assemblyShortName + ";component/" + relativeFile;
 
             return new Uri(uriString);
         }
@@ -67,9 +64,12 @@ namespace Solitaire.Effects
             set { SetValue(ThresholdProperty, value); }
         }
 
-        public static readonly DependencyProperty ThresholdProperty =
-            DependencyProperty.Register("Threshold", typeof(double), typeof(DropEffect),
-                    new UIPropertyMetadata(0.5, PixelShaderConstantCallback(0)));
+        public static readonly DependencyProperty ThresholdProperty = DependencyProperty.Register(
+            "Threshold",
+            typeof(double),
+            typeof(DropEffect),
+            new UIPropertyMetadata(0.5, PixelShaderConstantCallback(0))
+        );
 
         #endregion
 
@@ -82,9 +82,12 @@ namespace Solitaire.Effects
             set { SetValue(BlankColorProperty, value); }
         }
 
-        public static readonly DependencyProperty BlankColorProperty =
-            DependencyProperty.Register("BlankColor", typeof(Color), typeof(DropEffect),
-                    new UIPropertyMetadata(Colors.Transparent, PixelShaderConstantCallback(1)));
+        public static readonly DependencyProperty BlankColorProperty = DependencyProperty.Register(
+            "BlankColor",
+            typeof(Color),
+            typeof(DropEffect),
+            new UIPropertyMetadata(Colors.Transparent, PixelShaderConstantCallback(1))
+        );
 
         #endregion
     }
