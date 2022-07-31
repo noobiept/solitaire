@@ -16,7 +16,9 @@ jobs:
         uses: actions/setup-dotnet@v2
         with:
           dotnet-version: ${{ matrix.dotnet-version }}
-      - name: Install dependencies
-        run: dotnet restore
+ 
+      - run: dotnet restore
+      - run: dotnet tool restore
+
       - name: Check code format
         run: dotnet tool run dotnet-csharpier ./ --check
