@@ -1,7 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Windows;
-using System.Windows.Input;
-using System.Windows.Media;
 
 
 namespace Solitaire
@@ -112,13 +111,13 @@ namespace Solitaire
 
         private void openHelpWindow( object sender, RoutedEventArgs e )
             {
-            System.Diagnostics.Process.Start( this.currentGame.getHelpUrl() );
+            this.openExternalUrl( this.currentGame.getHelpUrl() );
             }
 
 
         private void openAboutPage( object sender, RoutedEventArgs e )
             {
-            System.Diagnostics.Process.Start( "https://bitbucket.org/drk4/solitaire" );
+            this.openExternalUrl( "https://github.com/noobiept/solitaire" );
             }
 
 
@@ -143,5 +142,16 @@ namespace Solitaire
             {
             Application.Current.Shutdown();
             }
+
+        private void openExternalUrl(String url)
+            {
+            System.Diagnostics.Process.Start(
+                new ProcessStartInfo
+                    {
+                    FileName = url,
+                    UseShellExecute = true,
+                    }
+            );
+        }
         }
     }
