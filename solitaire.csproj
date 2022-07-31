@@ -28,6 +28,7 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include=".github\workflows\check.yml" />
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
