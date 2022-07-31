@@ -138,5 +138,10 @@ namespace Solitaire
             {
             selectGame( typeof( Klondike ) );
             }
+
+        private void closeGame( object sender, RoutedEventArgs e )
+            {
+            Application.Current.Shutdown();
+            }
         }
     }

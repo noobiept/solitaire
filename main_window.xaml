@@ -29,13 +29,16 @@
         </Grid.RowDefinitions>
 
         <Menu Name="MainMenu" Grid.Row="0" Background="{StaticResource MenuBackgroundColor}">
-            <MenuItem Header="_Select Game">
+            <MenuItem Header="_Game">
+                <MenuItem Header="_New" Click="newGameClick" ToolTip="alt + n"></MenuItem>
+                <MenuItem Header="_Restart" Click="restartSameGameClick" ToolTip="alt + r"></MenuItem>
+                <MenuItem Header="_Close" Click="closeGame"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="_Select">
                 <MenuItem Header="_FreeCell" Click="selectFreeCell" />
                 <MenuItem Header="_Gold Mine" Click="selectGoldMine" />
                 <MenuItem Header="_Klondike" Click="selectKlondike" />
             </MenuItem>
-            <MenuItem Header="_New" Click="newGameClick" ToolTip="alt + n"></MenuItem>
-            <MenuItem Header="_Restart" Click="restartSameGameClick" ToolTip="alt + r"></MenuItem>
             <MenuItem Header="_Other">
                 <MenuItem Header="_Options" Click="openOptionsWindow"></MenuItem>
                 <MenuItem Header="_Statistics" Click="openStatisticsWindow"></MenuItem>
