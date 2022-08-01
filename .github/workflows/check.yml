@@ -22,3 +22,9 @@ jobs:
 
       - name: Check code format
         run: dotnet tool run dotnet-csharpier ./ --check
+
+      - name: Test
+        run: dotnet test --no-restore --verbosity normal
+
+      - name: Build project
+        run: dotnet build --configuration Release --no-restore
